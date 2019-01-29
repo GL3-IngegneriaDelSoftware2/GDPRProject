@@ -1,0 +1,2 @@
+Per esportare il dizionario dei dati: seleziona il database da cui vuoi esportare il dizionario dei dati, click su Dizionario dei dati.
+Per esportare le istruzioni di creazione del database: seleziona il database, in alto scegliere "Esporta", impostare il formato SQL, click su "Esegui" in basso nella pagina.
