@@ -11,11 +11,19 @@
 * Aprire un browser (tassativamente CHROME) e nella barra di ricerca digitare "localhost";
 * Cliccare in alto a destra su phpMyAdmin.
 
-## Se non hai ancora inserito le tabelle:
+## Creazione database (basta farlo una volta):
+
+* Aprire un browser (tassativamente CHROME) e nella barra di ricerca digitare "localhost";
+* Cliccare in alto a destra su phpMyAdmin;
+* In alto c'è un elenco di funzionalità: "Database", "SQL", "Stato",...: cliccare su "Database";
+* Creare un nuovo database: come nome mettere "gdpr_database" e come codifica caratteri mettere "utf8_general_ci";
+* Sulla sinistra c'è l'elenco dei database, cliccare su quello appena creato e seguire i passi successivi per inserire le tabelle.
+
+## Inserimento tabelle (basta farlo una volta):
 
 * In alto c'è un elenco di funzionalità: "Database", "SQL", "Stato",...: cliccare su "Importa";
 * Inserire il file in formato .sql presente su GitHub che contiene la costruzione del database e delle tabelle finora create per il progetto GDPR e cliccare "Esegui" in fondo alla pagina;
-* Seguire la procedura (forse non sono necessari altri passi) e il db con le tabelle dovrebbe essere inserito.
+* Seguire la procedura (forse non sono necessari altri passi) e le tabelle dovrebbero essere inserite.
 
 ## Se hai già inserito le tabelle:
 
