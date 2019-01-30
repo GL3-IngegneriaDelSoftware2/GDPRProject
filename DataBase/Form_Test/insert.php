@@ -1,3 +1,5 @@
+<!-- Il seguente script php, riceve i dati da un form html e dopo aver testato la connessione con un db esegue una query
+per inserire i dati in una tabella del db -->
 <?php
 // Salviamo i dati che ci arrivano dal form html in variabili php
 $name = $_POST['name']; // va passato il valore dell'attributo "name" del file html che contiene quel dato

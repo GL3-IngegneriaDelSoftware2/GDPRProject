@@ -45,6 +45,8 @@
 
 ## Materiale utile (?)
 
+Manuale PHP 7: http://it2.php.net/manual/en/
+
 User registration system con PHP e mysql database: https://www.youtube.com/watch?v=C--mu07uhQw
 
 Displaying records from a MySQL Database with PHP: https://www.youtube.com/watch?v=IHdd02IK2Jg
