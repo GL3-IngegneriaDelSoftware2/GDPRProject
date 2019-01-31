@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 31, 2019 alle 16:28
+-- Creato il: Gen 31, 2019 alle 17:08
 -- Versione del server: 10.1.37-MariaDB
 -- Versione PHP: 7.3.1
 
@@ -127,10 +127,17 @@ CREATE TABLE `potential_breach` (
 
 CREATE TABLE `users` (
   `u_id` int(11) NOT NULL,
-  `u_username` text NOT NULL COMMENT 'Univoco',
-  `u_password` text NOT NULL COMMENT 'Minimo 8 caratteri',
-  `u_email` varchar(50) NOT NULL
+  `u_username` varchar(100) NOT NULL COMMENT 'Univoco',
+  `u_password` varchar(100) NOT NULL COMMENT 'Minimo 8 caratteri',
+  `u_email` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dump dei dati per la tabella `users`
+--
+
+INSERT INTO `users` (`u_id`, `u_username`, `u_password`, `u_email`) VALUES
+(1, 'el_bomber', '25f9e794323b453885f5181f1b624d0b', 'b@gmail.com');
 
 --
 -- Indici per le tabelle scaricate
@@ -195,7 +202,7 @@ ALTER TABLE `event_typologies`
 -- AUTO_INCREMENT per la tabella `users`
 --
 ALTER TABLE `users`
-  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- Limiti per le tabelle scaricate
