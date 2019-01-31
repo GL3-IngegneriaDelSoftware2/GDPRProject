@@ -14,7 +14,7 @@ su una tabella html creata dinamicamente che "riproduce" la tabella presente nel
 
 $link = mysqli_connect("localhost", "root", "", "gdpr_database");
 
-$tableName = "document_manager"; // nome della tabella da cui estrarre i dati
+$tableName = "events"; // nome della tabella da cui estrarre i dati
 
 /* check connection */
 if (mysqli_connect_errno()) {
