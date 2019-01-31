@@ -5,17 +5,15 @@ per inserire i dati in una tabella del db -->
 // Salviamo i dati che ci arrivano dal form html in variabili php
 $name = $_POST['name']; // Stringa nome tipologia dell'evento
 $priority = $_POST['priority']; // Priorita' evento, stringa di un interno da 1 a 5 compresi
-$early_notification = $_POST['early_notification']; // Notifica anticipata, stringa anel formato ("hh/mm")
+$early_notification = $_POST['early_notification']; // Notifica anticipata, stringa anel formato ("hh");
 $repeat_value = $_POST['repeat_value']; // Interno da 1 a 99 compresi che rappresenta l'indice di ripetizione
 $repeat_interval = $_POST['repeat_interval']; // Stringa che indica l'intervallo di ripetizione
 
 //==== Elaborazione dei dati ====
 
 // Elaborazione early_notification
-$notification_time = explode(":",$early_notification); // Divido in ore :: minuti
-$notification_time[0] = (int)$notification_time[0]; // trasformo le stringhe in interi
-$notification_time[1] = (int)$notification_time[1];
-$early_notification_minutes = $notification_time[0]*60 + $notification_time[1]; // Sommo ore * 60 + minuti => minuti totali
+
+$early_notification_hours = (int)$early_notification;
 
 // Elaborazione repat ((TEMP))
 $repeat_after_hours = 0; // 0 = non ripetere, > 0 ripeti dopo n ore;
@@ -59,11 +57,11 @@ if (!empty($name) || !empty($priority) || !empty($early_notification) || !empty(
       $INSERT = "insert into $tableName (et_name, et_priority, et_early_notification, et_event_repeat) values(?, ?, ?, ?)";
       // Prepare statement
       $stmt = $conn->prepare($INSERT); // Prepariamo per INSERT
-      $stmt->bind_param('siii', $name, $priority, $early_notification_minutes, $repeat_after_hours); // $dateFrom, $dateTo, $class, $state, $notes, $participants, $actualStart, $actualEnd);
+      $stmt->bind_param('siii', $name, $priority, $early_notification_hours, $repeat_after_hours); // $dateFrom, $dateTo, $class, $state, $notes, $participants, $actualStart, $actualEnd);
       $stmt->execute();
       $stmt->close();
       $conn->close();
-      echo "<h1>Event Typology Recap</h1><p>New event typology has been correctly created.</p><p>Event Typology Name : <em>$_POST[name]</em></p><p>Event Priority : $_POST[priority]</p><p>Early Notification: $early_notification_minutes minutes before</p><p>Event will be repeated every $repeat_after_hours hours</p>";
+      echo "<h1>Event Typology Recap</h1><p>New event typology has been correctly created.</p><p>Event Typology Name : <em>$_POST[name]</em></p><p>Event Priority : $_POST[priority]</p><p>Early Notification: $early_notification_hours hours before</p><p>Event will be repeated every $repeat_after_hours hours</p>";
         }
 	
 }else{ // se le variabili sono vuote
