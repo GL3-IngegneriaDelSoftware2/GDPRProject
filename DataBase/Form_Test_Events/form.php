@@ -17,7 +17,7 @@
     <td>
         <label for="typology-select">
             <select id="typology-select" name="typology">
-                <option value="">--Selet an event typology--</option>
+                <option value="">--Select an event typology--</option>
                     <?php
                         $link = mysqli_connect("localhost", "root", "", "gdpr_database");
                         $tableName = "event_typologies"; // nome della tabella da cui estrarre i dati
@@ -37,6 +37,7 @@
             </select>
         </label>
   </td>
+  <td><a href="/event_typo/form.html"><input class="btn" type="button" value="Create new Event Typology"></a></td>
    </tr>
    <tr>
     <td>Description :</td>
@@ -75,7 +76,7 @@
     <td><input type="date" name="actual_end"></td>
    </tr>
    <tr>
-    <td><input type="submit" value="Create Event"></td>
+    <td><input class="btn" type="submit" value="Create Event"></td>
    </tr>
   </table>
  </form>
