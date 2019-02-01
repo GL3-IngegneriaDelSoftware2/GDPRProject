@@ -33,7 +33,7 @@ if (!empty($name) || !empty($typology) || !empty($description) || !empty($dateFr
       $INSERT = "insert into $tableName (e_name, e_typology, e_description, e_date_from, e_date_to, e_class, e_state, e_notes, e_participants, e_actual_start, e_actual_end) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
       // Prepare statement
       $stmt = $conn->prepare($INSERT); // Prepariamo per INSERT
-      $stmt->bind_param("sisssssssss", $name, $typology, $description, $dateFrom, $dateTo, $class, $state, $notes, $participants, $actualStart, $actualEnd);
+      $stmt->bind_param("sssssssssss", $name, $typology, $description, $dateFrom, $dateTo, $class, $state, $notes, $participants, $actualStart, $actualEnd);
       $stmt->execute();
       $stmt->close();
       $conn->close();
