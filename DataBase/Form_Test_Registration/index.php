@@ -1,3 +1,9 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Registration system PHP and MySQL</title>
+  <link rel="stylesheet" type="text/css" href="style.css">
+</head>
 <?php 
   session_start(); 
 
@@ -37,8 +43,9 @@
 
     <!-- logged in user information -->
     <?php  if (isset($_SESSION['username'])) : ?>
-    	<p>Welcome <strong><?php echo $_SESSION['username']; ?></strong></p>
-    	<p> <a href="index.php?logout='1'" style="color: red;">logout</a> </p>
+		<p>Welcome <strong><?php echo $_SESSION['username']; ?></strong></p>
+		<a href="/events/form.php"><input type="button" class="btn" value="Create new event"></a>
+    	<a href="index.php?logout='1'"><input type="button" class="btn" href="index.php?logout='1'" value="Logout"></a>
     <?php endif ?>
 </div>
 		
