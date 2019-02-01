@@ -1,6 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <link href="form.css" rel="stylesheet" type="text/css">
+<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <head>
   <title>New Event Typology Form</title>
   <script>
@@ -25,30 +26,13 @@
       }
       document.getElementById("print-priority").innerHTML = literalPriority;
     }
-    
-    // Temporanea non necessaria
-    function printRepeatInfo() {
-      var string_repeat = document.getElementById("repeat-select").value;
-      var int_repeat = document.getElementById("repeat-value").value;
 
-      if(string_repeat != "no-repeat"){ // In questa sezione vengono effettuate azioni sulla pagina in caso di repeat
+    function printAlert(code){
 
-        // Ho dovuto fare in questo modo in quanto JS e' stupido e non sa togliere gli ultimi due caratteri
-        string_repeat = string_repeat.split("").reverse().join("").substring(2).split("").reverse().join("");
-      
-        // Tappabuchi temporanei
-
-        if(string_repeat == "dai"){
-          string_repeat = "day";
-        }
-        if(int_repeat > 1){
-          string_repeat += "s";
-        }
-        if(string_repeat.length > 1){
-          document.getElementById("repat-info").innerHTML = "The event will be repeated every " + int_repeat + " " + string_repeat;
-        }
+      if(code == 1){
+        document.getElementById("color-tag").innerHTML = "Non inserito nel database, può essere utile?";
       }else{
-        document.getElementById("repat-info").innerHTML = "";
+        document.getElementById("color-tag").innerHTML = "Color tag (TEMP) :";
       }
     }
   </script>
@@ -79,22 +63,23 @@
 
    <tr>
     <td>Event Repeat :</td>
-    <td><input type="number" name="repeat_value" id="repeat-value" min="1" max="99" value="1" onmouseup="printRepeatInfo()"></td>
-
     <td><label for="repeat-select">
       <select id="repeat-select" name="repeat_interval">
-        <option value=""  onmouseup="printRepeatInfo()">--Selet a repeat interval--</option>
-        <option value="no-repeat" onmouseup="printRepeatInfo()">Don't repeat</option>
-        <option value="daily" onmouseup="printRepeatInfo()">Daily</option>
-        <option value="weekly" onmouseup="printRepeatInfo()">Weekly</option>
-        <option value="monthly" onmouseup="printRepeatInfo()">Monthly</option>
-        <option value="yearly" onmouseup="printRepeatInfo()">Yearly</option>
+        <option value="">--Selet a repeat interval--</option>
+        <option value="no-repeat">Don't repeat</option>
+        <option value="daily">Daily</option>
+        <option value="weekly">Weekly</option>
+        <option value="monthly">Monthly</option>
+        <option value="yearly">Yearly</option>
       </select>
     </label></td>
    </tr> 
 
    <tr>
-     <td id="repat-info"></td>
+     <td id="color-tag" onmouseover="printAlert(1)" onmouseout="printAlert(0)">Color tag (MOUSE HERE) :</td>
+     <td>
+       <input type="color" name="typology_color" value="#FE840E">
+     </td>
    </tr>
 
    <tr>
