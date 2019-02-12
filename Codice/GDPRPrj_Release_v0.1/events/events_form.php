@@ -43,7 +43,7 @@
             </select>
         </label>
   </td>
-  <td><a href="../event_typologies/event_typologies_form.html"><input class="btn" type="button" value="Create new Event Typology"></a></td>
+  <td><a href="../event_typologies/event_typologies_form.php"><input class="btn" type="button" value="Create new Event Typology"></a></td>
    </tr>
    <tr>
     <td>Description :</td>
