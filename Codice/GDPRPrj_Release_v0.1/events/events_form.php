@@ -1,3 +1,9 @@
+<?php
+    session_start();
+    if(!isset($_SESSION['username'])){
+        header("location: /dashboard/GDPRPrj_Release_v0.1/registration/registration_login.php");
+    }
+?>
 <!DOCTYPE HTML>
 <html>
 <link href="events_form.css" rel="stylesheet" type="text/css">
