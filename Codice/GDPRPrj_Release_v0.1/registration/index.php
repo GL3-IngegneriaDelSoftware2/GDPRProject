@@ -39,7 +39,7 @@
     <?php  if (isset($_SESSION['username'])) : ?>
     	<p>Welcome <strong><?php echo $_SESSION['username']; ?></strong></p>
     	<!-- <p> <a href="index.php?logout='1'" style="color: red;">logout</a> </p> -->
-		<p> <a href="../Homepage.html">Home Page </a> </p> <!-- Temporaneo LucaP -->
+		<p> <a href="../Homepage.php">Home Page </a> </p> <!-- Temporaneo LucaP -->
     <?php endif ?>
 </div>
 		

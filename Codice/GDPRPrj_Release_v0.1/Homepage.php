@@ -1,3 +1,6 @@
+<?php
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -16,7 +19,15 @@
 <div class="navbar">
   <a href="events/events_form.php">Events Form</a>
   <a href="event_typologies/event_typologies_form.html">Event Typology Form</a>
-  <a href="registration/index.php?logout='1'" class="right">Logout</a> <!-- Effettuo il logout passando per il file registration/index.php -->
+
+  <?php
+  if(isset($_SESSION['username'])){
+    echo "<a href=\"registration/index.php?logout='1'\" class=\"right\">Logout</a> <!-- Effettuo il logout passando per il file registration/index.php -->";
+  }else{
+    echo "<a href=\"registration/registration_login.php\" class=\"right\">Login</a> <!-- Da nascondere in base al valore session, passare per JS?-->";
+  }
+  ?>
+
 </div>
 
 <div class="row">
