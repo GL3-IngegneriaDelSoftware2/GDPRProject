@@ -13,13 +13,14 @@
 <body>
 <div>
  <form action="events_insert.php" method="POST"> <!-- mandiamo i dati inseriti nel form al file insert.php -->
+ <p>Fill the form to insert a new event (* some fields are required):</p>
   <table>
    <tr>
-    <td>Name :</td>
+    <td>Name (*) :</td>
     <td><input type="text" name="name" required></td>
    </tr>
    <tr>
-    <td>Typology :</td>
+    <td>Typology (*) :</td>
     <td>
         <label for="typology-select">
             <select id="typology-select" name="typology">
@@ -46,23 +47,23 @@
   <td><a href="../event_typologies/event_typologies_form.php"><input class="btn" type="button" value="Create new Event Typology"></a></td>
    </tr>
    <tr>
-    <td>Description :</td>
+    <td>Description (*) :</td>
     <td><input type="text" name="description" required></td>
    </tr>
    <tr>
-    <td>Date from :</td>
+    <td>Date from (*) :</td>
     <td><input type="date" name="date_from" required></td>
    </tr> 
    <tr>
-    <td>Date to :</td>
+    <td>Date to (*) :</td>
     <td><input type="date" name="date_to" required></td>
    </tr>
    <tr>
-    <td>Class :</td>
+    <td>Class (*) :</td>
     <td><input type="text" name="class" required></td>
    </tr>
    <tr>
-    <td>State :</td>
+    <td>State (*) :</td>
     <td><input type="text" name="state" required></td>
    </tr>
    <tr>

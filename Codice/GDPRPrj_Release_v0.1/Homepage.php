@@ -19,7 +19,9 @@
 
 <div class="navbar">
   <a href="events/events_form.php">Events Form</a>
+  <a href="events/events_display.php">Display Events</a>
   <a href="event_typologies/event_typologies_form.php">Event Typology Form</a>
+  <a href="event_typologies/event_typologies_display.php">Display Event Typology</a>
 
   <?php
   if(isset($_SESSION['username'])){

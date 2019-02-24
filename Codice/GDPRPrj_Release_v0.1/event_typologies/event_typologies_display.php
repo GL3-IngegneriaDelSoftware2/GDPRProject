@@ -1,8 +1,8 @@
 <?php
     session_start();
     if(!isset($_SESSION['username'])){
-        header("location: /dashboard/GDPRPrj_Release_v0.1/registration/registration_login.php");
-    }
+      header("location: /dashboard/GDPRPrj_Release_v0.1/registration/registration_login.php");
+  }
 ?>
 <html>
 
@@ -20,7 +20,7 @@ su una tabella html creata dinamicamente che "riproduce" la tabella presente nel
 
 $link = mysqli_connect("localhost", "root", "", "gdpr_database");
 
-$tableName = "events"; // nome della tabella da cui estrarre i dati
+$tableName = "event_typologies"; // nome della tabella da cui estrarre i dati
 
 /* check connection */
 if (mysqli_connect_errno()) {
