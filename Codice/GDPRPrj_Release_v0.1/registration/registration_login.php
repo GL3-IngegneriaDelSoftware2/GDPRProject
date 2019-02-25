@@ -1,6 +1,8 @@
 <?php include('registration_server.php') ?>
 <!DOCTYPE html>
 <html>
+<!-- Pagina da cui e' possibile effettuare il login dopo essersi registrati al sistema 
+Autore: Pellizzari Luca -->
 <head>
   <title>Registration system PHP and MySQL</title>
   <link rel="stylesheet" content-type="text/css" href="registration_style.css">

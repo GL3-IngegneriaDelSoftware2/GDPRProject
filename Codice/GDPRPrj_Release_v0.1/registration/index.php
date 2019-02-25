@@ -13,6 +13,8 @@
 ?>
 <!DOCTYPE html>
 <html>
+<!-- Pagina che segue la pagina del login: da il benvenuto all'utente chiamandolo con il suo username.
+Autore: Pellizzari Luca  -->
 <head>
 	<title>Home</title>
 	<link rel="stylesheet" type="text/css" href="registration_style.css">

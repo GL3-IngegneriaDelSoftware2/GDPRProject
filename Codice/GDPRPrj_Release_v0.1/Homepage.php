@@ -3,6 +3,9 @@
 ?>
 <!DOCTYPE html>
 <html lang="en">
+<!-- Questo file contiene la home page dell'applicazione web da consegnare all'Accademia delle Belle Arti di Udine, per poter utilizzare le funzionalita
+disponibili da questa pagina e' necessario aver effettuato il login al sito (e la registrazione utente se necessario).
+Autore: Pellizzari Luca -->
 <head>
 <title>Accademia delle Belle Arti - Udine</title>
 <link rel="shortcut icon" href="ABAico.ico" type="image/x-icon">

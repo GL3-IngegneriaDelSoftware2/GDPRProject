@@ -1,3 +1,4 @@
+<!-- Autore: Baradel Luca -->
 <?php
 	session_start();
 ?>

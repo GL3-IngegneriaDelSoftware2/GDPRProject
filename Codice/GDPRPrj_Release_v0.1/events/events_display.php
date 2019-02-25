@@ -14,7 +14,8 @@
 
 <!-- Il seguente script php, dopo aver testato la connessione ad un db, estrae i dati da una tabella del db e li stampa
 su una tabella html creata dinamicamente che "riproduce" la tabella presente nel db mostrando tutti i suoi record 
-(inclusa l'intestazione della tabella con i nomi di tutte le colonne)  -->
+(inclusa l'intestazione della tabella con i nomi di tutte le colonne).
+Autore: Pellizzari Luca  -->
 
 <?php
 

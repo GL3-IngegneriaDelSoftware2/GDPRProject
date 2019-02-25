@@ -6,6 +6,9 @@
 ?>
 <!DOCTYPE HTML>
 <html>
+<!-- Il file php contiene un form da cui l'utente puo inserire i dati relativi ad un nuovo evento nella tabella del database 
+che contiene gli eventi. I dati inseriti nel form vengono mandati ad un file php che tramite una query li inserisce nel database.
+Autore: Pellizzari Luca -->
 <link href="events_form.css" rel="stylesheet" type="text/css">
 <head>
   <title>Events Form</title>
@@ -44,7 +47,8 @@
             </select>
         </label>
   </td>
-  <td><a href="../event_typologies/event_typologies_form.php"><input class="btn" type="button" value="Create new Event Typology"></a></td>
+  <td><a href="../event_typologies/event_typologies_form.php"><input class="btn" type="button" value="Create new Event Typology"></a></td> <!-- I dati inseriti
+  nel form vengono mandati al file specificato in questa riga che si occupa di inserire i dati tramite query al database -->
    </tr>
    <tr>
     <td>Description (*) :</td>

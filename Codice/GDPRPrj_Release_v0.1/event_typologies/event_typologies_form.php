@@ -6,6 +6,9 @@
 ?>
 <!DOCTYPE HTML>
 <html>
+<!-- Il file php contiene un form da cui l'utente puo inserire i dati relativi ad una nuova tipologia di evento nella tabella del database 
+che contiene le tipologie di evento. I dati inseriti nel form vengono mandati ad un file php che tramite una query li inserisce nel database.
+Autore: Baradel Luca -->
 <link href="event_typologies_form.css" rel="stylesheet" type="text/css">
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <head>
@@ -19,11 +22,11 @@
       switch (priority) {
         case "1": literalPriority = "Low";
           break;
-        case "2": literalPriority = "Low-Mid";
+        case "2": literalPriority = "Low - Mid";
           break;
         case "3": literalPriority = "Mid";
           break;
-        case "4": literalPriority = "Mid-high";
+        case "4": literalPriority = "Mid - High";
           break;
         case "5": literalPriority = "High";
           break;
@@ -38,7 +41,8 @@
 
 <div class="event-typology-form">
 
- <form action="event_typologies_insert.php" method="POST">
+ <form action="event_typologies_insert.php" method="POST"> <!-- I dati inseriti nel form vengono mandati al file specificato in questa riga che si occupa
+ di inserire i dati tramite query al database -->
  
  <p>Fill the form to insert a new event typology (* some fields are required):</p>
 
@@ -50,9 +54,9 @@
 
    <tr>
     <td>Priority (*) :</td>
-    <td><input type="range" min="1" max="5" id="priority" name="priority" required onmouseup="printPriority()">
-      <span id="print-priority">Select a priority</span>
+    <td><input type="range" min="1" max="5" id="priority" name="priority" required onmouseup="printPriority()"> 
     </td>
+	<td><span id="print-priority">Not Set</span></td>
    </tr>
 
    <tr>
