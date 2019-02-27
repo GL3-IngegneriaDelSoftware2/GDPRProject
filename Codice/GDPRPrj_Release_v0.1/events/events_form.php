@@ -5,7 +5,7 @@
     }
 ?>
 <!DOCTYPE HTML>
-<html>
+<html lang="en">
 <!-- Il file php contiene un form da cui l'utente puo inserire i dati relativi ad un nuovo evento nella tabella del database 
 che contiene gli eventi. I dati inseriti nel form vengono mandati ad un file php che tramite una query li inserisce nel database.
 Autore: Pellizzari Luca -->

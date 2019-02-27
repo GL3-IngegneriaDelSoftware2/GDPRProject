@@ -1,4 +1,8 @@
 <?php
+
+// Pagina che verifica i dati inseriti durante la registrazione e durante il login
+// Autore: Pellizzari Luca
+
 session_start();
 
 // initializing variables
@@ -67,15 +71,15 @@ if (isset($_POST['login_user'])) {
   	array_push($errors, "Password is required");
   }
 
-  if (count($errors) == 0) {
-  	$password = md5($password);
+  if (count($errors) == 0) { // se non ci sono errori nel login
+  	$password = md5($password); // cifro la password per vedere se coincide con quella nel db (che e' cifrata)
   	$query = "SELECT * FROM users WHERE u_username='$username' AND u_password='$password'";
   	$results = mysqli_query($db, $query);
-  	if (mysqli_num_rows($results) == 1) {
+  	if (mysqli_num_rows($results) == 1) { // se il risultato della query ha una riga -> un utente
   	  $_SESSION['username'] = $username;
   	  $_SESSION['success'] = "You are now logged in";
-  	  header('location: index.php');
-  	}else {
+  	  header('location: ../Homepage.php'); // vado in questa pagina
+  	} else { // altrimenti scrivo sulla pagina corrente il seguente messaggio d'errore
   		array_push($errors, "Wrong username/password combination");
   	}
   }
