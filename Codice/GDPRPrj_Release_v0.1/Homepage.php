@@ -64,9 +64,38 @@ Autore: Pellizzari Luca -->
 	<!-- <br> <!-- line break/carriage return -->
 	
 	<h3>Lista eventi del mese:</h3>
-    <h5>Nome evento 1, data, ...</h5>
-    <h5>Nome evento 2, data, ...</h5>
-	<h5>Nome evento 3, data, ...</h5>
+    <?php
+
+
+      $link = mysqli_connect("localhost", "root", "", "gdpr_database");
+      $tableName = "events"; // nome della tabella da cui estrarre i dati
+
+      /* check connection */
+      if (mysqli_connect_errno()) {
+        printf("Connect failed: %s\n", mysqli_connect_error());
+        exit();
+      }
+
+      $query = "SELECT * FROM $tableName ORDER BY e_date_from"; // Tutti gli eventi
+      $dbResult = mysqli_query($link, $query);
+      $today = date("Y-m-d");
+
+      while($line = mysqli_fetch_array($dbResult, MYSQLI_NUM)){
+        
+        if($today <= $line[5]) {
+          $stato = "In arrivo";
+          if($today >= $line[4]) {
+            $stato = "In corso";
+          }
+          $event_start = date_parse($line[4]);
+          echo "<h3>$event_start[day]/$event_start[month]/$event_start[year]: $line[2] ($stato)</h3>\n<p>$line[3]</p>\nTermine: ";
+          $event_end = date_parse($line[5]);
+          echo "$event_end[day]/$event_end[month]/$event_end[year]";
+          echo "<hr>";
+        }
+      }
+
+    ?>
     
   </div>
 </div>

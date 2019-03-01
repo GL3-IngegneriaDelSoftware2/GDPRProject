@@ -15,7 +15,7 @@ Autore: Pellizzari Luca -->
 </head>
 <body>
 <div>
- <form action="events_insert.php" method="POST"> <!-- mandiamo i dati inseriti nel form al file insert.php -->
+ <form action="events_insert.php" method="POST" id="event-form"> <!-- mandiamo i dati inseriti nel form al file insert.php -->
  <p>Fill the form to insert a new event (* some fields are required):</p>
   <table>
    <tr>
@@ -52,7 +52,7 @@ Autore: Pellizzari Luca -->
    </tr>
    <tr>
     <td>Description (*) :</td>
-    <td><input type="text" name="description" required></td>
+    <td><textarea name="description" required form="event-form" cols="50" rows="3"></textarea>
    </tr>
    <tr>
     <td>Date from (*) :</td>
@@ -72,7 +72,7 @@ Autore: Pellizzari Luca -->
    </tr>
    <tr>
     <td>Notes :</td>
-    <td><input type="text" name="notes"></td>
+    <td><textarea name="notes" form="event-form" cols="50" rows="3"></textarea>
    </tr>
    <tr>
     <td>Participants :</td>
