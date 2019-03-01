@@ -38,7 +38,7 @@ if (!empty($name) || !empty($typology) || !empty($description) || !empty($dateFr
       $stmt->execute();
       $stmt->close();
       $conn->close();
-	  echo "New record inserted sucessfully";
+	  echo "<h1>Event Recap</h1><p>New event has been correctly inserted.</p><p>Event Name : <em>$name</em></p><p>Event Description : $description</p><p>Event Date From : $dateFrom</p><p>Event Date To : $dateTo</p><p>Event Class : $class</p>";
     }
 	
 }else{ // se le variabili sono vuote
