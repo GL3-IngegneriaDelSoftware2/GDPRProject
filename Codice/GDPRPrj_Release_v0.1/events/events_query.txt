@@ -3,4 +3,5 @@ VALUES (1, 1, 'Corso di PHP', 'Descrizione del corso', '2019-03-07', '2019-03-28
 (2, 1, 'Corso di SQL', 'Descrizione del corso', '2019-03-08', '2019-03-29', 'Informatica', 'Aperto', 'Portare pc', '', '2019-03-08',''),
 (3, 1, 'Corso di Fisica', 'Descrizione del corso', '2019-02-08', '2019-02-14', 'Matematica', 'Chiuso', 'Consegnare relazione di laboratorio', '', '2019-02-08',''),
 (4, 5, 'Riunione per gita scolastica', 'Un docente parlerà agli alunni', '2019-02-08', '2019-04-20', 'Docenti e alunni', 'Aperto', 'Portare proiettore', '', '2019-02-08',''),
-(5, 2, 'Prova di evacuazione', 'Uscire dall'aula in modo ordinato', '2019-03-20', '2019-03-20', 'Sicurezza', 'Aperto', 'Veloci ma ordinati', '', '','2019-03-20')
+(5, 2, 'Prova di evacuazione', 'Uscire dall'aula in modo ordinato', '2019-03-20', '2019-03-20', 'Sicurezza', 'Aperto', 'Veloci ma ordinati', '', '','2019-03-20'),
+(6, 4, 'Data Breach', 'Perdita dati', '2019-05-20', '2019-05-20', 'Sicurezza digitale', 'Aperto', 'Avvertire utenti', 'Luca, Luca, Gianluca', '2019-05-20','2019-05-20')
