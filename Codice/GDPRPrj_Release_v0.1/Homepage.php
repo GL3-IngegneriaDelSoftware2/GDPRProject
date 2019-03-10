@@ -10,12 +10,38 @@
 disponibili da questa pagina e' necessario aver effettuato il login al sito (e la registrazione utente se necessario).
 Autore: Pellizzari Luca -->
 <head>
-<title>Accademia delle Belle Arti - Udine</title>
-<link rel="shortcut icon" href="ABAico.ico" type="image/x-icon">
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<link rel="stylesheet" type="text/css" href="Homepage.css">
-</head>
+  <title>Accademia delle Belle Arti - Udine</title>
+  <link rel="shortcut icon" href="ABAico.ico" type="image/x-icon">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" type="text/css" href="Homepage.css">
+  <style>
+    .notif {
+    padding: 10px; 
+    border-radius: 10px; 
+    border: 1.5px solid black;
+    margin-top: 5px;
+    padding: 0px, 10px, 0px, 0px;
+    width: 100%;
+    height: 100%;
+    }
+
+    span {
+      font-size: 12px;
+      cursor: pointer;
+    }
+
+  </style>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script>
+    function close_notification(object) {
+      $(object.parentElement).slideUp();
+    }
+
+    function postpone_notification(object) {
+      $(object.parentElement).slideUp();
+    }
+  </script>
 <body>
 
 <div class="header">
@@ -42,12 +68,21 @@ Autore: Pellizzari Luca -->
 
 <div class="row">
   <div class="side"> <!-- Lato sinistro dello schermo, sotto l'header -->
-    <h2>Sezione notifiche</h2>
-	<h4>Notifica 1</h4>
-	<h4>Notifica 2</h4>
-	<h4>Notifica 3</h4>
-	<h4>Notifica 4</h4>
-	<h4>Notifica 5</h4>
+    <div class="notif-section">
+      <h2>Sezione notifiche</h2>
+      <?php
+        include 'temp.php';
+        $events = getLastFiveNotifications();
+        foreach($events as $event){
+          echo "<div class='notif' style='border-color: $event[color]'>";
+          echo "<h4>$event[name]</h4>";
+          echo "<p>$event[description]</p>";
+          echo "<span class='btn' onclick='close_notification(this)' style='color: $event[color]'>Chiudi </span>";
+          echo "<span class='btn' onclick='postpone_notification(this)' style='color: $event[color]'>Posponi</span>";
+          echo "</div>";
+        }
+      ?>
+    </div>
     <!-- <h5>Photo of me:</h5>
     <img src="BelleArtiUd.png" alt="Logo Accademia delle Belle Arti">
     <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
@@ -56,7 +91,7 @@ Autore: Pellizzari Luca -->
     <div class="fakeimg" style="height:60px;">Image</div><br>
     <div class="fakeimg" style="height:60px;">Image</div><br>
     <div class="fakeimg" style="height:60px;">Image</div> -->
-  </div>
+    </div>
   <div class="main"> <!-- Parte centrale dello schermo, sotto l'header -->
     <h2>Sezione Eventi</h2>
 	
@@ -68,36 +103,7 @@ Autore: Pellizzari Luca -->
 	
 	<h3>Lista eventi del mese:</h3>
     <?php
-
-
-      $link = mysqli_connect("localhost", "root", "", "gdpr_database");
-      $tableName = "events"; // nome della tabella da cui estrarre i dati
-
-      /* check connection */
-      if (mysqli_connect_errno()) {
-        printf("Connect failed: %s\n", mysqli_connect_error());
-        exit();
-      }
-
-      $query = "SELECT * FROM $tableName ORDER BY e_date_from"; // Tutti gli eventi
-      $dbResult = mysqli_query($link, $query);
-      $today = date("Y-m-d");
-
-      while($line = mysqli_fetch_array($dbResult, MYSQLI_NUM)){
-        
-        if($today <= $line[5]) {
-          $stato = "In arrivo";
-          if($today >= $line[4]) {
-            $stato = "In corso";
-          }
-          $event_start = date_parse($line[4]);
-          echo "<h3>$event_start[day]/$event_start[month]/$event_start[year]: $line[2] ($stato)</h3>\n<p>$line[3]</p>\nTermine: ";
-          $event_end = date_parse($line[5]);
-          echo "$event_end[day]/$event_end[month]/$event_end[year]";
-          echo "<hr>";
-        }
-      }
-
+      getLastFiveEvents();
     ?>
     
   </div>
