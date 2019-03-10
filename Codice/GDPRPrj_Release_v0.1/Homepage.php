@@ -1,5 +1,8 @@
 <?php
-  session_start();
+    session_start();
+    if(!isset($_SESSION['username'])){
+      header("location: /dashboard/GDPRPrj_Release_v0.1/registration/registration_login.php");
+  }
 ?>
 <!DOCTYPE html>
 <html lang="en">
