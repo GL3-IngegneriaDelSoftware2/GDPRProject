@@ -69,6 +69,7 @@ Autore: Pellizzari Luca -->
   <?php
   if(isset($_SESSION['username'])){
     echo "<a href=\"registration/index.php?logout='1'\" class=\"right\">Logout</a> <!-- Effettuo il logout passando per il file registration/index.php -->";
+    echo "<a class=\"right\">$_SESSION[username]</a>";
   }else{
     echo "<a href=\"registration/registration_login.php\" class=\"right\">Login</a> <!-- Da nascondere in base al valore session, passare per JS?-->";
   }
@@ -82,14 +83,20 @@ Autore: Pellizzari Luca -->
       <h2>Sezione notifiche</h2>
       <?php
         include 'temp.php';
-        $events = getLastFiveNotifications();
+        $events = getLastTenNotifications();
         foreach($events as $event){
-          echo "<div class='notif' style='border-color: $event[color]'>";
-          echo "<h4>$event[name]</h4>";
-          echo "<p>$event[description]</p>";
-          echo "<span class='btn' onclick='close_notification(this)'>Chiudi</span>";
-          echo "<span class='btn' onclick='postpone_notification(this)'>Posponi</span>";
-          echo "</div>";
+          if ($event['priority'] < 4) {
+            echo "<div class='notif' style='border-color: $event[color]'>";
+            echo "<h4>$event[name] -> $event[priority]</h4>";
+            echo "<p>$event[description]</p>";
+            if($event['priority'] < 2 ){
+              echo "<span class='btn' onclick='close_notification(this)'>Chiudi</span>";
+            }
+            if($event['priority'] > 0){
+              echo "<span class='btn' onclick='postpone_notification(this)'>Posponi</span>";
+            }
+            echo "</div>";
+          }
         }
       ?>
     </div>

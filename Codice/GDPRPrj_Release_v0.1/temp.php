@@ -1,6 +1,6 @@
 <?php
 
-function getLastFiveNotifications() {
+function getLastTenNotifications() {
     $link = mysqli_connect("localhost", "root", "", "gdpr_database");
     $tableName = "events"; // nome della tabella da cui estrarre i dati
 
@@ -22,11 +22,12 @@ function getLastFiveNotifications() {
         $current_event['name'] = $line[2];
         $current_event['description'] = $line[3];
 
-        if ($today >= $line[4] && $index < 5) {
+        if ($today >= $line[4] && $index < 10) {
             $typology = mysqli_query($link, "SELECT * FROM `event_typologies` WHERE et_id = $line[1]");
 
             $typology = $typology->fetch_assoc();
             $current_event['color'] = $typology['et_color'];
+            $current_event["priority"] = $typology['et_priority'];
             $events["event_$index"] = $current_event;
             $index++;
         }
