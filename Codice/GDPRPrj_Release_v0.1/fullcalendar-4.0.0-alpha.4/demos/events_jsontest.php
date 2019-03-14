@@ -22,7 +22,7 @@ if (mysqli_connect_errno()) {
 }
 
 // Estraggo i dati dalla tabella
-$query = "select $tableName.e_name, $tableName.e_date_from, $tableName.e_date_to from $tableName";
+$query = "select $tableName.e_name, $tableName.e_date_from, $tableName.e_date_to, et.et_color from $tableName join event_typologies et on $tableName.e_typology = et.et_id";
 $dbResult = mysqli_query($link, $query); // risultato della query
 $eventsArray = array(); // array di array di eventi
 
@@ -49,16 +49,17 @@ mysqli_close($link);
 	// pass PHP array to JavaScript 
 	var eventsTemp = <?php echo json_encode($eventsArray, JSON_PRETTY_PRINT) ?>;
 	
-	function Event(title, start, end){
+	function Event(title, start, end, color){
 		this.title = title;
 		this.start = start;
 		this.end = end;
+		this.color = color;
 	}
 	
 	var events = new Array();
 	
-	for(var i = 0; i < eventsTemp.length; i+=3){
-		events.push(new Event(eventsTemp[i], eventsTemp[i+1], eventsTemp[i+2]));
+	for(var i = 0; i < eventsTemp.length; i+=4){
+		events.push(new Event(eventsTemp[i], eventsTemp[i+1], eventsTemp[i+2], eventsTemp[i+3]));
 	}
 
 	// how to access 
@@ -82,7 +83,7 @@ mysqli_close($link);
         center: 'title',
         right: 'month,agendaWeek,agendaDay,listWeek' // per la lista degli eventi della settimana
       },
-      defaultDate: '2019-03-12',
+      defaultDate: Date.now(),
       navLinks: true, // can click day/week names to navigate views
       editable: true,
       eventLimit: true, // allow "more" link when too many events
