@@ -100,21 +100,13 @@ Autore: Pellizzari Luca -->
         }
       ?>
     </div>
-    <!-- <h5>Photo of me:</h5>
-    <img src="BelleArtiUd.png" alt="Logo Accademia delle Belle Arti">
-    <p>Some text about me in culpa qui officia deserunt mollit anim..</p>
-    <h3>More Text</h3>
-    <p>Lorem ipsum dolor sit ame.</p>
-    <div class="fakeimg" style="height:60px;">Image</div><br>
-    <div class="fakeimg" style="height:60px;">Image</div><br>
-    <div class="fakeimg" style="height:60px;">Image</div> -->
     </div>
   <div class="main"> <!-- Parte centrale dello schermo, sotto l'header -->
     <h2>Sezione Eventi</h2>
 	
 	<!-- <br> <!-- line break/carriage return -->
 	
-	<h3>Vai al calendario: <a href="#">Link calendario (da implementare)</a></h3>
+	<h3>Vai al calendario: <a href="fullcalendar-4.0.0-alpha.4/demos/events_jsontest.php">Link calendario</a></h3>
 	
 	<!-- <br> <!-- line break/carriage return -->
 	
