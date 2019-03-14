@@ -29,6 +29,16 @@ Autore: Pellizzari Luca -->
     span {
       font-size: 12px;
       cursor: pointer;
+      border: 1px solid black; 
+      border-radius: 2px; 
+      margin:2px; 
+      padding: 4px;
+    }
+
+    span:hover {  
+      background-color: #666;
+      color: white;
+      transition: 0.5s;
     }
 
   </style>
@@ -77,8 +87,8 @@ Autore: Pellizzari Luca -->
           echo "<div class='notif' style='border-color: $event[color]'>";
           echo "<h4>$event[name]</h4>";
           echo "<p>$event[description]</p>";
-          echo "<span class='btn' onclick='close_notification(this)' style='color: $event[color]'>Chiudi </span>";
-          echo "<span class='btn' onclick='postpone_notification(this)' style='color: $event[color]'>Posponi</span>";
+          echo "<span class='btn' onclick='close_notification(this)'>Chiudi</span>";
+          echo "<span class='btn' onclick='postpone_notification(this)'>Posponi</span>";
           echo "</div>";
         }
       ?>
@@ -103,7 +113,7 @@ Autore: Pellizzari Luca -->
 	
 	<h3>Lista eventi del mese:</h3>
     <?php
-      getLastFiveEvents();
+      getLastEvents();
     ?>
     
   </div>

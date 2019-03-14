@@ -35,7 +35,7 @@ function getLastFiveNotifications() {
 
 }
 
-function getLastFiveEvents()
+function getLastEvents()
 {
     $link = mysqli_connect("localhost", "root", "", "gdpr_database");
     $tableName = "events"; // nome della tabella da cui estrarre i dati
@@ -46,7 +46,7 @@ function getLastFiveEvents()
         exit();
     }
 
-    $query = "SELECT * FROM $tableName ORDER BY e_date_from"; // Tutti gli eventi
+    $query = "SELECT * FROM $tableName JOIN event_typologies on $tableName.e_typology = event_typologies.et_id ORDER BY e_date_from"; // Tutti gli eventi
     $dbResult = mysqli_query($link, $query);
     $today = date("Y-m-d");
 
@@ -61,6 +61,7 @@ function getLastFiveEvents()
             echo "<h3>$event_start[day]/$event_start[month]/$event_start[year]: $line[2] ($stato)</h3>\n<p>$line[3]</p>\nTermine: ";
             $event_end = date_parse($line[5]);
             echo "$event_end[day]/$event_end[month]/$event_end[year]";
+            echo "<p>Tipologia: $line[13]</p>";
             echo "<hr>";
         }
     }
