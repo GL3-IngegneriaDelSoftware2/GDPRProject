@@ -44,7 +44,7 @@ Autore: Baradel Luca -->
  <form action="event_typologies_insert.php" method="POST"> <!-- I dati inseriti nel form vengono mandati al file specificato in questa riga che si occupa
  di inserire i dati tramite query al database -->
  
- <p>Fill the form to insert a new event typology (* some fields are required):</p>
+ <h4><p>Fill the form to insert a new event typology (* some fields are required):</p></h4>
 
   <table>
    <tr>

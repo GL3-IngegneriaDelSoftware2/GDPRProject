@@ -16,7 +16,7 @@ Autore: Pellizzari Luca -->
 <body>
 <div>
  <form action="events_insert.php" method="POST" id="event-form"> <!-- mandiamo i dati inseriti nel form al file insert.php -->
- <p>Fill the form to insert a new event (* some fields are required):</p>
+ <h4><p>Fill the form to insert a new event (* some fields are required):</p></h4>
   <table>
    <tr>
     <td>Name (*) :</td>
