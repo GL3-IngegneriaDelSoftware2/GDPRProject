@@ -12,6 +12,32 @@ Autore: Pellizzari Luca -->
 <link href="events_form.css" rel="stylesheet" type="text/css">
 <head>
   <title>Events Form</title>
+  <script>
+	  function selectUsers(select){
+		  
+	  var option = select.options[select.selectedIndex];
+	  var ul = select.parentNode.getElementsByTagName('ul')[0];
+		 
+	  var choices = ul.getElementsByTagName('input');
+	  for (var i = 0; i < choices.length; i++)
+		if (choices[i].value == option.value)
+		  return;
+		 
+	  var li = document.createElement('li');
+	  var input = document.createElement('input');
+	  var text = document.createTextNode(option.firstChild.data);
+		 
+	  input.type = 'hidden';
+	  input.name = 'users[]';
+	  input.value = option.value;
+
+	  li.appendChild(input);
+	  li.appendChild(text);
+	  li.setAttribute('onclick', 'this.parentNode.removeChild(this);');     
+		
+	  ul.appendChild(li);
+	}
+  </script>
 </head>
 <body>
 <div>
@@ -38,7 +64,7 @@ Autore: Pellizzari Luca -->
                             exit();
                         }
 
-                        $typologies = mysqli_query($link, "SELECT * FROM $tableName");
+                        $typologies = mysqli_query($link, "SELECT * FROM $tableName where $tableName.et_id != 4");
                         while($row = mysqli_fetch_array($typologies)){
                             
                             echo "<option value=\"$row[et_id]\">$row[et_name]</option>"; // nome della colonna
@@ -47,7 +73,7 @@ Autore: Pellizzari Luca -->
             </select>
         </label>
   </td>
-  <td><a href="../event_typologies/event_typologies_form.php"><input class="btn" type="button" value="Create new Event Typology"></a></td> <!-- I dati inseriti
+  <td><a href="../event_typologies/event_typologies_form.php"><input class="btn" type="button" value="Create New Event Typology"></a></td> <!-- I dati inseriti
   nel form vengono mandati al file specificato in questa riga che si occupa di inserire i dati tramite query al database -->
    </tr>
    <tr>
@@ -63,20 +89,34 @@ Autore: Pellizzari Luca -->
     <td><input type="date" name="date_to" required></td>
    </tr>
    <tr>
-    <td>Class (*) :</td>
-    <td><input type="text" name="class" required></td>
-   </tr>
-   <tr>
-    <td>State (*) :</td>
-    <td><input type="text" name="state" required></td>
-   </tr>
-   <tr>
     <td>Notes :</td>
     <td><textarea name="notes" form="event-form" cols="50" rows="3"></textarea>
    </tr>
    <tr>
-    <td>Participants :</td>
-    <td><input type="text" name="participants"></td>
+		<td>Participants (*) :</td>
+		<td>
+			<label for="participants-select">
+				<select id="participants-select" name="participants" required>
+					<option value="">-- Select participants --</option>
+						<?php
+							$link = mysqli_connect("localhost", "root", "", "gdpr_database");
+							$tableName = "users"; // nome della tabella da cui estrarre i dati
+
+							/* check connection */
+							if (mysqli_connect_errno()) {
+								printf("Connect failed: %s\n", mysqli_connect_error());
+								exit();
+							}
+
+							$users = mysqli_query($link, "SELECT * FROM $tableName");
+							while($row = mysqli_fetch_array($users)){
+								
+								echo "<option value=\"$row[u_id]\">$row[u_username]</option>"; // nome della colonna
+							}
+						?>
+				</select>
+			</label>
+	    </td>
    </tr> 
    <tr>
     <td>Actual start :</td>

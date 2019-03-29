@@ -61,10 +61,9 @@ Autore: Pellizzari Luca -->
 </div>
 
 <div class="navbar">
-  <a href="events/events_form.php">Events Form</a>
-  <a href="events/events_display.php">Display Events</a> <!-- TEMPORANEO solo per i test -->
-  <a href="event_typologies/event_typologies_form.php">Event Typology Form</a>
-  <a href="event_typologies/event_typologies_display.php">Display Event Typology</a> <!-- TEMPORANEO solo per i test -->
+  <a href="events/events_form.php">New Event</a>
+  <a href="databreach/databreach_form.php">Data Breach</a>
+  <a href="event_typologies/event_typologies_form.php">New Event Typology</a>
 
   <?php
   if(isset($_SESSION['username'])){
@@ -87,7 +86,7 @@ Autore: Pellizzari Luca -->
         foreach($events as $event){
           if ($event['priority'] < 4) {
             echo "<div class='notif' style='border-color: $event[color]'>";
-            echo "<h4>$event[name] -> $event[priority]</h4>";
+            echo "<h4>$event[name]</h4>";
             echo "<p>$event[description]</p>";
             if($event['priority'] < 2 ){
               echo "<span class='btn' onclick='close_notification(this)'>Chiudi</span>";
@@ -104,11 +103,7 @@ Autore: Pellizzari Luca -->
   <div class="main"> <!-- Parte centrale dello schermo, sotto l'header -->
     <h2>Sezione Eventi</h2>
 	
-	<!-- <br> <!-- line break/carriage return -->
-	
 	<h3>Vai al calendario: <a href="fullcalendar-4.0.0-alpha.4/demos/events_jsontest.php">Link calendario</a></h3>
-	
-	<!-- <br> <!-- line break/carriage return -->
 	
 	<h3>Lista eventi del mese:</h3>
     <?php

@@ -19,10 +19,6 @@ Autore: Pellizzari Luca -->
  <h4><p>Fill the form to insert a potentially privacy violation (* some fields are required):</p></h4>
   <table>
    <tr>
-    <td>Name (*) :</td>
-    <td><input type="text" name="name" required></td>
-   </tr>
-   <tr>
     <td>Description (*) :</td>
     <td><textarea name="description" required form="event-form" cols="50" rows="3"></textarea>
    </tr>
@@ -31,19 +27,37 @@ Autore: Pellizzari Luca -->
     <td><input type="date" name="date_from" required></td>
    </tr> 
    <tr>
-    <td>State (*) :</td>
-    <td><input type="text" name="state" required></td>
-   </tr>
-   <tr>
     <td>Notes :</td>
     <td><textarea name="notes" form="event-form" cols="50" rows="3"></textarea>
    </tr>
    <tr>
-    <td>Participants :</td>
-    <td><input type="text" name="participants"></td>
-   </tr> 
+    <td>Participants (*) :</td>
+    <td>
+        <label for="participants-select">
+            <select id="participants-select" name="participants" required>
+                <option value="">-- Select participants --</option>
+                    <?php
+                        $link = mysqli_connect("localhost", "root", "", "gdpr_database");
+                        $tableName = "users"; // nome della tabella da cui estrarre i dati
+
+                        /* check connection */
+                        if (mysqli_connect_errno()) {
+                            printf("Connect failed: %s\n", mysqli_connect_error());
+                            exit();
+                        }
+
+                        $users = mysqli_query($link, "SELECT * FROM $tableName");
+                        while($row = mysqli_fetch_array($users)){
+                            
+                            echo "<option value=\"$row[u_id]\">$row[u_username]</option>"; // nome della colonna
+                        }
+                    ?>
+            </select>
+        </label>
+  </td>
+ </tr> 
    <tr>
-    <td><input class="btn" type="submit" value="Create Event"></td>
+    <td><input class="btn" type="submit" value="Send"></td>
    </tr>
   </table>
  </form>
