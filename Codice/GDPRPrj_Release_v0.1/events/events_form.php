@@ -12,32 +12,6 @@ Autore: Pellizzari Luca -->
 <link href="events_form.css" rel="stylesheet" type="text/css">
 <head>
   <title>Events Form</title>
-  <script>
-	  function selectUsers(select){
-		  
-	  var option = select.options[select.selectedIndex];
-	  var ul = select.parentNode.getElementsByTagName('ul')[0];
-		 
-	  var choices = ul.getElementsByTagName('input');
-	  for (var i = 0; i < choices.length; i++)
-		if (choices[i].value == option.value)
-		  return;
-		 
-	  var li = document.createElement('li');
-	  var input = document.createElement('input');
-	  var text = document.createTextNode(option.firstChild.data);
-		 
-	  input.type = 'hidden';
-	  input.name = 'users[]';
-	  input.value = option.value;
-
-	  li.appendChild(input);
-	  li.appendChild(text);
-	  li.setAttribute('onclick', 'this.parentNode.removeChild(this);');     
-		
-	  ul.appendChild(li);
-	}
-  </script>
 </head>
 <body>
 <div>
@@ -96,8 +70,7 @@ Autore: Pellizzari Luca -->
 		<td>Participants (*) :</td>
 		<td>
 			<label for="participants-select">
-				<select id="participants-select" name="participants" required>
-					<option value="">-- Select participants --</option>
+				<select multiple="multiple" id="participants-select" name="participants[]" size="3" required> <!-- mettendo le quadre automaticamente produco un array -->
 						<?php
 							$link = mysqli_connect("localhost", "root", "", "gdpr_database");
 							$tableName = "users"; // nome della tabella da cui estrarre i dati

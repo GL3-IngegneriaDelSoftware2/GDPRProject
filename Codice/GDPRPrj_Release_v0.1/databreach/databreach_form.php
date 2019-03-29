@@ -34,25 +34,24 @@ Autore: Pellizzari Luca -->
     <td>Participants (*) :</td>
     <td>
         <label for="participants-select">
-            <select id="participants-select" name="participants" required>
-                <option value="">-- Select participants --</option>
-                    <?php
-                        $link = mysqli_connect("localhost", "root", "", "gdpr_database");
-                        $tableName = "users"; // nome della tabella da cui estrarre i dati
+            <select multiple="multiple" id="participants-select" name="participants[]" size="3" required> <!-- mettendo le quadre automaticamente produco un array -->
+						<?php
+							$link = mysqli_connect("localhost", "root", "", "gdpr_database");
+							$tableName = "users"; // nome della tabella da cui estrarre i dati
 
-                        /* check connection */
-                        if (mysqli_connect_errno()) {
-                            printf("Connect failed: %s\n", mysqli_connect_error());
-                            exit();
-                        }
+							/* check connection */
+							if (mysqli_connect_errno()) {
+								printf("Connect failed: %s\n", mysqli_connect_error());
+								exit();
+							}
 
-                        $users = mysqli_query($link, "SELECT * FROM $tableName");
-                        while($row = mysqli_fetch_array($users)){
-                            
-                            echo "<option value=\"$row[u_id]\">$row[u_username]</option>"; // nome della colonna
-                        }
-                    ?>
-            </select>
+							$users = mysqli_query($link, "SELECT * FROM $tableName");
+							while($row = mysqli_fetch_array($users)){
+								
+								echo "<option value=\"$row[u_id]\">$row[u_username]</option>"; // nome della colonna
+							}
+						?>
+				</select>
         </label>
   </td>
  </tr> 
