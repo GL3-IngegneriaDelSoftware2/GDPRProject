@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Creato il: Gen 30, 2019 alle 12:16
+-- Creato il: Mar 29, 2019 alle 14:49
 -- Versione del server: 10.1.37-MariaDB
 -- Versione PHP: 7.3.1
 
@@ -59,13 +59,26 @@ CREATE TABLE `events` (
   `e_description` text NOT NULL,
   `e_date_from` date NOT NULL,
   `e_date_to` date NOT NULL,
-  `e_class` text NOT NULL,
-  `e_state` text NOT NULL,
+  `e_class` text NOT NULL COMMENT 'Task oppure Event',
+  `e_state` text NOT NULL COMMENT 'Elenco degli id degli utenti con l''evento ancora da chiudere',
   `e_notes` text,
-  `e_participants` text,
+  `e_participants` text NOT NULL COMMENT 'Elenco degli id degli utenti a cui e'' rivolto l''evento',
   `e_actual_start` date DEFAULT NULL,
   `e_actual_end` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dump dei dati per la tabella `events`
+--
+
+INSERT INTO `events` (`e_id`, `e_typology`, `e_name`, `e_description`, `e_date_from`, `e_date_to`, `e_class`, `e_state`, `e_notes`, `e_participants`, `e_actual_start`, `e_actual_end`) VALUES
+(1, 1, 'Corso di PHP', 'Descrizione del corso', '2019-03-07', '2019-03-28', 'Informatica', 'Aperto', 'Portare materiale didattico', '', '2019-03-07', '0000-00-00'),
+(2, 1, 'Corso di SQL', 'Descrizione del corso', '2019-03-08', '2019-03-29', 'Informatica', 'Aperto', 'Portare pc', '', '2019-03-08', '0000-00-00'),
+(3, 1, 'Corso di fisica', 'Descrizione del corso', '2019-02-08', '2019-02-14', 'Matematica', 'Chiuso', 'Consegnare relazione di laboratorio', '', '2019-02-08', '0000-00-00'),
+(4, 5, 'Riunione per gita scolastica', 'Un docente parlerÃ  agli alunni', '2019-02-08', '2019-04-20', 'Docenti e alunni', 'Aperto', 'Portare proiettore', '', '2019-02-08', '0000-00-00'),
+(5, 2, 'Prova di evacuazione', 'Uscire dall\'aula in modo ordinato', '2019-03-20', '2019-03-20', 'Sicurezza', 'Aperto', 'Veloci ma ordinati', '', '0000-00-00', '2019-03-20'),
+(6, 4, 'Data Breach', 'Perdita dati', '2019-05-20', '2019-05-20', 'Sicurezza digitale', 'Aperto', 'Avvertire utenti', 'Luca, Luca, Gianluca', '2019-05-20', '2019-05-20'),
+(7, 3, 'Riunione personale', 'Descrizione della riunione', '2019-03-20', '2019-03-26', 'Riunioni personale', 'Aperto', 'Non ci sono note per questo evento', 'Tutto il personale', '2019-03-20', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -74,12 +87,24 @@ CREATE TABLE `events` (
 --
 
 CREATE TABLE `event_typologies` (
-  `et_id` int(5) NOT NULL,
+  `et_id` int(11) NOT NULL,
   `et_name` text NOT NULL,
   `et_priority` int(11) NOT NULL COMMENT 'Intero in range 1-5 inclusi',
   `et_early_notification` int(11) NOT NULL COMMENT 'Tempo espresso in ore',
-  `et_event_repeat` int(11) NOT NULL COMMENT 'Tempo espresso in ore'
+  `et_event_repeat` varchar(20) NOT NULL COMMENT 'don''t repeat, daily, weekly, monthly, yearly',
+  `et_color` varchar(20) NOT NULL COMMENT 'Colore in formato HEX'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dump dei dati per la tabella `event_typologies`
+--
+
+INSERT INTO `event_typologies` (`et_id`, `et_name`, `et_priority`, `et_early_notification`, `et_event_repeat`, `et_color`) VALUES
+(1, 'Corso di formazione', 2, 48, 'weekly', '#ff0000'),
+(2, 'Corso sulla sicurezza', 3, 48, 'weekly', '#00ff00'),
+(3, 'Riunione personale accademico', 3, 48, 'daily', '#0000ff'),
+(4, 'Segnalazione data breach', 4, 24, 'don\'t repeat', '#ff0000'),
+(5, 'Riunione docenti', 2, 24, 'weekly', '#ffcc33');
 
 -- --------------------------------------------------------
 
@@ -112,9 +137,19 @@ CREATE TABLE `potential_breach` (
 
 CREATE TABLE `users` (
   `u_id` int(11) NOT NULL,
-  `u_username` text NOT NULL COMMENT 'Univoco',
-  `u_password` text NOT NULL COMMENT 'Minimo 8 caratteri'
+  `u_username` varchar(100) NOT NULL COMMENT 'Univoco',
+  `u_password` varchar(100) NOT NULL COMMENT 'Minimo 8 caratteri',
+  `u_email` varchar(100) NOT NULL COMMENT 'Univoca'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dump dei dati per la tabella `users`
+--
+
+INSERT INTO `users` (`u_id`, `u_username`, `u_password`, `u_email`) VALUES
+(5, 'lucap', '5cd7fa01cc2c7aaa923775b1a9f011d2', 'lucap@gmail.com'),
+(6, 'lucab', '04703a9cdb6a13b411b351f32aad95b2', 'lucab@gmail.com'),
+(7, 'gianlu', '77df21256ea08f5747765c588686aa4c', 'gianlu@gmail.com');
 
 --
 -- Indici per le tabelle scaricate
@@ -167,19 +202,19 @@ ALTER TABLE `document_manager`
 -- AUTO_INCREMENT per la tabella `events`
 --
 ALTER TABLE `events`
-  MODIFY `e_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `e_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT per la tabella `event_typologies`
 --
 ALTER TABLE `event_typologies`
-  MODIFY `et_id` int(5) NOT NULL AUTO_INCREMENT;
+  MODIFY `et_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT per la tabella `users`
 --
 ALTER TABLE `users`
-  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `u_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- Limiti per le tabelle scaricate

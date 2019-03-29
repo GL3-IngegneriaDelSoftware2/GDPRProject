@@ -2,19 +2,22 @@
 per inserire i dati in una tabella del db.
 Autore: Pellizzari Luca -->
 <?php
-
 // Salviamo i dati che ci arrivano dal form html in variabili php
-$name = $_POST['name']; // va passato il valore dell'attributo "name" del file html che contiene quel dato
-$typology = $_POST['typology'];
+// name, typology e class hanno valori fissi in quanto sappiamo gia che l'evento e' di tipo data breach
+$name = "Data Breach";
+$typology = 4; // la tipologia di evento "Segnalazione data breach" ha et_id = 4
+$class = "Event";
+// gli altri campi li prendo dal form
 $description = $_POST['description'];
 $dateFrom = $_POST['date_from'];
-$dateTo = $_POST['date_to'];
-$class = "Task"; // l'utente puo inserire solo Task, gli Event dovrebbero essere inseriti automaticamnte dal sistema
-$participants = implode(";", $_POST['participants']); // id degli utenti (separati da ";") a cui sara mostrata la notifica dell'evento
-$state = $participants; // come sopra, poi quando un utente risolve la notifica da $state viene tolto il suo id
+$date = DateTime::createFromFormat('Y-m-d', $dateFrom); // creo un oggetto di tipo date per poter sommare tre giorni a $dateFrom
+$date2 = date_add($date, date_interval_create_from_date_string('3 days')); // sommo tre giorni (tempo massimo per chiudere la pratica data breach)
+$dateTo = $date2->format('Y-m-d'); // riporto la data in formato stringa per la query
 $notes = $_POST['notes']; // puo essere null
-$actualStart = $_POST['actual_start']; // puo essere null
-$actualEnd = $_POST['actual_end']; // puo essere null
+$participants = implode(";", $_POST['participants']); // id degli utenti (separati da ";") a cui sara mostrata la notifica della violazione
+$state = $participants; // uguale, la violazione puo essere risolta da uno di questi utenti
+$actualStart = $dateFrom;
+$actualEnd = $dateTo;
 
 // Dettagli del db
 $host = "localhost";
@@ -23,7 +26,7 @@ $dbPassword = "";
 $dbname = "gdpr_database";
 $tableName = "events";
 
-if (!empty($name) || !empty($typology) || !empty($description) || !empty($dateFrom) || !empty($dateTo) || !empty($class) || !empty($state) || !empty($participants)) {
+if (!empty($name) || !empty($typology) || !empty($description) || !empty($dateFrom) || !empty($dateTo) || !empty($class) || !empty($state)) {
 	
     // create connection
     $conn = new mysqli($host, $dbUsername, $dbPassword, $dbname);
