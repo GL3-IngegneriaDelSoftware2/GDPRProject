@@ -27,6 +27,7 @@ function getLastTenNotifications() {
 
             $typology = $typology->fetch_assoc();
             $current_event['color'] = $typology['et_color'];
+            $current_event['second_color'] = rgbToHsl($typology['et_color'], 30);
             $current_event["priority"] = $typology['et_priority'];
             $events["event_$index"] = $current_event;
             $index++;
@@ -67,4 +68,40 @@ function getLastEvents()
         }
     }
 }
- 
+
+function rgbToHsl($color, $correction) {
+	$r = hexdec(substr($color, 1, 2))/255;
+	$g = hexdec(substr($color, 3, 2))/255;
+    $b = hexdec(substr($color, 5, 2))/255;
+	
+    $max = max( $r, $g, $b );
+	$min = min( $r, $g, $b );
+	$h;
+	$s;
+	$l = ( $max + $min ) / 2;
+	$d = $max - $min;
+    	if( $d == 0 ){
+        	$h = $s = 0; // achromatic
+    	} else {
+        	$s = $d / ( 1 - abs( 2 * $l - 1 ) );
+		switch( $max ){
+	            case $r:
+	            	$h = 60 * fmod( ( ( $g - $b ) / $d ), 6 ); 
+                        if ($b > $g) {
+	                    $h += 360;
+	                }
+	                break;
+	            case $g: 
+	            	$h = 60 * ( ( $b - $r ) / $d + 2 ); 
+	            	break;
+	            case $b: 
+	            	$h = 60 * ( ( $r - $g ) / $d + 4 ); 
+	            	break;
+	        }			        	        
+	}
+	$h = round($h, 2);
+    $s = round($s, 2)*100;
+    $l = round($l, 2)*100;
+    $l += $correction;
+    return "hsl($h, $s%, $l%)";
+}
