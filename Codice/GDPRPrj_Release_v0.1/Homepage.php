@@ -109,11 +109,26 @@ Autore: Pellizzari Luca -->
 
 <body>
 
-  <div class="header">
-    <h1>Accademia delle Belle Arti di Udine</h1>
-    <img src="BelleArtiUd.png" alt="Logo Accademia delle Belle Arti">
-    <p>A website created by GL3</p>
-  </div>
+<div class="header">
+  <h1>Accademia delle Belle Arti di Udine</h1>
+  <img src="BelleArtiUd.png" alt="Logo Accademia delle Belle Arti">
+  <p>A website created by GL3</p>
+</div>
+
+<div class="navbar">
+  <a href="events/events_form.php">New Event</a>
+  <a href="event_typologies/event_typologies_form.php">New Event Typology</a>
+  <a href="databreach/databreach_form.php">Data Breach</a>
+  <a href="#">Richiesta Esercizio Diritti</a>
+
+  <?php
+  if(isset($_SESSION['username'])){
+    echo "<a href=\"registration/index.php?logout='1'\" class=\"right\">Logout</a> <!-- Effettuo il logout passando per il file registration/index.php -->";
+    echo "<a class=\"right\">$_SESSION[username]</a>";
+  }else{
+    echo "<a href=\"registration/registration_login.php\" class=\"right\">Login</a> <!-- Da nascondere in base al valore session, passare per JS?-->";
+  }
+  ?>
 
   <div class="navbar">
     <a href="events/events_form.php">New Event</a>

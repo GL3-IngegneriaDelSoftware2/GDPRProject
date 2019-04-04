@@ -27,15 +27,24 @@ if (!empty($name) || !empty($priority) || !empty($early_notification) || !empty(
     if (mysqli_connect_error()) { // connessione fallita
      die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
     }else{ // connessione ha successo
-      $INSERT = "insert into $tableName (et_name, et_priority, et_early_notification, et_event_repeat, et_color) values(?, ?, ?, ?, ?)";
-      // Prepare statement
-      $stmt = $conn->prepare($INSERT); // Prepariamo per INSERT
-      $stmt->bind_param('siiss', $name, $priority, $early_notification_hours, $repeat_interval, $typology_color);
-      $stmt->execute();
-      $stmt->close();
-      $conn->close();
-      echo "<h1>Event Typology Recap</h1><p>New event typology has been correctly created.</p><p>Event Typology Name : <em>$_POST[name]</em></p><p>Event Priority : $_POST[priority]</p><p>Early Notification: $early_notification_hours hours before</p><p>Event repetition: $repeat_interval</p>";
-        }
+	
+	  // Query per controllare che il nome della tipologia non sia gia presente nel db
+	  $typology_check_query = "select $tableName.et_name from $tableName where $tableName.et_name = $name LIMIT 1";
+	  $db = mysqli_connect('localhost', 'root', '', 'gdpr_database');
+	  $result = mysqli_query($db, $typology_check_query); // risultato della query
+	  if($result != FALSE){ // tipologia non presente nel db
+		  $INSERT = "insert into $tableName (et_name, et_priority, et_early_notification, et_event_repeat, et_color) values(?, ?, ?, ?, ?)";
+		  // Prepare statement
+		  $stmt = $conn->prepare($INSERT); // Prepariamo per INSERT
+		  $stmt->bind_param('siiss', $name, $priority, $early_notification_hours, $repeat_interval, $typology_color);
+		  $stmt->execute();
+		  $stmt->close();
+		  $conn->close();
+		  echo "<h1>Event Typology Recap</h1><p>New event typology has been correctly created.</p><p>Event Typology Name : <em>$_POST[name]</em></p><p>Event Priority : $_POST[priority]</p><p>Early Notification: $early_notification_hours hours before</p><p>Event repetition: $repeat_interval</p>";
+	  }else{ // tipologia con lo stesso nome gia presente nel db
+		echo "<p>A typology with the same name already exist. Please choose another name for the typology.</p>";
+	  }
+	}
 	
 }else{ // se le variabili sono vuote
  echo "All field are required";
