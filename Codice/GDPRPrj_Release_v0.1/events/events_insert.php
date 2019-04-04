@@ -34,9 +34,10 @@ if (!empty($name) || !empty($typology) || !empty($description) || !empty($dateFr
     }else{ // connessione ha successo
 	
 	  // Query per controllare che il nome dell'evento non sia gia presente nel db
-	  $event_check_query = "select $tableName.e_name from $tableName where $tableName.e_name = $name LIMIT 1";
+    $event_check_query = "select $tableName.e_name from $tableName where $tableName.e_name = '$name' LIMIT 1";
 	  $db = mysqli_connect('localhost', 'root', '', 'gdpr_database');
-	  $result = mysqli_query($db, $event_check_query); // risultato della query
+    $result = mysqli_query($db, $event_check_query); // risultato della query
+    print_r ($result);
 	  if($result != FALSE){ // evento non presente nel db
 		$INSERT = "insert into $tableName (e_name, e_typology, e_description, e_date_from, e_date_to, e_class, e_state, e_notes, e_participants, e_actual_start, e_actual_end) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         // Prepare statement

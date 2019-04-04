@@ -17,7 +17,20 @@ Autore: Pellizzari Luca -->
     $(object.parentElement).slideUp();
   }
 
-  function postpone_notification(object) {
+  function hide_notification(object, id) {
+
+    jQuery.ajax({
+      type: "POST",
+      url: 'notif_manager.php',
+      dataType: 'json',
+      data: {
+        notifToHideId: id
+      },
+
+      success: console.log("CORRECT");
+      }
+    });
+
     $(object.parentElement).slideUp();
   }
 </script>
@@ -94,6 +107,7 @@ Autore: Pellizzari Luca -->
       color: black;
       border: 2px solid black;
       transition: 0.5s;
+      box-shadow: 0 0 7px white;
     }
   </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -109,31 +123,17 @@ Autore: Pellizzari Luca -->
 
 <body>
 
-<div class="header">
-  <h1>Accademia delle Belle Arti di Udine</h1>
-  <img src="BelleArtiUd.png" alt="Logo Accademia delle Belle Arti">
-  <p>A website created by GL3</p>
-</div>
-
-<div class="navbar">
-  <a href="events/events_form.php">New Event</a>
-  <a href="event_typologies/event_typologies_form.php">New Event Typology</a>
-  <a href="databreach/databreach_form.php">Data Breach</a>
-  <a href="#">Richiesta Esercizio Diritti</a>
-
-  <?php
-  if(isset($_SESSION['username'])){
-    echo "<a href=\"registration/index.php?logout='1'\" class=\"right\">Logout</a> <!-- Effettuo il logout passando per il file registration/index.php -->";
-    echo "<a class=\"right\">$_SESSION[username]</a>";
-  }else{
-    echo "<a href=\"registration/registration_login.php\" class=\"right\">Login</a> <!-- Da nascondere in base al valore session, passare per JS?-->";
-  }
-  ?>
+  <div class="header">
+    <h1>Accademia delle Belle Arti di Udine</h1>
+    <img src="BelleArtiUd.png" alt="Logo Accademia delle Belle Arti">
+    <p>A website created by GL3</p>
+  </div>
 
   <div class="navbar">
     <a href="events/events_form.php">New Event</a>
     <a href="databreach/databreach_form.php">Data Breach</a>
     <a href="event_typologies/event_typologies_form.php">New Event Typology</a>
+    <a href="#">Richiesta Esercizio Diritti</a>
 
     <?php
     if (isset($_SESSION['username'])) {
@@ -163,7 +163,7 @@ Autore: Pellizzari Luca -->
               echo "<span class='btn' onclick='close_notification(this)'>Chiudi</span>";
             }
             if ($event['priority'] > 0) {
-              echo "<span class='btn' onclick='postpone_notification(this)' style='border: 1px solid $event[color];'>Posponi</span>";
+              echo "<span class='btn' onclick='hide_notification(this, $event[id])' style='border: 1px solid $event[color];'>Nascondi</span>";
             }
             echo "</div>";
           }

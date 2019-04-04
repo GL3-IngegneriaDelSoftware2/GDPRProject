@@ -77,7 +77,10 @@ if (isset($_POST['login_user'])) {
   	$results = mysqli_query($db, $query);
   	if (mysqli_num_rows($results) == 1) { // se il risultato della query ha una riga -> un utente
   	  $_SESSION['username'] = $username;
-  	  $_SESSION['success'] = "You are now logged in";
+      $_SESSION['success'] = "You are now logged in";
+
+      include 'temp.php';
+      $_SESSION['hiddenNotifications'] = [];
   	  header('location: ../Homepage.php'); // vado in questa pagina
   	} else { // altrimenti scrivo sulla pagina corrente il seguente messaggio d'errore
   		array_push($errors, "Wrong username/password combination");

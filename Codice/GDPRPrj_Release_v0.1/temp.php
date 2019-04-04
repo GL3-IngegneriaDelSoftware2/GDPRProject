@@ -1,6 +1,12 @@
 <?php
 
-function getLastTenNotifications() {
+// File used in 
+/*
+- Homepage.php
+*/
+
+function getLastTenNotifications()
+{
     $link = mysqli_connect("localhost", "root", "", "gdpr_database");
     $tableName = "events"; // nome della tabella da cui estrarre i dati
 
@@ -19,10 +25,12 @@ function getLastTenNotifications() {
 
     while ($line = mysqli_fetch_array($dbResult, MYSQLI_NUM)) {
         $current_event = [];
+        $current_event['id'] = $line[0];
         $current_event['name'] = $line[2];
         $current_event['description'] = $line[3];
+        $current_event['participants'] = $line[9];
 
-        if ($today >= $line[4] && $index < 10) {
+        if ($today >= $line[4] && $index < 10 && userShouldBeNotified($_SESSION['username'], $current_event['participants']) && !in_array($current_event['id'], $_SESSION['hiddenNotifications'])) {
             $typology = mysqli_query($link, "SELECT * FROM `event_typologies` WHERE et_id = $line[1]");
 
             $typology = $typology->fetch_assoc();
@@ -34,7 +42,6 @@ function getLastTenNotifications() {
         }
     }
     return $events;
-
 }
 
 function getLastEvents()
@@ -69,39 +76,64 @@ function getLastEvents()
     }
 }
 
-function rgbToHsl($color, $correction) {
-	$r = hexdec(substr($color, 1, 2))/255;
-	$g = hexdec(substr($color, 3, 2))/255;
-    $b = hexdec(substr($color, 5, 2))/255;
-	
-    $max = max( $r, $g, $b );
-	$min = min( $r, $g, $b );
-	$h;
-	$s;
-	$l = ( $max + $min ) / 2;
-	$d = $max - $min;
-    	if( $d == 0 ){
-        	$h = $s = 0; // achromatic
-    	} else {
-        	$s = $d / ( 1 - abs( 2 * $l - 1 ) );
-		switch( $max ){
-	            case $r:
-	            	$h = 60 * fmod( ( ( $g - $b ) / $d ), 6 ); 
-                        if ($b > $g) {
-	                    $h += 360;
-	                }
-	                break;
-	            case $g: 
-	            	$h = 60 * ( ( $b - $r ) / $d + 2 ); 
-	            	break;
-	            case $b: 
-	            	$h = 60 * ( ( $r - $g ) / $d + 4 ); 
-	            	break;
-	        }			        	        
-	}
-	$h = round($h, 2);
-    $s = round($s, 2)*100;
-    $l = round($l, 2)*100;
+function rgbToHsl($color, $correction)
+{
+    $r = hexdec(substr($color, 1, 2)) / 255;
+    $g = hexdec(substr($color, 3, 2)) / 255;
+    $b = hexdec(substr($color, 5, 2)) / 255;
+
+    $max = max($r, $g, $b);
+    $min = min($r, $g, $b);
+    $h;
+    $s;
+    $l = ($max + $min) / 2;
+    $d = $max - $min;
+    if ($d == 0) {
+        $h = $s = 0; // achromatic
+    } else {
+        $s = $d / (1 - abs(2 * $l - 1));
+        switch ($max) {
+            case $r:
+                $h = 60 * fmod((($g - $b) / $d), 6);
+                if ($b > $g) {
+                    $h += 360;
+                }
+                break;
+            case $g:
+                $h = 60 * (($b - $r) / $d + 2);
+                break;
+            case $b:
+                $h = 60 * (($r - $g) / $d + 4);
+                break;
+        }
+    }
+    $h = round($h, 2);
+    $s = round($s, 2) * 100;
+    $l = round($l, 2) * 100;
     $l += $correction;
     return "hsl($h, $s%, $l%)";
+}
+
+function userShouldBeNotified($current_user, $list)
+{
+    if (strlen($list) > 0) {
+        //$current_id = ;
+
+        $link = mysqli_connect("localhost", "root", "", "gdpr_database");
+    
+        /* check connection */
+        if (mysqli_connect_errno()) {
+            printf("Connect failed: %s\n", mysqli_connect_error());
+            exit();
+        }
+    
+        $query = "SELECT u_id FROM `users` WHERE u_username = '$current_user'"; // Tutti gli eventi
+        $dbResult = mysqli_query($link, $query);
+        $data = $dbResult->fetch_assoc();
+        if(!empty($data)){
+            return 1;
+        }else{
+            return 0;
+        }
+    }
 }

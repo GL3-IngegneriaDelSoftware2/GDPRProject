@@ -11,7 +11,8 @@ che contiene gli eventi. I dati inseriti nel form vengono mandati ad un file php
 Autore: Pellizzari Luca -->
 <link href="events_form.css" rel="stylesheet" type="text/css">
 <head>
-  <title>Events Form</title>
+  <title>Crea un nuovo evento</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 <div>
@@ -19,15 +20,15 @@ Autore: Pellizzari Luca -->
  <h4><p>Fill the form to insert a new event (* some fields are required):</p></h4>
   <table>
    <tr>
-    <td>Name (*) :</td>
+    <td>Nome (*) :</td>
     <td><input type="text" name="name" required></td>
    </tr>
    <tr>
-    <td>Typology (*) :</td>
+    <td>Tipologia (*) :</td>
     <td>
         <label for="typology-select">
             <select id="typology-select" name="typology">
-                <option value="">-- Select an event typology --</option>
+                <option value="">-- Seleziona una Tipologia di Evento --</option>
                     <?php
                         $link = mysqli_connect("localhost", "root", "", "gdpr_database");
                         $tableName = "event_typologies"; // nome della tabella da cui estrarre i dati
@@ -51,23 +52,23 @@ Autore: Pellizzari Luca -->
   nel form vengono mandati al file specificato in questa riga che si occupa di inserire i dati tramite query al database -->
    </tr>
    <tr>
-    <td>Description (*) :</td>
+    <td>Descrizione (*) :</td>
     <td><textarea name="description" required form="event-form" cols="50" rows="3"></textarea>
    </tr>
    <tr>
-    <td>Date from (*) :</td>
+    <td>Dal giorno (*) :</td>
     <td><input type="date" name="date_from" required></td>
    </tr> 
    <tr>
-    <td>Date to (*) :</td>
+    <td>Al giorno (*) :</td>
     <td><input type="date" name="date_to" required></td>
    </tr>
    <tr>
-    <td>Notes :</td>
+    <td>Note :</td>
     <td><textarea name="notes" form="event-form" cols="50" rows="3"></textarea>
    </tr>
    <tr>
-		<td>Participants (*) :</td>
+		<td>Partecipanti (*) : <br><br> <strong>Ctrl + click</strong> <br> seleziona più utenti</td>
 		<td>
 			<label for="participants-select">
 				<select multiple="multiple" id="participants-select" name="participants[]" size="3" required> <!-- mettendo le quadre automaticamente produco un array -->
@@ -92,11 +93,11 @@ Autore: Pellizzari Luca -->
 	    </td>
    </tr> 
    <tr>
-    <td>Actual start :</td>
+    <td>Inizio effettivo :</td>
     <td><input type="date" name="actual_start"></td>
    </tr>
    <tr>
-    <td>Actual end :</td>
+    <td>Termine effettivo :</td>
     <td><input type="date" name="actual_end"></td>
    </tr>
    <tr>
