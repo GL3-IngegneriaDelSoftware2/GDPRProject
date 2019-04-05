@@ -1,5 +1,6 @@
-<!-- Il seguente script php, riceve i dati da un form e dopo aver testato la connessione con un db esegue una query
-per inserire i dati in una tabella del db.
+<!-- Il seguente script php, riceve i dettagli relativi ad una tipologia da un form e dopo aver testato la connessione con un db, controlla che il 
+nome della tipologia che si vuole inserire non sia gia presente nel db, in questo caso esegue una query per inserire i dati nella tabella event_typologies.
+Se la tipologia e' gia presente stampa un messaggio che invita l'utente a scegliere un nome diverso.
 Autore: Baradel Luca -->
 <?php
 
@@ -19,15 +20,13 @@ $dbPassword = "";
 $dbname = "gdpr_database";
 $tableName = "event_typologies";
 
-if (!empty($name) || !empty($priority) || !empty($early_notification) || !empty($repeat_interval)) {
-	
+if(!empty($name) || !empty($priority) || !empty($early_notification) || !empty($repeat_interval)){
     // create connection
     $conn = new mysqli($host, $dbUsername, $dbPassword, $dbname);
 	
     if (mysqli_connect_error()) { // connessione fallita
      die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
     }else{ // connessione ha successo
-	
 	  // Query per controllare che il nome della tipologia non sia gia presente nel db
 	  $typology_check_query = "select $tableName.et_name from $tableName where $tableName.et_name = $name LIMIT 1";
 	  $db = mysqli_connect('localhost', 'root', '', 'gdpr_database');
