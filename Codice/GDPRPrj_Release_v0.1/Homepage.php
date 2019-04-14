@@ -112,11 +112,11 @@ Autore: Pellizzari Luca -->
   </style>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script>
-    function close_notification(object) {
+    function close_notification(object, id) {
       $(object.parentElement).slideUp();
     }
 
-    function postpone_notification(object) {
+    function hide_notification(object, id) {
       $(object.parentElement).slideUp();
     }
   </script>
@@ -152,7 +152,7 @@ Autore: Pellizzari Luca -->
       <div class="notif-section">
         <h2>Sezione notifiche</h2>
         <?php
-        include 'temp.php';
+        include 'lib/PHP/notifications.php';
         $events = getLastTenNotifications();
         foreach ($events as $event) {
           if ($event['priority'] < 4) {
@@ -160,7 +160,7 @@ Autore: Pellizzari Luca -->
             echo "<h4>$event[name]</h4>";
             echo "<p>$event[description]</p>";
             if ($event['priority'] < 2) {
-              echo "<span class='btn' onclick='close_notification(this)'>Chiudi</span>";
+              echo "<span class='btn' onclick='close_notification(this, $event[id])'>Chiudi</span>";
             }
             if ($event['priority'] > 0) {
               echo "<span class='btn' onclick='hide_notification(this, $event[id])' style='border: 1px solid $event[color];'>Nascondi</span>";
