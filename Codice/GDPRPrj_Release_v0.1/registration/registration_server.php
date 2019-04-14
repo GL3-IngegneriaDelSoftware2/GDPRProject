@@ -79,8 +79,8 @@ if (isset($_POST['login_user'])) {
   	  $_SESSION['username'] = $username;
       $_SESSION['success'] = "You are now logged in";
 
-      include 'temp.php';
-      $_SESSION['hiddenNotifications'] = [];
+      include 'lib/PHP/notif_manager.php';
+      $_SESSION["hiddenNotifications"] = [];
   	  header('location: ../Homepage.php'); // vado in questa pagina
   	} else { // altrimenti scrivo sulla pagina corrente il seguente messaggio d'errore
   		array_push($errors, "Wrong username/password combination");

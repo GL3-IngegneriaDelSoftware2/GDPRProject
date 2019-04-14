@@ -29,8 +29,13 @@ function getLastTenNotifications()
         $current_event['name'] = $line[2];
         $current_event['description'] = $line[3];
         $current_event['participants'] = $line[9];
+        $current_event['state'] = explode(";",$line[7]);
 
-        if ($today >= $line[4] && $index < 10 && userShouldBeNotified($_SESSION['username'], $current_event['participants']) && !in_array($current_event['id'], $_SESSION['hiddenNotifications'])) {
+        $inState = in_array($_SESSION['username'],$current_event['state']);
+        $hiddenNotification = !in_array($current_event['id'], $_SESSION['hiddenNotifications']);
+        $isUserNotified = userShouldBeNotified($_SESSION['username'], $current_event['participants']);
+
+        if ($today >= $line[4] && $index < 10 && $isUserNotified && $hiddenNotification && $inState) {
             $typology = mysqli_query($link, "SELECT * FROM `event_typologies` WHERE et_id = $line[1]");
 
             $typology = $typology->fetch_assoc();

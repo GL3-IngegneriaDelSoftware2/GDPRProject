@@ -12,68 +12,8 @@ Autore: Pellizzari Luca -->
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-<script>
-  function close_notification(object) {
-    $(object.parentElement).slideUp();
-  }
-
-  function hide_notification(object, id) {
-
-    jQuery.ajax({
-      type: "POST",
-      url: 'notif_manager.php',
-      dataType: 'json',
-      data: {
-        notifToHideId: id
-      },
-
-      success: console.log("CORRECT");
-      }
-    });
-
-    $(object.parentElement).slideUp();
-  }
-</script>
-<script>
-  function midHighNotif() {
-    Swal.fire({
-      titleText: 'Evento con Medio-alta Priorità!',
-      text: "Questo evento ha priorità media. Va risolto al più presto!",
-      type: "info",
-      footer: "Uscire dall'evento lo riproporrà al prossimo accesso o visita",
-      confirmButtonText: "Risolvi evento",
-      showCancelButton: true,
-      cancelButtonText: 'Posponi notifica',
-      confirmButtonColor: '#1abc9c'
-    })
-  }
-
-  function highNotif() {
-    Swal.fire({
-      titleText: 'Evento Alta Priorità!',
-      text: "Evento ad alta priorità, va risolto istantaneamente!",
-      confirmButtonText: 'Solve Event Now',
-      allowOutsideClick: false,
-      type: "warning",
-      footer: "Uscire dalla pagina o ricaricare non fa eveitare questa notifica.",
-      confirmButtonText: "Risolvi evento ora",
-      confirmButtonColor: '#1abc9c'
-    })
-  }
-
-  function toastNotif() {
-    Swal.fire({
-      toast: true,
-      showConfirmButton: false,
-      timer: 2000,
-      title: "Evento creato!",
-      html: "<p>L'evento <strong>Riunione</strong> è stato creato correttamente</p>",
-      type: "success",
-      position: "top-end"
-
-    })
-  }
-</script>
+<script type="text/javascript" src="lib/javascript/notifications.js"></script>
+<script type="text/javascript" src="lib/javascript/sweetalert_functions.js"></script>
 
 <head>
   <title>Accademia delle Belle Arti - Udine</title>
@@ -105,22 +45,10 @@ Autore: Pellizzari Luca -->
     span:hover {
       background-color: rgba(255, 255, 255, 0.6);
       color: black;
-      border: 2px solid black;
       transition: 0.5s;
       box-shadow: 0 0 7px white;
     }
   </style>
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script>
-    function close_notification(object, id) {
-      $(object.parentElement).slideUp();
-    }
-
-    function hide_notification(object, id) {
-      $(object.parentElement).slideUp();
-    }
-  </script>
-
 <body>
 
   <div class="header">
@@ -160,7 +88,7 @@ Autore: Pellizzari Luca -->
             echo "<h4>$event[name]</h4>";
             echo "<p>$event[description]</p>";
             if ($event['priority'] < 2) {
-              echo "<span class='btn' onclick='close_notification(this, $event[id])'>Chiudi</span>";
+              echo "<span class='btn' onclick='close_notification(this, $event[id])' style='border: 1px solid $event[color];'>Chiudi</span>";
             }
             if ($event['priority'] > 0) {
               echo "<span class='btn' onclick='hide_notification(this, $event[id])' style='border: 1px solid $event[color];'>Nascondi</span>";
@@ -176,7 +104,7 @@ Autore: Pellizzari Luca -->
       <h2>Sezione Eventi</h2>
       <button onclick="midHighNotif()">Try Mid High Notification</button>
       <button onclick="highNotif()">Try High Notification</button>
-      <button onclick="toastNotif()">Try Toast Notification</button>
+      <button id="notifx" onclick="hiddenNotifs()">Leggi le notifiche nascoste</button>
       <h3>Vai al calendario: <a href="fullcalendar-4.0.0-alpha.4/demos/events_jsontest.php">Link calendario</a></h3>
 
       <h3>Lista eventi del mese:</h3>
@@ -189,6 +117,13 @@ Autore: Pellizzari Luca -->
 
   <div class="footer">
     <h2>Page Footer</h2>
+    <p id="spoiler" hidden>
+    Test functions from php go here
+    <br><br>
+        <?php
+        print_r($_SESSION);
+        ?>
+      </p>
   </div>
 
 </body>

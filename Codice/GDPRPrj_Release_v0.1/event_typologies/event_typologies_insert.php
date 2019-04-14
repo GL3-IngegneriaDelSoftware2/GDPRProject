@@ -28,7 +28,7 @@ if(!empty($name) || !empty($priority) || !empty($early_notification) || !empty($
      die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
     }else{ // connessione ha successo
 	  // Query per controllare che il nome della tipologia non sia gia presente nel db
-	  $typology_check_query = "select $tableName.et_name from $tableName where $tableName.et_name = $name LIMIT 1";
+	  $typology_check_query = "SELECT 'et_name' FROM $tableName WHERE et_name = $name LIMIT 1";
 	  $db = mysqli_connect('localhost', 'root', '', 'gdpr_database');
 	  $result = mysqli_query($db, $typology_check_query); // risultato della query
 	  if($result != FALSE){ // tipologia non presente nel db
