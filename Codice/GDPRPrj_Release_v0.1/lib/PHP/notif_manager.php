@@ -13,9 +13,6 @@ if($operation == "hide" && isset($operation)) {
     hideNotification($notificationToHide);
 }
 
-//removeFromState($_POST['notifToHideId'], $_POST['username']);
-
-
 function removeFromState($eventId)
 {
     $link = mysqli_connect("localhost", "root", "", "gdpr_database");
@@ -33,6 +30,22 @@ function removeFromState($eventId)
     $e_state = explode(";", $result["e_state"]);
     print_r($e_state);
 
+    $link = mysqli_connect("localhost", "root", "", "gdpr_database");
+    $tableName = "events"; // nome della tabella da cui estrarre i dati
+
+    /* check connection */
+    if (mysqli_connect_errno()) {
+        printf("Connect failed: %s\n", mysqli_connect_error());
+        exit();
+    }
+    $link = mysqli_connect("localhost", "root", "", "gdpr_database");
+    $tableName = "events"; // nome della tabella da cui estrarre i dati
+
+    /* check connection */
+    if (mysqli_connect_errno()) {
+        printf("Connect failed: %s\n", mysqli_connect_error());
+        exit();
+    }
     $username = $_SESSION["username"];
 
     $query = "SELECT u_id FROM users WHERE u_username = '$username'";

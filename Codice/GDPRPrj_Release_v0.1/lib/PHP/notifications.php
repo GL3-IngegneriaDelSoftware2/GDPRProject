@@ -29,9 +29,23 @@ function getLastTenNotifications()
         $current_event['name'] = $line[2];
         $current_event['description'] = $line[3];
         $current_event['participants'] = $line[9];
-        $current_event['state'] = explode(";",$line[7]);
+        $current_event['state'] = explode(";", $line[7]);
 
-        $inState = in_array($_SESSION['username'],$current_event['state']);
+        $link = mysqli_connect("localhost", "root", "", "gdpr_database");
+        $tableName = "events"; // nome della tabella da cui estrarre i dati
+
+        /* check connection */
+        if (mysqli_connect_errno()) {
+            printf("Connect failed: %s\n", mysqli_connect_error());
+            exit();
+        }
+
+        $username = $_SESSION['username'];
+        $query = "SELECT u_id FROM users WHERE u_username = '$username'";
+        $result = mysqli_query($link, $query)->fetch_assoc();   
+        $userId = $result['u_id'];
+
+        $inState = in_array($userId, $current_event['state']);
         $hiddenNotification = !in_array($current_event['id'], $_SESSION['hiddenNotifications']);
         $isUserNotified = userShouldBeNotified($_SESSION['username'], $current_event['participants']);
 
@@ -125,19 +139,19 @@ function userShouldBeNotified($current_user, $list)
         //$current_id = ;
 
         $link = mysqli_connect("localhost", "root", "", "gdpr_database");
-    
+
         /* check connection */
         if (mysqli_connect_errno()) {
             printf("Connect failed: %s\n", mysqli_connect_error());
             exit();
         }
-    
+
         $query = "SELECT u_id FROM `users` WHERE u_username = '$current_user'"; // Tutti gli eventi
         $dbResult = mysqli_query($link, $query);
         $data = $dbResult->fetch_assoc();
-        if(!empty($data)){
+        if (!empty($data)) {
             return 1;
-        }else{
+        } else {
             return 0;
         }
     }
