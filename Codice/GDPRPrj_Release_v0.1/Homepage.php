@@ -21,6 +21,7 @@ Autore: Pellizzari Luca -->
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" type="text/css" href="Homepage.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- Per la freccia nel bottone dropdown -->
   <style>
     .notif {
       padding: 10px;
@@ -58,10 +59,36 @@ Autore: Pellizzari Luca -->
   </div>
 
   <div class="navbar">
+	<a href="#">Home</a>
     <a href="events/events_form.php">Nuovo Evento</a>
-    <a href="databreach/databreach_form.php">Data Breach</a>
     <a href="event_typologies/event_typologies_form.php">Nuova Tipologia di Evento</a>
-    <a href="#">Richiesta Esercizio Diritti</a>
+	<div class="dropdown">
+	  <button class="dropbtn" onclick="myFunction()">Segnalazioni
+		<i class="fa fa-caret-down"></i>
+	  </button>
+	  <div class="dropdown-content" id="myDropdown">
+		<a href="#">Richiesta Esercizio Diritti</a>
+		<a href="#">Data Breach</a>
+	  </div>
+	</div>
+	
+	<script>
+	/* When the user clicks on the button, 
+	toggle between hiding and showing the dropdown content */
+	function myFunction() {
+	  document.getElementById("myDropdown").classList.toggle("show");
+	}
+
+	// Close the dropdown if the user clicks outside of it
+	window.onclick = function(e) {
+	  if (!e.target.matches('.dropbtn')) {
+	  var myDropdown = document.getElementById("myDropdown");
+		if (myDropdown.classList.contains('show')) {
+		  myDropdown.classList.remove('show');
+		}
+	  }
+	}
+	</script>
 
     <?php
     if (isset($_SESSION['username'])) {
