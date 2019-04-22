@@ -11,13 +11,13 @@ che contiene gli eventi. I dati inseriti nel form vengono mandati ad un file php
 Autore: Pellizzari Luca -->
 <link href="events_form.css" rel="stylesheet" type="text/css">
 <head>
-  <title>Crea un nuovo evento</title>
+  <title>Nuovo evento</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 </head>
 <body>
 <div>
  <form action="events_insert.php" method="POST" id="event-form"> <!-- mandiamo i dati inseriti nel form al file insert.php -->
- <h4><p>Fill the form to insert a new event (* some fields are required):</p></h4>
+ <h4><p>Compila il form per inserire un nuovo evento (* alcuni campi sono obbligatori):</p></h4>
   <table>
    <tr>
     <td>Nome (*) :</td>
@@ -48,7 +48,7 @@ Autore: Pellizzari Luca -->
             </select>
         </label>
   </td>
-  <td><a href="../event_typologies/event_typologies_form.php"><input class="btn" type="button" value="Create New Event Typology"></a></td> <!-- I dati inseriti
+  <td><a href="../event_typologies/event_typologies_form.php"><input class="btn" type="button" value="Crea Nuova Tipologia"></a></td> <!-- I dati inseriti
   nel form vengono mandati al file specificato in questa riga che si occupa di inserire i dati tramite query al database -->
    </tr>
    <tr>
@@ -101,7 +101,7 @@ Autore: Pellizzari Luca -->
     <td><input type="date" name="actual_end"></td>
    </tr>
    <tr>
-    <td><input class="btn" type="submit" value="Create Event"></td>
+    <td><input class="btn" type="submit" value="Crea Evento"></td>
    </tr>
   </table>
  </form>

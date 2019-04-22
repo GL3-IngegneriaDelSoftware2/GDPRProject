@@ -12,7 +12,7 @@ Autore: Baradel Luca -->
 <link href="event_typologies_form.css" rel="stylesheet" type="text/css">
 <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 <head>
-  <title>New Event Typology Form</title>
+  <title>Nuova Tipologia di Evento</title>
   <script>
 
     // Di queste funzioni verra' fatta una libreria
@@ -20,17 +20,17 @@ Autore: Baradel Luca -->
       var priority = document.getElementById("priority").value;
       var literalPriority = "";
       switch (priority) {
-        case "1": literalPriority = "Low";
+        case "1": literalPriority = "Bassa";
           break;
-        case "2": literalPriority = "Low - Mid";
+        case "2": literalPriority = "Medio - Bassa";
           break;
-        case "3": literalPriority = "Mid";
+        case "3": literalPriority = "Media";
           break;
-        case "4": literalPriority = "Mid - High";
+        case "4": literalPriority = "Medio - Alta";
           break;
-        case "5": literalPriority = "High";
+        case "5": literalPriority = "Alta";
           break;
-        default: literalPriority = "Not Set";
+        default: literalPriority = "Non Selezionata";
           break;
       }
       document.getElementById("print-priority").innerHTML = literalPriority;
@@ -44,49 +44,49 @@ Autore: Baradel Luca -->
  <form action="event_typologies_insert.php" method="POST"> <!-- I dati inseriti nel form vengono mandati al file specificato in questa riga che si occupa
  di inserire i dati tramite query al database -->
  
- <h4><p>Fill the form to insert a new event typology (* some fields are required):</p></h4>
+ <h4><p>Compila il form per inserire una nuova tipologia di evento (* alcuni campi sono obbligatori):</p></h4>
 
   <table>
    <tr>
-    <td>Typology Name (*) :</td>
-    <td><input type="text" name="name" required placeholder="Enter a name for event typology"></td>
+    <td>Nome della tipologia (*) :</td>
+    <td><input type="text" name="name" required placeholder="Inserisci un nome per la nuova tipologia di evento"></td>
    </tr>
 
    <tr>
-    <td>Priority (*) :</td>
+    <td>Priorità (*) :</td>
     <td><input type="range" min="1" max="5" id="priority" name="priority" required onmouseup="printPriority()"> 
     </td>
-	<td><span id="print-priority">Not Set</span></td>
+	<td><span id="print-priority">Non Selezionata</span></td>
    </tr>
 
    <tr>
-    <td>Early Notification (hours) (*) :</td>
+    <td>Notifica preventiva (ore) (*) :</td>
     <td><input type="number" name="early_notification" value="1" min="0" max="168" required></td>
    </tr>
 
    <tr>
-    <td>Event Repeat (*) :</td>
+    <td>Ripetizione dell'evento (*) :</td>
     <td><label for="repeat-select">
       <select id="repeat-select" name="repeat_interval" required>
-        <option value="">-- Select a repeat interval --</option>
-        <option value="no-repeat">Don't repeat</option>
-        <option value="daily">Daily</option>
-        <option value="weekly">Weekly</option>
-        <option value="monthly">Monthly</option>
-        <option value="yearly">Yearly</option>
+        <option value="">-- Seleziona il tipo di ripetizione --</option>
+        <option value="no-repeat">Non ripetere</option>
+        <option value="daily">Giornaliero</option>
+        <option value="weekly">Settimanale</option>
+        <option value="monthly">Mensile</option>
+        <option value="yearly">Annuale</option>
       </select>
     </label></td>
    </tr> 
 
    <tr>
-     <td id="color-tag">Color tag :</td>
+     <td id="color-tag">Colore :</td>
      <td>
        <input type="color" name="typology_color" value="#FE840E">
      </td>
    </tr>
 
    <tr>
-     <td><input type="submit" value="Create Typology"></td>
+     <td><input type="submit" value="Crea Tipologia"></td>
     </tr>
   </table>
  </form>

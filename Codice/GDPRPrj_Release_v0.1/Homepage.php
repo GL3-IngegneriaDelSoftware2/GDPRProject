@@ -58,9 +58,9 @@ Autore: Pellizzari Luca -->
   </div>
 
   <div class="navbar">
-    <a href="events/events_form.php">New Event</a>
+    <a href="events/events_form.php">Nuovo Evento</a>
     <a href="databreach/databreach_form.php">Data Breach</a>
-    <a href="event_typologies/event_typologies_form.php">New Event Typology</a>
+    <a href="event_typologies/event_typologies_form.php">Nuova Tipologia di Evento</a>
     <a href="#">Richiesta Esercizio Diritti</a>
 
     <?php
