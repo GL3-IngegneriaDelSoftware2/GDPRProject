@@ -33,24 +33,27 @@ if(!empty($name) || !empty($typology) || !empty($description) || !empty($dateFro
      die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
     }else{ // connessione ha successo
 	  // Query per controllare che il nome dell'evento non sia gia presente nel db
-	  $event_check_query = "select $tableName.e_name from $tableName where $tableName.e_name = '$name' LIMIT 1";
+	  $event_check_query = "SELECT * FROM $tableName WHERE $tableName.e_name = '$name' LIMIT 1";
 	  $db = mysqli_connect('localhost', 'root', '', 'gdpr_database');
 	  $result = mysqli_query($db, $event_check_query); // risultato della query
-	  if($result != FALSE){ // nome evento non presente nel db quindi posso inserirlo
-		$INSERT = "insert into $tableName (e_name, e_typology, e_description, e_date_from, e_date_to, e_class, e_state, e_notes, e_participants, e_actual_start, e_actual_end) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+	  $event = mysqli_fetch_assoc($result);
+	  if ($event){ // evento con stesso nome gia presente nel db
+		if ($event['e_name'] === $name){
+		  echo "<p>Esiste già un evento con lo stesso nome, per favore scegliere un nome diverso.</p>"; // messaggio per l'utente
+		}
+	  }else{ // evento non presente
+		$INSERT = "INSERT into $tableName (e_name, e_typology, e_description, e_date_from, e_date_to, e_class, e_state, e_notes, e_participants, e_actual_start, e_actual_end) values(?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
         // Prepare statement
         $stmt = $conn->prepare($INSERT); // Prepariamo per INSERT
         $stmt->bind_param("sisssssssss", $name, $typology, $description, $dateFrom, $dateTo, $class, $state, $notes, $participants, $actualStart, $actualEnd);
         $stmt->execute();
         $stmt->close();
         $conn->close();
-	    echo "<h1>Event Recap</h1><p>New event has been correctly inserted.</p><p>Event Name : <em>$name</em></p><p>Event Description : $description</p><p>Event Date From : $dateFrom</p><p>Event Date To : $dateTo</p><p>Event Class : $class</p>";
-	  }else{ // evento con lo stesso nome gia presente nel db
-		echo "<p>An event with the same name already exist. Please choose another name for the event.</p>"; // messaggio per l'utente
+	    echo "<h1>Riepilogo Evento</h1><p>L'evento è stato inserito correttamente.</p><p>Nome Evento : <em>$name</em></p><p>Descrizione : $description</p><p>Dal giorno : $dateFrom</p><p>Al giorno : $dateTo</p>";
 	  }
 	}
 }else{ // se le variabili sono vuote
- echo "All field are required";
+ echo "Per favore inserire un valore per tutti i campi del form segnati con un asterisco.";
  die();
 }
 

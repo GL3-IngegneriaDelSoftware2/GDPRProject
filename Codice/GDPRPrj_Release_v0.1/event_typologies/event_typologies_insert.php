@@ -28,25 +28,27 @@ if(!empty($name) || !empty($priority) || !empty($early_notification) || !empty($
      die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
     }else{ // connessione ha successo
 	  // Query per controllare che il nome della tipologia non sia gia presente nel db
-	  $typology_check_query = "SELECT 'et_name' FROM $tableName WHERE et_name = $name LIMIT 1";
+	  $typology_check_query = "SELECT * FROM $tableName WHERE et_name = '$name' LIMIT 1";
 	  $db = mysqli_connect('localhost', 'root', '', 'gdpr_database');
 	  $result = mysqli_query($db, $typology_check_query); // risultato della query
-	  if($result != FALSE){ // tipologia non presente nel db
-		  $INSERT = "insert into $tableName (et_name, et_priority, et_early_notification, et_event_repeat, et_color) values(?, ?, ?, ?, ?)";
-		  // Prepare statement
-		  $stmt = $conn->prepare($INSERT); // Prepariamo per INSERT
-		  $stmt->bind_param('siiss', $name, $priority, $early_notification_hours, $repeat_interval, $typology_color);
-		  $stmt->execute();
-		  $stmt->close();
-		  $conn->close();
-		  echo "<h1>Event Typology Recap</h1><p>New event typology has been correctly created.</p><p>Event Typology Name : <em>$_POST[name]</em></p><p>Event Priority : $_POST[priority]</p><p>Early Notification: $early_notification_hours hours before</p><p>Event repetition: $repeat_interval</p>";
-	  }else{ // tipologia con lo stesso nome gia presente nel db
-		echo "<p>A typology with the same name already exist. Please choose another name for the typology.</p>";
+	  $typology = mysqli_fetch_assoc($result);
+	  if ($typology){ // tipologia di evento con stesso nome gia presente nel db
+		if ($typology['et_name'] === $name){
+		  echo "<p>Esiste già una tipologia di evento con lo stesso nome, per favore scegliere un nome diverso.</p>"; // messaggio per l'utente
+		}
+	  }else{ // tipologia di evento non presente
+		$INSERT = "INSERT into $tableName (et_name, et_priority, et_early_notification, et_event_repeat, et_color) values(?, ?, ?, ?, ?)";
+		// Prepare statement
+		$stmt = $conn->prepare($INSERT); // Prepariamo per INSERT
+		$stmt->bind_param('siiss', $name, $priority, $early_notification_hours, $repeat_interval, $typology_color);
+		$stmt->execute();
+		$stmt->close();
+		$conn->close();
+		echo "<h1>Riepilogo Tipologia</h1><p>Una nuova tipologia di evento è stata inserita correttamente.</p><p>Nome Tipologia : <em>$_POST[name]</em></p><p>Priorità : $_POST[priority]</p><p>Notifica di preavviso : $early_notification_hours ore prima</p><p>Ripetizione Evento : $repeat_interval</p>";
 	  }
-	}
-	
+	}	
 }else{ // se le variabili sono vuote
- echo "All field are required";
+ echo "Per favore inserire un valore per tutti i campi del form segnati con un asterisco.";
  die();
 }
 
