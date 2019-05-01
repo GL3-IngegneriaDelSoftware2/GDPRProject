@@ -1,4 +1,9 @@
 <?php
+// This file handles the internal logic and operations on notifications through POST requests.
+//
+// Author: Baradel Luca
+
+// Reloads the session to retrieve or modify information on the notifications.
 session_start();
 header('Content-Type: application/json');
 
@@ -13,6 +18,7 @@ if($operation == "hide" && isset($operation)) {
     hideNotification($notificationToHide);
 }
 
+// Remove current user from the state of event with given ID
 function removeFromState($eventId)
 {
     $link = mysqli_connect("localhost", "root", "", "gdpr_database");
@@ -68,9 +74,9 @@ function removeFromState($eventId)
     $query = "UPDATE `$events` SET e_state = '$newState' WHERE e_id = $eventId";
     $dbResult = mysqli_query($link, $query);
 
-    //print_r($_SESSION);
 }
 
+// Hide event's notification from this session
 function hideNotification($eventId) {
     if(!in_array($eventId, $_SESSION["hiddenNotifications"])){
         $_SESSION["hiddenNotifications"][] = $eventId;

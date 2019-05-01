@@ -1,11 +1,11 @@
 <?php
 
-// File used in 
-/*
-- Homepage.php
-*/
+// File containing helper methods for notifications
+//
+// Author: Baradel Luca
 
-function getLastTenNotifications()
+// Retrieves the last ten events and create the notifications excluding the ones with high and mid-high priority
+function getLastNotifications()
 {
     $link = mysqli_connect("localhost", "root", "", "gdpr_database");
     $tableName = "events"; // nome della tabella da cui estrarre i dati
@@ -23,6 +23,8 @@ function getLastTenNotifications()
 
     $events = [];
 
+    // for each event retrieve information and build an array to return.
+    // Events retrieved should contain the current user_id in their state. (Otherwise is closed/hidden/not in participants)
     while ($line = mysqli_fetch_array($dbResult, MYSQLI_NUM)) {
         $current_event = [];
         $current_event['id'] = $line[0];
@@ -49,6 +51,7 @@ function getLastTenNotifications()
         $hiddenNotification = !in_array($current_event['id'], $_SESSION['hiddenNotifications']);
         $isUserNotified = userShouldBeNotified($_SESSION['username'], $current_event['participants']);
 
+        // Retrieves only not ended events, with user in state and not hidden
         if ($today >= $line[4] && $index < 10 && $isUserNotified && $hiddenNotification && $inState) {
             $typology = mysqli_query($link, "SELECT * FROM `event_typologies` WHERE et_id = $line[1]");
 
@@ -63,6 +66,9 @@ function getLastTenNotifications()
     return $events;
 }
 
+// Retrieves the last events to display them in the homepage, this function is similar to getLastNotifications. 
+// Echoes the needed information
+// TEMP the echo section can be moved to Homepage.php
 function getLastEvents()
 {
     $link = mysqli_connect("localhost", "root", "", "gdpr_database");
@@ -95,6 +101,7 @@ function getLastEvents()
     }
 }
 
+// Converts a RGB color to the HSL color code
 function rgbToHsl($color, $correction)
 {
     $r = hexdec(substr($color, 1, 2)) / 255;

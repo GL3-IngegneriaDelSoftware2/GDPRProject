@@ -1,6 +1,11 @@
+// This file handles every function of SweetAlert used in the application
+// 
+// Author: Baradel Luca
+
+// This function is a sample for a notification of priority 3.
 function midHighNotif() {
     Swal.fire({
-        titleText: 'Evento con Medio-alta Priorità!',
+        titleText: 'Evento con priorità Medio-alta !',
         text: "Questo evento ha priorità media. Va risolto al più presto!",
         type: "info",
         footer: "Uscire dall'evento lo riproporrà al prossimo accesso o visita",
@@ -11,6 +16,7 @@ function midHighNotif() {
     })
 }
 
+// This function is a sample for a notification of priority 4.
 function highNotif() {
     Swal.fire({
         titleText: 'Evento Alta Priorità!',
@@ -66,19 +72,5 @@ function toastNotif(type, msg) {
         default:
             break;
     }
-}
-
-function hiddenNotifs() {
-    var xhttp = new XMLHttpRequest();
-    xhttp.open("POST", "lib/PHP/notif_manager.php", true);
-    xhttp.onreadystatechange = function () {
-        if (this.readyState == 4 && this.status == 200) {
-            var msg = "Eventi nascosti = " + this.responseText;
-            toastNotif("test", msg);
-        }
-    };
-    xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhttp.send("notifToHideId=3");
-
 }
 

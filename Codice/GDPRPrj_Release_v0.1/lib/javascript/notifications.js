@@ -1,4 +1,9 @@
+// This files contains any function that handles the notification logic
+// in the application
+//
+// Author: Baradel Luca
 
+// Closes a notification through an asynchornous request and then showing a toast notification
 function close_notification(object, id) {
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "lib/PHP/notif_manager.php", true);
@@ -10,6 +15,7 @@ function close_notification(object, id) {
     $(object.parentElement).slideUp();
 }
 
+// Hides a notification through an asynchornous request and then showing a toast notification
 function hide_notification(object, id) {
     var xhttp = new XMLHttpRequest();
     xhttp.open("POST", "lib/PHP/notif_manager.php", true);
@@ -20,9 +26,3 @@ function hide_notification(object, id) {
     toastNotif("hide", msg);
     $(object.parentElement).slideUp();
 }
-
-$(document).ready(function () {
-    $(".footer").click(function () {
-        $("#spoiler").toggle();
-    });
-});

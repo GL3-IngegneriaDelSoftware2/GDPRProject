@@ -1,3 +1,7 @@
+<!-- 
+  This file contains all the markup and logic of the homepage
+  Author: Pellizzari Luca
+-->
 <?php
 session_start();
 if (!isset($_SESSION['username'])) {
@@ -14,6 +18,7 @@ Autore: Pellizzari Luca -->
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
 <script type="text/javascript" src="lib/javascript/notifications.js"></script>
 <script type="text/javascript" src="lib/javascript/sweetalert_functions.js"></script>
+<script type="text/javascript" scr="lib/javascript/jquery_functions.js"></script>
 
 <head>
   <title>Accademia delle Belle Arti - Udine</title>
@@ -107,8 +112,8 @@ Autore: Pellizzari Luca -->
       <div class="notif-section">
         <h2>Sezione notifiche</h2>
         <?php
-        include 'lib/PHP/notifications.php';
-        $events = getLastTenNotifications();
+        include 'lib/PHP/notifications_helper.php';
+        $events = getLastNotifications();
         foreach ($events as $event) {
           if ($event['priority'] < 4) {
             echo "<div class='notif' style='border-color: $event[color]; background-color: $event[second_color];'>";
@@ -131,7 +136,6 @@ Autore: Pellizzari Luca -->
       <h2>Sezione Eventi</h2>
       <button onclick="midHighNotif()">Try Mid High Notification</button>
       <button onclick="highNotif()">Try High Notification</button>
-      <button id="notifx" onclick="hiddenNotifs()">Leggi le notifiche nascoste</button>
       <h3>Vai al calendario: <a href="fullcalendar-4.0.0-alpha.4/demos/events_jsontest.php">Link calendario</a></h3>
 
       <h3>Lista eventi del mese:</h3>
