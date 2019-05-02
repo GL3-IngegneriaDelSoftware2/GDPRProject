@@ -1,4 +1,8 @@
 <?php
+
+// This file contains the form for the creation of new event typologies
+//
+// Author: Pellizzari Luca
     session_start();
     if(!isset($_SESSION['username'])){
       header("location: /dashboard/GDPRPrj_Release_v0.1/registration/registration_login.php");
