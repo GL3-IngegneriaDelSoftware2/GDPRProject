@@ -1,8 +1,9 @@
-<!-- Il seguente script php, riceve i dettagli relativi ad un evento da un form e dopo aver testato la connessione con un db, controlla che il 
-nome dell'evento che si vuole inserire non sia gia presente nel db, in questo caso esegue una query per inserire i dati nella tabella events.
-Se l'evento e' gia presente stampa un messaggio che invita l'utente a scegliere un nome diverso.
-Autore: Pellizzari Luca -->
+<!-- -->
 <?php
+
+// This file receives the details from the events form and validates the event (non-duplicated, presence of fields etc.) then stores the event in the DB.
+//
+// Author: Pellizzari Luca
 
 // Salviamo i dati che ci arrivano dal form html in variabili php
 $name = $_POST['name']; // va passato il valore dell'attributo "name" del file html che contiene quel dato
