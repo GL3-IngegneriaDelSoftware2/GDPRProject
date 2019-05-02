@@ -1,4 +1,3 @@
-<!-- -->
 <?php
 
 // This file receives the details from the events form and validates the event (non-duplicated, presence of fields etc.) then stores the event in the DB.
