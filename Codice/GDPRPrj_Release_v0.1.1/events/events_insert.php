@@ -25,7 +25,7 @@ $dbname = "gdpr_database";
 $tableName = "events";
 
 // Controllo se i campi ricevuti dal form (che dovranno essere != NULL hanno un valore)
-if(!empty($name) || !empty($typology) || !empty($description) || !empty($dateFrom) || !empty($dateTo) || !empty($class) || !empty($state) || !empty($participants)){
+if(!empty($name) && !empty($typology) && !empty($description) && !empty($dateFrom) && !empty($dateTo) && !empty($class) && !empty($state) && !empty($participants)){
     // create connection
     $conn = new mysqli($host, $dbUsername, $dbPassword, $dbname);
 	

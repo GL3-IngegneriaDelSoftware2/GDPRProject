@@ -20,7 +20,7 @@ $dbPassword = "";
 $dbname = "gdpr_database";
 $tableName = "event_typologies";
 
-if(!empty($name) || !empty($priority) || !empty($early_notification) || !empty($repeat_interval)){
+if(!empty($name) && !empty($priority) && !empty($early_notification) && !empty($repeat_interval)){
     // create connection
     $conn = new mysqli($host, $dbUsername, $dbPassword, $dbname);
 	
