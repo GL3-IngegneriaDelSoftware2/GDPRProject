@@ -1,16 +1,19 @@
 // COSTRUTTORE dell'oggetto Event
 function Event(title, start, end, color, flagRepetition, repetitionDay){
+	var endArray = end.split('-');  // divido la data in anno mese giorno
+	var endDate = new Date(endArray[0], endArray[1] - 1, endArray[2]); // js conta i mesi a partire da zero
+	endDate.setDate(endDate.getDate() + 1); // sposto la data fine di un giorno perche fullcalendar ragiona in modo diverso
 	if(flagRepetition){ // se l'evento si ripete uso startRecur e endRecur invece di start e end
 		this.title = title;
 		this.color = color;
 		// campi per gestire la ripetizione:
 		this.startRecur = start; // con startRecur il campo this.start non serve
-		this.endRecur = end; // con endRecur il campo this.end non serve
+		this.endRecur = endDate; // con endRecur il campo this.end non serve
 		this.daysOfWeek = repetitionDay; // un array di interi con 0 = Sunday, 1 = Monday,..., se non presente l'evento si ripete ogni giorno
 	}else{ // se l'evento non si ripete uso il costruttore normale
 		this.title = title;
 		this.start = start;
-		this.end = end;
+		this.end = endDate;
 		this.color = color;
 	}
 }
