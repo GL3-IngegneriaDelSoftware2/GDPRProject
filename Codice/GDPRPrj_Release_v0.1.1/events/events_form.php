@@ -17,6 +17,7 @@ Autore: Pellizzari Luca -->
 <head>
   <title>Nuovo evento</title>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <link rel="shortcut icon" href="lib/images/ABAico.ico" type="image/x-icon">
 </head>
 <body>
 <div>
@@ -61,18 +62,21 @@ Autore: Pellizzari Luca -->
    </tr>
    <tr>
     <td>Dal giorno (*) :</td>
-    <td><input type="date" name="date_from" required></td>
+    <td><input type="date" name="date_from" required></td> 
+    <td><input type="time" name="time_from" required value="08:00"></td>
    </tr> 
    <tr>
     <td>Al giorno (*) :</td>
     <td><input type="date" name="date_to" required></td>
+    <td><input type="time" name="time_to" required value="08:00"></td>
    </tr>
    <tr>
     <td>Note :</td>
     <td><textarea name="notes" form="event-form" cols="50" rows="3"></textarea>
    </tr>
    <tr>
-		<td>Partecipanti (*) : <br><br> <strong>Ctrl + click</strong> <br> seleziona più utenti</td>
+        <td>Partecipanti (*) : <br><br> <strong>Ctrl + click</strong> <br> seleziona più utenti<br>
+        <strong>Ctrl + A</strong> <br> seleziona tutti gli utenti</td>
 		<td>
 			<label for="participants-select">
 				<select multiple="multiple" id="participants-select" name="participants[]" size="3" required> <!-- mettendo le quadre automaticamente produco un array -->
@@ -99,10 +103,12 @@ Autore: Pellizzari Luca -->
    <tr>
     <td>Inizio effettivo :</td>
     <td><input type="date" name="actual_start"></td>
+    <td><input type="time" name="actual_time_from" value="08:00"></td>
    </tr>
    <tr>
     <td>Termine effettivo :</td>
     <td><input type="date" name="actual_end"></td>
+    <td><input type="time" name="actual_time_to" value="08:00"></td>
    </tr>
    <tr>
     <td><input class="btn" type="submit" value="Crea Evento"></td>

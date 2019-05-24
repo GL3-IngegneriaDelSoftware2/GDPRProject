@@ -9,13 +9,22 @@ $name = $_POST['name']; // va passato il valore dell'attributo "name" del file h
 $typology = $_POST['typology'];
 $description = $_POST['description'];
 $dateFrom = $_POST['date_from'];
+$timeFrom = $_POST['time_from'];
 $dateTo = $_POST['date_to'];
+$timeTo = $_POST['time_to'];
 $class = "Task"; // l'utente puo inserire solo Task, gli Event dovrebbero essere inseriti automaticamnte dal sistema
 $participants = implode(";", $_POST['participants']); // id degli utenti (separati da ";") a cui sara mostrata la notifica dell'evento
 $state = $participants; // come sopra, poi quando un utente risolve la notifica da $state viene tolto il suo id
 $notes = $_POST['notes']; // puo essere null
 $actualStart = $_POST['actual_start']; // puo essere null
+$actualTimeFrom = $_POST['actual_time_from']; // puo essere null
 $actualEnd = $_POST['actual_end']; // puo essere null
+$actualTimeTo = $_POST['actual_time_to']; // puo essere null
+
+$dateFrom = $dateFrom ." ". $timeFrom;
+$dateTo = $dateTo ." ". $timeTo;
+$actualStart = $actualStart ." ". $actualTimeFrom;
+$actualEnd = $actualEnd ." ". $actualTimeTo;
 
 // Dettagli del db a cui fare la query
 $host = "localhost";
@@ -33,8 +42,8 @@ if(!empty($name) && !empty($typology) && !empty($description) && !empty($dateFro
      die('Connect Error('. mysqli_connect_errno().')'. mysqli_connect_error());
     }else{ // connessione ha successo
 	  // Validazione 3: Controllo che dateFrom <= dateTo
-	  $dateBegin = date('Y-m-d', strtotime($dateFrom));
-      $dateEnd = date('Y-m-d', strtotime($dateTo));
+	  $dateBegin = date('Y-m-d-h-m', strtotime($dateFrom));
+      $dateEnd = date('Y-m-d-h-m', strtotime($dateTo));
 	  if($dateBegin > $dateEnd){
 		  echo "La data di inizio evento non può essere successiva alla data di fine evento.";
 	  }else{
