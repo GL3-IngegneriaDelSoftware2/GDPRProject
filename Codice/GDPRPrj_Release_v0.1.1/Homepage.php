@@ -13,13 +13,6 @@ if (!isset($_SESSION['username'])) {
 <!-- This file contains the homepage of the application. Login is needed to have access to this section.
 Author: Pellizzari Luca -->
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
-<script type="text/javascript" src="lib/javascript/notifications.js"></script>
-<script type="text/javascript" src="lib/javascript/sweetalert_functions.js"></script>
-<script type="text/javascript" src="lib/javascript/jquery_functions.js"></script>
-<script src='fullcalendar-4.0.0-alpha.4/dist/fullcalendar.js'></script>
-
 <head>
   <title>Accademia delle Belle Arti - Udine</title>
   <link rel="shortcut icon" href="lib/images/ABAico.ico" type="image/x-icon">
@@ -28,6 +21,15 @@ Author: Pellizzari Luca -->
   <link rel="stylesheet" type="text/css" href="Homepage.css">
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> <!-- Per la freccia nel bottone dropdown -->
   <link href='fullcalendar-4.0.0-alpha.4/dist/fullcalendar.css' rel='stylesheet' />
+  
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+  <script type="text/javascript" src="lib/javascript/notifications.js"></script>
+  <script type="text/javascript" src="lib/javascript/sweetalert_functions.js"></script>
+  <script type="text/javascript" src="lib/javascript/jquery_functions.js"></script>
+  <script src='fullcalendar-4.0.0-alpha.4/dist/fullcalendar.js'></script>
+  
+</head>
 
 <body>
 
