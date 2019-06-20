@@ -1,0 +1,31 @@
+# == Schema Information
+#
+# Table name: event_typologies
+#
+#  id                    :integer          not null, primary key
+#  et_name               :string
+#  et_priority           :integer
+#  et_early_notification :integer
+#  et_event_repeat       :string
+#  et_color              :string
+#  created_at            :datetime         not null
+#  updated_at            :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  events: one
+  et_name: MyString
+  et_priority: 1
+  et_early_notification: 1
+  et_event_repeat: MyString
+  et_color: MyString
+
+two:
+  events: two
+  et_name: MyString
+  et_priority: 1
+  et_early_notification: 1
+  et_event_repeat: MyString
+  et_color: MyString

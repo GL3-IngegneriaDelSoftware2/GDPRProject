@@ -1,0 +1,72 @@
+<%= form_with(model: event, local: true) do |form| %>
+  <% if event.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+      <ul>
+      <% event.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :event_typology_id %>
+    <%= form.collection_select :event_typology_id, EventTypology.all, :id, :et_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :e_name %>
+    <%= form.text_field :e_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :e_description %>
+    <%= form.text_field :e_description %>
+  </div>
+
+  <div class="field">
+    <%= form.label :e_date_from %>
+    <%= form.datetime_select :e_date_from %>
+  </div>
+
+  <div class="field">
+    <%= form.label :e_date_to %>
+    <%= form.datetime_select :e_date_to %>
+  </div>
+
+  <div class="field">
+    <%= form.label :e_class %>
+    <%= form.text_field :e_class %>
+  </div>
+
+  <div class="field">
+    <%= form.label :e_state %>
+    <%= form.text_field :e_state %>
+  </div>
+
+  <div class="field">
+    <%= form.label :e_participants %>
+    <%= form.text_field :e_participants %>
+  </div>
+
+  <div class="field">
+    <%= form.label :e_notes %>
+    <%= form.text_field :e_notes %>
+  </div>
+
+  <div class="field">
+    <%= form.label :e_actual_start %>
+    <%= form.datetime_select :e_actual_start %>
+  </div>
+
+  <div class="field">
+    <%= form.label :e_actual_end %>
+    <%= form.datetime_select :e_actual_end %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

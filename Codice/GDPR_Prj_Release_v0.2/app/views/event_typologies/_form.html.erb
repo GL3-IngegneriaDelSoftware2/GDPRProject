@@ -1,0 +1,42 @@
+<%= form_with(model: event_typology, local: true) do |form| %>
+  <% if event_typology.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(event_typology.errors.count, "error") %> prohibited this event_typology from being saved:</h2>
+
+      <ul>
+      <% event_typology.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :et_name %>
+    <%= form.text_field :et_name %>
+  </div>
+
+  <div class="field">
+    <%= form.label :et_priority %>
+    <%= form.number_field :et_priority %>
+  </div>
+
+  <div class="field">
+    <%= form.label :et_early_notification %>
+    <%= form.number_field :et_early_notification %>
+  </div>
+
+  <div class="field">
+    <%= form.label :et_event_repeat %>
+    <%= form.text_field :et_event_repeat %>
+  </div>
+
+  <div class="field">
+    <%= form.label :et_color %>
+    <%= form.text_field :et_color %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,59 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>E typology:</strong>
+  <%= @event.event_typology.et_name %>
+</p>
+
+<p>
+  <strong>E name:</strong>
+  <%= @event.e_name %>
+</p>
+
+<p>
+  <strong>E description:</strong>
+  <%= @event.e_description %>
+</p>
+
+<p>
+  <strong>E date from:</strong>
+  <%= @event.e_date_from %>
+</p>
+
+<p>
+  <strong>E date to:</strong>
+  <%= @event.e_date_to %>
+</p>
+
+<p>
+  <strong>E class:</strong>
+  <%= @event.e_class %>
+</p>
+
+<p>
+  <strong>E state:</strong>
+  <%= @event.e_state %>
+</p>
+
+<p>
+  <strong>E participants:</strong>
+  <%= @event.e_participants %>
+</p>
+
+<p>
+  <strong>E notes:</strong>
+  <%= @event.e_notes %>
+</p>
+
+<p>
+  <strong>E actual start:</strong>
+  <%= @event.e_actual_start %>
+</p>
+
+<p>
+  <strong>E actual end:</strong>
+  <%= @event.e_actual_end %>
+</p>
+
+<%= link_to 'Edit', edit_event_path(@event) %> |
+<%= link_to 'Back', events_path %>

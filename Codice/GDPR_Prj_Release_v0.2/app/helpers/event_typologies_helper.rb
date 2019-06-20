@@ -1,0 +1,2 @@
+module EventTypologiesHelper
+end
