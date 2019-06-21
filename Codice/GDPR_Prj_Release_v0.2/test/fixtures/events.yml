@@ -1,0 +1,48 @@
+# == Schema Information
+#
+# Table name: events
+#
+#  id                :integer          not null, primary key
+#  event_typology_id :integer
+#  e_typology        :integer
+#  e_name            :string
+#  e_description     :string
+#  e_date_from       :datetime
+#  e_date_to         :datetime
+#  e_class           :string
+#  e_state           :string
+#  e_participants    :string
+#  e_notes           :string
+#  e_actual_start    :datetime
+#  e_actual_end      :datetime
+#  created_at        :datetime         not null
+#  updated_at        :datetime         not null
+#
+
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  e_typology: 1
+  e_name: 1
+  e_description: MyString
+  e_date_from: 2019-06-20 15:21:14
+  e_date_to: 2019-06-20 15:21:14
+  e_class: MyString
+  e_state: MyString
+  e_participants: MyString
+  e_notes: MyString
+  e_actual_start: 2019-06-20 15:21:14
+  e_actual_end: 2019-06-20 15:21:14
+
+two:
+  e_typology: 1
+  e_name: 1
+  e_description: MyString
+  e_date_from: 2019-06-20 15:21:14
+  e_date_to: 2019-06-20 15:21:14
+  e_class: MyString
+  e_state: MyString
+  e_participants: MyString
+  e_notes: MyString
+  e_actual_start: 2019-06-20 15:21:14
+  e_actual_end: 2019-06-20 15:21:14

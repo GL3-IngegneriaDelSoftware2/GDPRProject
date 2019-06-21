@@ -1,0 +1,2 @@
+json.extract! event, :id, :e_typology, :e_name, :e_description, :e_date_from, :e_date_to, :e_class, :e_state, :e_participants, :e_notes, :e_actual_start, :e_actual_end, :created_at, :updated_at
+json.url event_url(event, format: :json)

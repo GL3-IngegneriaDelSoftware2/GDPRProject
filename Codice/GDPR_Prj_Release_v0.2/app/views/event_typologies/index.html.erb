@@ -1,0 +1,35 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Event Typologies</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Et name</th>
+      <th>Et priority</th>
+      <th>Et early notification</th>
+      <th>Et event repeat</th>
+      <th>Et color</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @event_typologies.each do |event_typology| %>
+      <tr>
+        <td><%= event_typology.et_name %></td>
+        <td><%= event_typology.et_priority %></td>
+        <td><%= event_typology.et_early_notification %></td>
+        <td><%= event_typology.et_event_repeat %></td>
+        <td><%= event_typology.et_color %></td>
+        <td><%= link_to 'Show', event_typology %></td>
+        <td><%= link_to 'Edit', edit_event_typology_path(event_typology) %></td>
+        <td><%= link_to 'Destroy', event_typology, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Event Typology', new_event_typology_path %>
