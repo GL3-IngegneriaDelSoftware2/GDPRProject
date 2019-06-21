@@ -1,29 +1,29 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Et name:</strong>
+  <strong>Nome Tipologia:</strong>
   <%= @event_typology.et_name %>
 </p>
 
 <p>
-  <strong>Et priority:</strong>
+  <strong>Priorità Tipologia:</strong>
   <%= @event_typology.et_priority %>
 </p>
 
 <p>
-  <strong>Et early notification:</strong>
+  <strong>Notifica Anticipata:</strong>
   <%= @event_typology.et_early_notification %>
 </p>
 
 <p>
-  <strong>Et event repeat:</strong>
+  <strong>Ripetizione:</strong>
   <%= @event_typology.et_event_repeat %>
 </p>
 
 <p>
-  <strong>Et color:</strong>
+  <strong>Colore:</strong>
   <%= @event_typology.et_color %>
 </p>
 
-<%= link_to 'Edit', edit_event_typology_path(@event_typology) %> |
-<%= link_to 'Back', event_typologies_path %>
+<%= link_to 'Modifica', edit_event_typology_path(@event_typology) %> |
+<%= link_to 'Indietro', event_typologies_path %>

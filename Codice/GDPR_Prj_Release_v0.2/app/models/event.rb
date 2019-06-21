@@ -20,4 +20,7 @@
 
 class Event < ApplicationRecord
   belongs_to :event_typology
+
+  # Validations
+  validates :e_name, :e_description, :e_date_from, :e_date_to, :e_class, :e_state, presence: true
 end
