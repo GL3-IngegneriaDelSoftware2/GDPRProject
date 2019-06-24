@@ -21,14 +21,15 @@
 //= require fullcalendar
 
 function eventCalendar() {
-    return $('#calendar').fullCalendar({ events: '/events.json' });
+    return $('#calendar').fullCalendar({events: '/events.json'});
 };
+
 function clearCalendar() {
     $('#calendar').fullCalendar('delete');
     $('#calendar').html('');
 };
 
-$(document).on('turbolinks:load', function(){
+$(document).on('turbolinks:load', function () {
     eventCalendar();
 });
 $(document).on('turbolinks:before-cache', clearCalendar);
@@ -36,3 +37,11 @@ $(document).on('turbolinks:before-cache', clearCalendar);
 $('#calendar').fullCalendar({
     events: '/events.json'
 });
+
+function sweetAlertTest() {
+    Swal.fire(
+        'Sweet Alert Works',
+        'Now use it in a nice way, porco dio!',
+        'success'
+    )
+};
