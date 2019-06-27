@@ -1,7 +1,7 @@
-app/models/event.rb dbeb079b8b94c523a9809cf6d2ece4be894a10fd
+app/models/event.rb fec50ca0f0836ddfb86f06f5aacf34f71e14c9b4
 app/jobs/application_job.rb 9a24c3e30cfb517943d8774df4695ba794bfd69d
 app/helpers/events_helper.rb f704008b71fd2cdd74afeba04f895fe5694e32fc
-app/models/event_typology.rb d37e33f145ade90985ec5e78bf5d12af79fd94c7
+app/models/event_typology.rb b1dbcb1e473da86fdb07b76d2ae0ae06c9c5b584
 app/models/application_record.rb b40193a5447806d689d114a0f55f392ae7c199e4
 app/helpers/application_helper.rb eef3d3adce96afe8b14c19b6135323f47543d979
 app/mailers/application_mailer.rb d8f3c8a175c9b44ee0ed7e8120eb5ca3c252d1cb

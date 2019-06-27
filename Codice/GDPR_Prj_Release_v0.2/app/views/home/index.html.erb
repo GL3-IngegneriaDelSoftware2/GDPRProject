@@ -1,15 +1,19 @@
 <h1>GDRP Software by GL3</h1>
-<%= link_to "Events", events_path, :class => "btn btn-primary" %>
+<%= link_to "Eventi", events_path, :class => "btn btn-primary" %>
 <br><br>
-<%= link_to "Event Typologies", event_typologies_path, :class => "btn btn-primary" %>
+<%= link_to "Tipologie Evento", event_typologies_path, :class => "btn btn-primary" %>
 <br><br>
-<button onclick="sweetAlertTest()" class="btn btn-danger">Try SweetAlert2</button>
+<button onclick="sweetAlertTest()" class="btn btn-danger">Test SweetAlert2</button>
 <br>
 <div>
   <h3>Notifiche</h3>
   <ul>
     <% Event.get_all_notifications.each do |event| %>
-      <li><%= event.e_name %></li>
+      <li>
+        <%= event.e_name %> con priorità
+        <%= event.event_typology.et_priority%>
+        <br>
+        <%= event.e_description %></li>
     <% end %>
   </ul>
 </div>
