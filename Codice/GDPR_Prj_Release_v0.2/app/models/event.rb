@@ -4,12 +4,12 @@
 #
 #  id                :integer          not null, primary key
 #  event_typology_id :integer
-#  e_name            :string
-#  e_description     :string
-#  e_date_from       :datetime
-#  e_date_to         :datetime
-#  e_class           :string
-#  e_state           :string
+#  e_name            :string           not null
+#  e_description     :string           not null
+#  e_date_from       :datetime         not null
+#  e_date_to         :datetime         not null
+#  e_class           :string           not null
+#  e_state           :string           not null
 #  e_participants    :string
 #  e_notes           :string
 #  e_actual_start    :datetime
@@ -23,4 +23,6 @@ class Event < ApplicationRecord
 
   # Validations
   validates :e_name, :e_description, :e_date_from, :e_date_to, :e_class, :e_state, presence: true
+
+
 end
