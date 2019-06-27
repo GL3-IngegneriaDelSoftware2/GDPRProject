@@ -24,5 +24,17 @@ class Event < ApplicationRecord
   # Validations
   validates :e_name, :e_description, :e_date_from, :e_date_to, :e_class, :e_state, presence: true
 
+  # Retrieves all the events that are active or will be active within a certain time specified in {EventTypology} field ()early notification).
+  # TODO Add the verification of participants using the current user in session
+  # @return [Array<Event>] a set of events that should be notified to the user
+  def self.get_all_notifications
+    events = self.all
+    events.select do |event|
+      is_ongoing = event.e_date_from < DateTime.now && event.e_date_to > DateTime.now
+      # is_imminent = event.e_date_from == DateTime.now + event.event_typology.et_early_notification # TODO uncomment or fix when et_early_notification is esatblished
+      is_imminent = false # TODO remove
+      event if is_ongoing || is_imminent
+    end
+  end
 
 end

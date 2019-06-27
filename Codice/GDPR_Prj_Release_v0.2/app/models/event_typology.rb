@@ -18,6 +18,6 @@ class EventTypology < ApplicationRecord
   # Validations
 
   validates :et_name, :et_early_notification, presence: true
-  validates :et_priority, inclusion: { in: [1..5], message: "%{value} is not a valid size" }
+  validates :et_priority, inclusion: { in: (1..5), message: "%{value} is not a valid size" }
 
 end
