@@ -11,6 +11,9 @@
 #  created_at            :datetime         not null
 #  updated_at            :datetime         not null
 #
+# == About the class
+# This class represents the event typology, for more information on the event typology read the relative documentation
+# For more information on schema data read the documentation of the database
 
 class EventTypology < ApplicationRecord
   has_many :events, dependent: :destroy

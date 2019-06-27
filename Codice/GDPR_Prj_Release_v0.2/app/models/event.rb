@@ -17,6 +17,9 @@
 #  created_at        :datetime         not null
 #  updated_at        :datetime         not null
 #
+# == About the class
+# This class represents the event, for more information on the events of the system read the relative documentation
+# For more information on schema data read the documentation of the database
 
 class Event < ApplicationRecord
   belongs_to :event_typology
@@ -31,16 +34,29 @@ class Event < ApplicationRecord
   def self.get_all_notifications(high_priority: false)
     events = self.all
     events.select do |event|
+
+      # is_imminent = event.e_date_from == DateTime.now + event.event_typology.et_early_notification
+      early_notif = event.event_typology.et_early_notification
+      notif_start_day = event.e_date_from - (early_notif * 86400)
+
+      # By default an early notification will start at 8AM the number of days specified in early_notification
+      # before the event e_date_from
+      notification_start = DateTime.new(notif_start_day.year, notif_start_day.month, notif_start_day.day, 8, 0, 0, "+0200") # WARNING: Maybe a problem with offset
+
+      is_imminent = DateTime.now > notification_start
       is_ongoing = event.e_date_from < DateTime.now && event.e_date_to > DateTime.now
-      # is_imminent = event.e_date_from == DateTime.now + event.event_typology.et_early_notification # TODO uncomment or fix when et_early_notification is esatblished
-      is_imminent = false # TODO remove
       is_important = event.event_typology.et_priority >= 4
       is_current_user_included = true # TODO Fix with correct value from Devise
+
+      ap early_notif
+      ap notif_start_day
+      ap notification_start
+      ap is_imminent
 
       if high_priority
         event if is_current_user_included && is_important && (is_imminent || is_ongoing)
       else
-        event if is_current_user_included && (is_ongoing || is_imminent)
+        event if is_current_user_included && !is_important && (is_imminent || is_ongoing)
       end
     end
   end
