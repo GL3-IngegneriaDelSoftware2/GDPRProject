@@ -4,7 +4,6 @@
 #
 #  id                :integer          not null, primary key
 #  event_typology_id :integer
-#  e_typology        :integer
 #  e_name            :string
 #  e_description     :string
 #  e_date_from       :datetime

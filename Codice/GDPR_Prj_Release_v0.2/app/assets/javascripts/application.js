@@ -41,7 +41,7 @@ $('#calendar').fullCalendar({
 function sweetAlertTest() {
     Swal.fire(
         'Sweet Alert Works',
-        'Now use it in a nice way, porco dio!',
+        'Now use this',
         'success'
     )
 };
