@@ -44,21 +44,21 @@ class Event < ApplicationRecord
       # By default an early notification will start at 8AM the number of days specified in early_notification
       # before the event e_date_from
       notification_start = DateTime.new(notif_start_day.year, notif_start_day.month, notif_start_day.day, 8, 0, 0, "+0200") # WARNING: Maybe a problem with offset
-      is_not_hidden = hidden_notifications.include? event.id ? false : true # verifies if the event id is hidden
+      is_hidden = hidden_notifications.include? event.id
       is_imminent = DateTime.now > notification_start
       is_ongoing = event.e_date_from < DateTime.now && event.e_date_to > DateTime.now
       is_important = event.event_typology.et_priority >= 4
       is_current_user_included = true # TODO Fix with correct value from Devise
 
-      ap early_notif
-      ap notif_start_day
-      ap notification_start
-      ap is_imminent
-
+      ap "name: #{event.event_typology.et_priority}"
+      ap "not hidden: #{is_hidden}"
+      ap "user: #{is_current_user_included}"
+      ap "important: #{is_important}"
+      ap "imminent: #{is_imminent}"
       if high_priority
-        event if is_not_hidden && is_current_user_included && is_important && (is_imminent || is_ongoing)
+        event if !is_hidden && is_current_user_included && is_important && (is_imminent || is_ongoing)
       else
-        event if is_not_hidden && is_current_user_included && !is_important && (is_imminent || is_ongoing)
+        event if !is_hidden && is_current_user_included && !is_important && (is_imminent || is_ongoing)
       end
     end
   end

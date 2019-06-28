@@ -5,7 +5,7 @@
 <br><br>
 <button onclick="sweetAlertTest()" class="btn btn-danger">Test SweetAlert2</button>
 <br>
-<div>
+<div class="notif-section">
   <h3>Notifiche</h3>
   <ul>
     <% Event.get_all_notifications(session[:hidden_notifications]).each do |event| %>
@@ -22,14 +22,26 @@
           <% when 1 %>
             <button onclick="close_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-warning" method="POST">×</button>
           <% when 2 %>
-            <button onclick="close_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-warning"method="POST">×</button>
-            <button onclick="hide_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-info"method="POST">Nascondi</button>
+            <button onclick="close_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-warning" method="POST">×</button>
+            <button onclick="hide_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-info" method="POST">Nascondi</button>
           <% when 3 %>
-            <button onclick="hide_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-info"method="POST">Nascondi</button>
+            <button onclick="hide_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-info" method="POST">Nascondi</button>
           <% end %>
         </div>
       </li>
     <% end %>
   </ul>
 </div>
+
+<% event = Event.get_all_notifications(session[:hidden_notifications], high_priority: true).first %>
+<% if event %>
+  <script>
+      <%case event.event_typology.et_priority%>
+      <%when 4 %>
+      midHighNotif()
+      <%when 5 %>
+      highNotif()
+      <% end %>
+  </script>
+<% end %>
 <div id="calendar"></div>
