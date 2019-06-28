@@ -28,6 +28,9 @@ Rails.application.routes.draw do
   resources :event_typologies
   resources :events
 
+  post 'notif/hide/:id', to: "home#hide"
+  post 'notif/close/:id', to: "home#close"
+
   root to: 'home#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

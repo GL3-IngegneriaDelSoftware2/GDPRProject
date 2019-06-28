@@ -8,12 +8,27 @@
 <div>
   <h3>Notifiche</h3>
   <ul>
-    <% Event.get_all_notifications.each do |event| %>
+    <% Event.get_all_notifications(session[:hidden_notifications]).each do |event| %>
       <li>
-        <%= event.e_name %> con priorità
-        <%= event.event_typology.et_priority%>
-        <br>
-        <%= event.e_description %></li>
+        <div class="notif-head">
+          <%= event.e_name %>
+          <% priority = event.event_typology.et_priority %>
+        </div>
+        <div class="content">
+          <%= event.e_description %>
+        </div>
+        <div class="control-buttons">
+          <% case priority %>
+          <% when 1 %>
+            <button onclick="close_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-warning" method="POST">×</button>
+          <% when 2 %>
+            <button onclick="close_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-warning"method="POST">×</button>
+            <button onclick="hide_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-info"method="POST">Nascondi</button>
+          <% when 3 %>
+            <button onclick="hide_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-info"method="POST">Nascondi</button>
+          <% end %>
+        </div>
+      </li>
     <% end %>
   </ul>
 </div>

@@ -28,10 +28,12 @@ class Event < ApplicationRecord
   validates :e_name, :e_description, :e_date_from, :e_date_to, :e_class, :e_state, presence: true
 
   # Retrieves all the events that are active or will be active within a certain time specified in {EventTypology} field ()early notification).
+  # Events hidden (which id appears in session[:hidden_notifications]) will not be shown
   # TODO Add the verification of participants using the current user in session
+  # @param hidden_notifications array retrieved from session in the calling view, contains the ids of hidden notifications
   # @param high_priority if set to true retrieves only events with priority set to 4 or 5
   # @return [Array<Event>] a set of events that should be notified to the user
-  def self.get_all_notifications(high_priority: false)
+  def self.get_all_notifications(hidden_notifications, high_priority: false)
     events = self.all
     events.select do |event|
 
@@ -42,7 +44,7 @@ class Event < ApplicationRecord
       # By default an early notification will start at 8AM the number of days specified in early_notification
       # before the event e_date_from
       notification_start = DateTime.new(notif_start_day.year, notif_start_day.month, notif_start_day.day, 8, 0, 0, "+0200") # WARNING: Maybe a problem with offset
-
+      is_not_hidden = hidden_notifications.include? event.id ? false : true # verifies if the event id is hidden
       is_imminent = DateTime.now > notification_start
       is_ongoing = event.e_date_from < DateTime.now && event.e_date_to > DateTime.now
       is_important = event.event_typology.et_priority >= 4
@@ -54,9 +56,9 @@ class Event < ApplicationRecord
       ap is_imminent
 
       if high_priority
-        event if is_current_user_included && is_important && (is_imminent || is_ongoing)
+        event if is_not_hidden && is_current_user_included && is_important && (is_imminent || is_ongoing)
       else
-        event if is_current_user_included && !is_important && (is_imminent || is_ongoing)
+        event if is_not_hidden && is_current_user_included && !is_important && (is_imminent || is_ongoing)
       end
     end
   end
