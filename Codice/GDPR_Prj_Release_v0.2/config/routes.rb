@@ -17,6 +17,8 @@
 #                           PATCH  /events/:id(.:format)                                                                    events#update
 #                           PUT    /events/:id(.:format)                                                                    events#update
 #                           DELETE /events/:id(.:format)                                                                    events#destroy
+#                           POST   /notif/hide/:id(.:format)                                                                home#hide
+#                           POST   /notif/close/:id(.:format)                                                               home#close
 #                      root GET    /                                                                                        home#index
 #        rails_service_blob GET    /rails/active_storage/blobs/:signed_id/*filename(.:format)                               active_storage/blobs#show
 # rails_blob_representation GET    /rails/active_storage/representations/:signed_blob_id/:variation_key/*filename(.:format) active_storage/representations#show
@@ -27,6 +29,9 @@
 Rails.application.routes.draw do
   resources :event_typologies
   resources :events
+
+  post 'notif/hide/:id', to: "home#hide"
+  post 'notif/close/:id', to: "home#close"
 
   root to: 'home#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
