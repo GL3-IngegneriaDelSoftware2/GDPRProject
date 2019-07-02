@@ -1,3 +1,9 @@
+<% if event.persisted? %>
+  <h1>Editing Event</h1>
+<% else %>
+  <h1>New Event</h1>
+<% end %>
+
 <%= form_with(model: event, local: true) do |form| %>
   <% if event.errors.any? %>
     <div id="error_explanation">
@@ -12,61 +18,65 @@
   <% end %>
 
   <div class="field">
-    <%= form.label :event_typology_id %>
+    <%= form.label :event_typology_id, 'Tipologia' %>
     <%= form.collection_select :event_typology_id, EventTypology.all, :id, :et_name %>
   </div>
 
   <div class="field">
-    <%= form.label :e_name %>
+    <%= form.label :e_name, 'Nome' %>
     <%= form.text_field :e_name %>
   </div>
 
   <div class="field">
-    <%= form.label :e_description %>
+    <%= form.label :e_description, 'Descrizione' %>
     <%= form.text_field :e_description %>
   </div>
 
   <div class="field">
-    <%= form.label :e_date_from %>
+    <%= form.label :e_date_from, 'Data inizio' %>
     <%= form.datetime_select :e_date_from %>
   </div>
 
   <div class="field">
-    <%= form.label :e_date_to %>
+    <%= form.label :e_date_to, 'Data fine' %>
     <%= form.datetime_select :e_date_to %>
   </div>
 
   <div class="field">
-    <%= form.label :e_class %>
+    <%= form.label :e_class, 'Classe' %>
     <%= form.text_field :e_class %>
   </div>
 
   <div class="field">
-    <%= form.label :e_state %>
+    <%= form.label :e_state, 'Stato' %>
     <%= form.text_field :e_state %>
   </div>
 
   <div class="field">
-    <%= form.label :e_participants %>
+    <%= form.label :e_participants, 'Partecipanti' %>
     <%= form.text_field :e_participants %>
   </div>
 
   <div class="field">
-    <%= form.label :e_notes %>
+    <%= form.label :e_notes, 'Note' %>
     <%= form.text_field :e_notes %>
   </div>
 
   <div class="field">
-    <%= form.label :e_actual_start %>
+    <%= form.label :e_actual_start, 'Inizio effettivo' %>
     <%= form.datetime_select :e_actual_start %>
   </div>
 
   <div class="field">
-    <%= form.label :e_actual_end %>
+    <%= form.label :e_actual_end, 'Fine effettiva' %>
     <%= form.datetime_select :e_actual_end %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+    Salva
+  <% end %>
+
+
+  <%= link_to 'Indietro', events_path, :class => "btn btn-light" %>
+
 <% end %>

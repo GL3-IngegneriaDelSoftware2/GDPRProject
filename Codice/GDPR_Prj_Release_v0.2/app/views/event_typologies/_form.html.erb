@@ -1,3 +1,9 @@
+<% if event_typology.persisted? %>
+  <h1>Editing Event Typology</h1>
+<% else %>
+  <h1>New Event Typology</h1>
+<% end %>
+
 <%= form_with(model: event_typology, local: true) do |form| %>
   <% if event_typology.errors.any? %>
     <div id="error_explanation">
@@ -12,31 +18,35 @@
   <% end %>
 
   <div class="field">
-    <%= form.label "Nome Tipologia" %>
+    <%= form.label :et_name, "Nome Tipologia" %>
     <%= form.text_field :et_name %>
   </div>
 
   <div class="field">
-    <%= form.label :Priorità %>
+    <%= form.label :et_priority, "Priorità" %>
     <%= form.number_field :et_priority %>
   </div>
 
   <div class="field">
-    <%= form.label "Notifica Anticipata"%>
+    <%= form.label :et_early_notification, "Notifica Anticipata"%>
     <%= form.number_field :et_early_notification %>
   </div>
 
   <div class="field">
-    <%= form.label "Ripetizione" %>
+    <%= form.label :et_event_repeat, "Ripetizione" %>
     <%= form.text_field :et_event_repeat %>
   </div>
 
   <div class="field">
-    <%= form.label "Colore" %>
+    <%= form.label :et_color, "Colore" %>
     <%= form.text_field :et_color %>
   </div>
 
-  <div class="actions">
-    <%= form.submit %>
-  </div>
+  <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+    Salva
+  <% end %>
+
+
+  <%= link_to 'Indietro', event_typologies_path, :class => "btn btn-light" %>
+
 <% end %>
