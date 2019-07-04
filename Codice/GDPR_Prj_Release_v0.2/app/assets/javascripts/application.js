@@ -45,3 +45,9 @@ function sweetAlertTest() {
         'success'
     )
 };
+
+$(document).ready(function () {
+    $('.show-session').click(function () {
+        $('.session').show();
+    });
+});

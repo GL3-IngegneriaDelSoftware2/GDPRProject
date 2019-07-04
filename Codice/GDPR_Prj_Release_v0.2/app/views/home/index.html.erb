@@ -5,30 +5,43 @@
 <br><br>
 <button onclick="sweetAlertTest()" class="btn btn-danger">Test SweetAlert2</button>
 <br>
+
+<p class="toggle">Click</p>
+<p class="test">
+  Text to toggle
+</p>
+
+<script>
+
+
+
+</script>
 <div class="notif-section">
   <h3>Notifiche</h3>
   <ul>
     <% Event.get_all_notifications(session[:hidden_notifications]).each do |event| %>
-      <li>
-        <div class="notif-head">
-          <%= event.e_name %>
-          <% priority = event.event_typology.et_priority %>
-        </div>
-        <div class="content">
-          <%= event.e_description %>
-        </div>
-        <div class="control-buttons">
-          <% case priority %>
-          <% when 1 %>
-            <button onclick="close_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-warning" method="POST">×</button>
-          <% when 2 %>
-            <button onclick="close_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-warning" method="POST">×</button>
-            <button onclick="hide_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-info" method="POST">Nascondi</button>
-          <% when 3 %>
-            <button onclick="hide_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-info" method="POST">Nascondi</button>
-          <% end %>
-        </div>
-      </li>
+      <div class="notif">
+        <li>
+          <div class="notif-head">
+            <%= event.e_name %>
+            <% priority = event.event_typology.et_priority %>
+          </div>
+          <div class="content">
+            <%= event.e_description %>
+          </div>
+          <div class="control-buttons">
+            <% case priority %>
+            <% when 1 %>
+              <button onclick="close_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-warning" method="POST">×</button>
+            <% when 2 %>
+              <button onclick="close_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-warning" method="POST">×</button>
+              <button onclick="hide_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-info" method="POST">Nascondi</button>
+            <% when 3 %>
+              <button onclick="hide_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-info" method="POST">Nascondi</button>
+            <% end %>
+          </div>
+        </li>
+      </div>
     <% end %>
   </ul>
 </div>
