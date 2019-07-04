@@ -44,7 +44,7 @@ class Event < ApplicationRecord
       # By default an early notification will start at 8AM the number of days specified in early_notification
       # before the event e_date_from
       notification_start = DateTime.new(notif_start_day.year, notif_start_day.month, notif_start_day.day, 8, 0, 0, "+0200") # WARNING: Maybe a problem with offset
-      is_hidden = hidden_notifications.include? event.id
+      is_hidden = hidden_notifications&.include? event.id || false
       is_imminent = DateTime.now > notification_start
       is_ongoing = event.e_date_from < DateTime.now && event.e_date_to > DateTime.now
       is_important = event.event_typology.et_priority >= 4

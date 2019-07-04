@@ -14,3 +14,48 @@
  */
 
 @import "bootstrap";
+.notif-block {
+  display: none;
+  //background-color: #2da31d;
+
+  .notif-section {
+    //background-color: #0000FF;
+    width: 400px;
+    margin-left: 0px;
+    height: 500px;
+    border: 1px solid black;
+    border-radius: 5px;
+
+    ul {
+      margin-top: 40px;
+      padding-left: 0px;
+      list-style-type: none;
+    }
+
+    .notif {
+      //background-color: #FF0000;
+      width: 100%;
+      border: 2px solid black;
+      margin: 5px 0;
+      padding: 5px;
+      border-radius: 5px;
+
+      .notif-head {
+        font-weight: bold;
+      }
+
+      .content {
+        font-size: 12px;
+      }
+
+      .control-buttons {
+        text-align: right;
+        button {
+          padding: 0 5px;
+          font-size: 10px;
+        }
+      }
+    }
+  }
+}
+
