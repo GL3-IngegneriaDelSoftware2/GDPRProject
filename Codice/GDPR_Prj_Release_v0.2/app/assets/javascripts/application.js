@@ -51,3 +51,10 @@ $(document).ready(function () {
         $('.session').show();
     });
 });
+
+
+$(document).ready(function(){
+   $('.toggler').click(function () {
+       $('.notif-block').slideToggle();
+   })
+});
