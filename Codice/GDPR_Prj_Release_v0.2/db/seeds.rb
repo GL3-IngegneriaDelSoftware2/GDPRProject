@@ -13,15 +13,6 @@ event_typology_names = [
     'Manutenzione'
 ]
 
-event_names = [
-    'Corso sulla sicurezza',
-    'Corso di aggiornamento',
-    'Richiesta utente 12',
-    'Databreach banda bassotti',
-    'Manutenzione Ordinaria',
-    'Manutenzione Strordinaria'
-]
-
 ap "Cleaning database...."
 EventTypology.destroy_all
 Event.destroy_all
@@ -32,6 +23,7 @@ event_typology_names.each do |name|
   EventTypology.create(
          et_name: name,
          et_priority: rand(5)+1,
+         et_early_notification: rand(48)+1,
          et_color: Faker::Color.hex_color
   )
 end
@@ -47,7 +39,9 @@ ap "Creating events..."
            e_description: Faker::JapaneseMedia::DragonBall.character,
            e_date_from: event_date_from,
            e_date_to: event_date_from + rand(150000),
-           event_typology: EventTypology.all[rand(EventTypology.count)]
+           event_typology: EventTypology.all[rand(EventTypology.count)],
+           e_class: 'Classe',
+           e_state: ''
   )
 end
 

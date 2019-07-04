@@ -2,7 +2,7 @@
 
 <h1>Tipologie Evento</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Nome Evento</th>
@@ -22,9 +22,9 @@
         <td><%= event_typology.et_early_notification %></td>
         <td><%= event_typology.et_event_repeat %></td>
         <td><%= event_typology.et_color %></td>
-        <td><%= link_to 'Dettagli', event_typology %></td>
-        <td><%= link_to 'Modifica', edit_event_typology_path(event_typology) %></td>
-        <td><%= link_to 'Elimina', event_typology, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Dettagli', event_typology, :class => "btn btn-secondary" %></td>
+        <td><%= link_to 'Modifica', edit_event_typology_path(event_typology), :class => "btn btn-primary" %></td>
+        <td><%= link_to 'Elimina', event_typology, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -32,4 +32,5 @@
 
 <br>
 
-<%= link_to 'Crea una Nuova Tipologia', new_event_typology_path %>
+<%= link_to 'Crea Nuova Tipologia', new_event_typology_path, :class => "btn btn-primary" %>
+<%= link_to 'Indietro', '/', :class => "btn btn-light" %>

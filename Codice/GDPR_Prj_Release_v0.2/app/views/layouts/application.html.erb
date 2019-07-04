@@ -11,6 +11,8 @@
 
 </head>
 
+<%= render 'layouts/header' %> <!-- navbar con i vari link -->
+
 <body>
 <div class="container-fluid">
   <%= yield %>
@@ -19,6 +21,8 @@
 <div class="session">
   <%= session.to_hash %>
 </div>
+
+<%= render 'layouts/footer' %>
 
 </body>
 </html>

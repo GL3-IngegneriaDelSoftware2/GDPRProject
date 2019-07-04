@@ -1,8 +1,8 @@
 <p id="notice"><%= notice %></p>
 
-<h1>Events</h1>
+<h1>Eventi</h1>
 
-<table>
+<table class="table table-striped">
   <thead>
     <tr>
       <th>Tipologia</th>
@@ -12,7 +12,7 @@
       <th>Fine</th>
       <th>Classe</th>
       <th>Stato</th>
-      <th>Participanti</th>
+      <th>Partecipanti</th>
       <th>Note</th>
       <th>Inizio Effettivo</th>
       <th>Fine Effettiva</th>
@@ -34,9 +34,9 @@
         <td><%= event.e_notes %></td>
         <td><%= event.e_actual_start %></td>
         <td><%= event.e_actual_end %></td>
-        <td><%= link_to 'Dettagli', event %></td>
-        <td><%= link_to 'Modifica', edit_event_path(event) %></td>
-        <td><%= link_to 'Elimina', event, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to 'Dettagli', event, :class => "btn btn-secondary" %></td>
+        <td><%= link_to 'Modifica', edit_event_path(event), :class => "btn btn-primary" %></td>
+        <td><%= link_to 'Elimina', event, method: :delete, data: { confirm: 'Are you sure?' }, :class => "btn btn-danger" %></td>
       </tr>
     <% end %>
   </tbody>
@@ -44,4 +44,5 @@
 
 <br>
 
-<%= link_to 'Nuovo Evento', new_event_path %>
+<%= link_to 'Nuovo Evento', new_event_path, :class => "btn btn-primary" %>
+<%= link_to 'Indietro', '/', :class => "btn btn-light" %>
