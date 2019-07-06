@@ -40,7 +40,7 @@ ap "Creating events..."
            e_date_from: event_date_from,
            e_date_to: event_date_from + rand(150000),
            event_typology: EventTypology.all[rand(EventTypology.count)],
-           e_class: 'Classe',
+           e_class: 'Task',
            e_state: ''
   )
 end

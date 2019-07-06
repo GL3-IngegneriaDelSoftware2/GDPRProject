@@ -28,7 +28,7 @@ class EventTypologiesController < ApplicationController
 
     respond_to do |format|
       if @event_typology.save
-        format.html { redirect_to @event_typology, notice: 'Event typology was successfully created.' }
+        format.html { redirect_to @event_typology, notice: 'La tipologia è stata creata correttamente.' }
         format.json { render :show, status: :created, location: @event_typology }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class EventTypologiesController < ApplicationController
   def update
     respond_to do |format|
       if @event_typology.update(event_typology_params)
-        format.html { redirect_to @event_typology, notice: 'Event typology was successfully updated.' }
+        format.html { redirect_to event_typologies_path, notice: 'La tipologia è stata modificata correttamente.' }
         format.json { render :show, status: :ok, location: @event_typology }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class EventTypologiesController < ApplicationController
   def destroy
     @event_typology.destroy
     respond_to do |format|
-      format.html { redirect_to event_typologies_url, notice: 'Event typology was successfully destroyed.' }
+      format.html { redirect_to event_typologies_url, notice: 'La tipologia è stata cancellata correttamente.' }
       format.json { head :no_content }
     end
   end
