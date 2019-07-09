@@ -1,39 +1,50 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Eventi</h1>
-
-<table class="table table-striped">
-  <thead>
+<form class="form-inline padded" action="/events_search" method="post">
+  <input class="form-control mr-sm-2" type="search" placeholder="Filtra Eventi" aria-label="Cerca Eventi" name="query">
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</button>
+</form>
+<% if @events %>
+  <table class="table table-striped">
+    <thead>
     <tr>
       <th>Nome</th>
       <th>Tipologia</th>
       <th>Inizio</th>
       <th>Fine</th>
       <th>Classe</th>
-      <th>Partecipanti</th>
+      <!--      <th>Partecipanti</th>-->
       <th>Inizio Effettivo</th>
       <th>Fine Effettiva</th>
       <th colspan="3"></th>
     </tr>
-  </thead>
+    </thead>
 
-  <tbody>
-    <% @events.each do |event| %>
+    <tbody>
+
+    <% @events&.each do |event| %>
       <tr>
+        <%next unless event %>
         <td><%= event.e_name %></td>
         <td><%= event.event_typology.et_name %></td>
-        <td><%= event.e_date_from %></td>
-        <td><%= event.e_date_to %></td>
+        <td><%= event.e_date_from.strftime("%d/%m/%Y %H:%M") %></td>
+        <td><%= event.e_date_to.strftime("%d/%m/%Y %H:%M") %></td>
         <td><%= event.e_class %></td>
-        <td><%= event.e_participants %></td>
-        <td><%= event.e_actual_start %></td>
-        <td><%= event.e_actual_end %></td>
+        <!--        <td><%#= event.e_participants %></td>-->
+        <td><%= event.e_actual_start&.strftime("%d/%m/%Y %H:%M") %></td>
+        <td><%= event.e_actual_end&.strftime("%d/%m/%Y %H:%M") %></td>
         <td><%= link_to 'Dettagli', event, :class => "btn btn-secondary" %></td>
         <td><%= link_to 'Modifica', edit_event_path(event), :class => "btn btn-primary" %></td>
-        <td><%= link_to 'Elimina', event, method: :delete, data: { confirm: 'Sei sicuro di voler cancellare l\'evento?' }, :class => "btn btn-danger" %></td>
+        <td><%= link_to 'Elimina', event, method: :delete, data: {confirm: 'Sei sicuro di voler cancellare l\'evento?'}, :class => "btn btn-danger" %></td>
       </tr>
     <% end %>
-  </tbody>
+<% else %>
+  <div class="container-fluid">
+    <h3><%= "Nessun Evento Trovato" %></h3>
+  </div>
+<% end %>
+</tbody>
 </table>
 
 <br>

@@ -27,12 +27,14 @@
 #      rails_direct_uploads POST   /rails/active_storage/direct_uploads(.:format)                                           active_storage/direct_uploads#create
 
 Rails.application.routes.draw do
-  devise_for :users, controllers: { sessions: 'users/sessions' }
+  devise_for :users, controllers: {sessions: 'users/sessions'}
   resources :event_typologies
   resources :events
 
   post 'notif/hide/:id', to: "home#hide"
   post 'notif/close/:id', to: "home#close"
+  post 'events_search/', to: "events#search"
+  get '/events_search', to: redirect('/events')
 
   root to: 'home#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html

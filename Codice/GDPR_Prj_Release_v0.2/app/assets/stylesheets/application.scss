@@ -12,8 +12,8 @@
  *
  *= require fullcalendar
  */
-
 @import "bootstrap";
+
 .notif-block {
   display: none;
   //background-color: #2da31d;
@@ -50,6 +50,7 @@
 
       .control-buttons {
         text-align: right;
+
         button {
           padding: 0 5px;
           font-size: 10px;
@@ -58,4 +59,24 @@
     }
   }
 }
+
+.login {
+  padding: 20px;
+  background-color: #f8f9fa;
+  border: 1px solid #ced4da;
+  border-radius: 5px;
+  text-align: center;
+}
+
+.fillable {
+  input {
+    width: 100%;
+    border-radius: .25rem;
+  }
+}
+
+.padded {
+  padding: 10px 0;
+}
+
 
