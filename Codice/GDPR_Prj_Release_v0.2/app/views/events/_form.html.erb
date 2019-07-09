@@ -1,82 +1,93 @@
-<% if event.persisted? %>
-  <h1>Editing Event</h1>
-<% else %>
-  <h1>New Event</h1>
-<% end %>
+<div class="container" style="margin-top: 15px">
+  <div class="row">
+    <div class="col-4"></div>
+    <div class="col-5">
 
-<%= form_with(model: event, local: true) do |form| %>
-  <% if event.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
-
-      <ul>
-      <% event.errors.full_messages.each do |message| %>
-        <li><%= message %></li>
+      <% if event.persisted? %>
+        <h1>Modifica Evento</h1>
+      <% else %>
+        <h1>Nuovo Evento</h1>
       <% end %>
-      </ul>
+
+      <%= form_with(model: event, local: true) do |form| %>
+        <% if event.errors.any? %>
+          <div id="error_explanation">
+            <h2><%= pluralize(event.errors.count, "error") %> prohibited this event from being saved:</h2>
+
+            <ul>
+              <% event.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="field">
+          <%= form.label :event_typology_id, 'Tipologia' %>
+          <%= form.collection_select :event_typology_id, EventTypology.all, :id, :et_name %>
+        </div>
+
+        <div class="field">
+          <%= form.label :e_name, 'Nome' %>
+          <%= form.text_field :e_name %>
+        </div>
+
+        <div class="field">
+          <%= form.label :e_description, 'Descrizione' %>
+          <%= form.text_field :e_description %>
+        </div>
+
+        <div class="field">
+          <%= form.label :e_date_from, 'Data inizio' %>
+          <%= form.datetime_select :e_date_from %>
+        </div>
+
+        <div class="field">
+          <%= form.label :e_date_to, 'Data fine' %>
+          <%= form.datetime_select :e_date_to %>
+        </div>
+
+        <div class="field">
+          <%= form.label :e_class, 'Classe' %>
+          <%= form.text_field :e_class %>
+        </div>
+
+        <div class="field">
+          <%= form.label :e_state, 'Stato' %>
+          <%= form.text_field :e_state %>
+        </div>
+
+        <div class="field">
+          <%= form.label :e_participants, 'Partecipanti' %>
+          <%= form.text_field :e_participants %>
+        </div>
+
+        <div class="field">
+          <%= form.label :e_notes, 'Note' %>
+          <%= form.text_field :e_notes %>
+        </div>
+
+        <div class="field">
+          <%= form.label :e_actual_start, 'Inizio effettivo' %>
+          <%= form.datetime_select :e_actual_start %>
+        </div>
+
+        <div class="field">
+          <%= form.label :e_actual_end, 'Fine effettiva' %>
+          <%= form.datetime_select :e_actual_end %>
+        </div>
+
+        <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
+          Salva
+        <% end %>
+
+
+        <%= link_to 'Indietro', events_path, :class => "btn btn-light" %>
+
+      <% end %>
+
     </div>
-  <% end %>
-
-  <div class="field">
-    <%= form.label :event_typology_id, 'Tipologia' %>
-    <%= form.collection_select :event_typology_id, EventTypology.all, :id, :et_name %>
+    <div class="col-3"></div>
   </div>
 
-  <div class="field">
-    <%= form.label :e_name, 'Nome' %>
-    <%= form.text_field :e_name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :e_description, 'Descrizione' %>
-    <%= form.text_field :e_description %>
-  </div>
-
-  <div class="field">
-    <%= form.label :e_date_from, 'Data inizio' %>
-    <%= form.datetime_select :e_date_from %>
-  </div>
-
-  <div class="field">
-    <%= form.label :e_date_to, 'Data fine' %>
-    <%= form.datetime_select :e_date_to %>
-  </div>
-
-  <div class="field">
-    <%= form.label :e_class, 'Classe' %>
-    <%= form.text_field :e_class %>
-  </div>
-
-  <div class="field">
-    <%= form.label :e_state, 'Stato' %>
-    <%= form.text_field :e_state %>
-  </div>
-
-  <div class="field">
-    <%= form.label :e_participants, 'Partecipanti' %>
-    <%= form.text_field :e_participants %>
-  </div>
-
-  <div class="field">
-    <%= form.label :e_notes, 'Note' %>
-    <%= form.text_field :e_notes %>
-  </div>
-
-  <div class="field">
-    <%= form.label :e_actual_start, 'Inizio effettivo' %>
-    <%= form.datetime_select :e_actual_start %>
-  </div>
-
-  <div class="field">
-    <%= form.label :e_actual_end, 'Fine effettiva' %>
-    <%= form.datetime_select :e_actual_end %>
-  </div>
-
-  <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
-    Salva
-  <% end %>
-
-
-  <%= link_to 'Indietro', events_path, :class => "btn btn-light" %>
-
-<% end %>
+</div>
