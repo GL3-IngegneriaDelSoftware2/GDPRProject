@@ -1,10 +1,18 @@
 <p id="notice"><%= notice %></p>
 
 <h1>Eventi</h1>
-<form class="form-inline padded" action="/events_search" method="post">
-  <input class="form-control mr-sm-2" type="search" placeholder="Filtra Eventi" aria-label="Cerca Eventi" name="query">
-  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</button>
-</form>
+<div class="d-flex justify-content-between">
+  <div>
+    <%= link_to 'Nuovo Evento', new_event_path, :class => "btn btn-primary" %>
+    <%= link_to 'Indietro', '/', :class => "btn btn-light" %>
+  </div>
+  <p></p>
+  <form class="form-inline padded" action="/events_search" method="post">
+    <input class="form-control mr-sm-2" type="search" placeholder="Filtra Eventi" aria-label="Cerca Eventi" name="query">
+    <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Cerca</button>
+  </form>
+</div>
+
 <% if @events %>
   <table class="table table-striped">
     <thead>
@@ -47,7 +55,3 @@
 </tbody>
 </table>
 
-<br>
-
-<%= link_to 'Nuovo Evento', new_event_path, :class => "btn btn-primary" %>
-<%= link_to 'Indietro', '/', :class => "btn btn-light" %>

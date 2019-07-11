@@ -47,20 +47,13 @@
           <%= form.datetime_select :e_date_to %>
         </div>
 
-        <div class="field">
-          <%= form.label :e_class, 'Classe' %>
-          <%= form.text_field :e_class %>
-        </div>
+        <select name="event[e_participants]" id="event_e_participants" multiple="multiple">
+           <% User.all.each do |user| %>
+             <option value="<%= user.id %>"><%= user.email %></option>
+           <% end %>
+        </select>
 
-        <div class="field">
-          <%= form.label :e_state, 'Stato' %>
-          <%= form.text_field :e_state %>
-        </div>
-
-        <div class="field">
-          <%= form.label :e_participants, 'Partecipanti' %>
-          <%= form.text_field :e_participants %>
-        </div>
+        <%= form.hidden_field :e_class, :value => "Task" %>
 
         <div class="field">
           <%= form.label :e_notes, 'Note' %>

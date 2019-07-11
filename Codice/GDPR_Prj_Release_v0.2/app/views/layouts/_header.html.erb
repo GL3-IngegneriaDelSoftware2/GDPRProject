@@ -7,7 +7,6 @@
         <li class="nav-item">
           <% if user_signed_in? %><%= link_to 'Eventi', events_path, :class => "nav-link" %><% end %>
         </li>
-        </li>
         <li class="nav-item">
           <% if user_signed_in? %>
             <%= link_to 'Tipologie', event_typologies_path, :class => "nav-link" %>

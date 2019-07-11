@@ -1,55 +1,61 @@
 <h1>Calendario</h1>
 <!--<button onclick="sweetAlertTest()" class="btn btn-danger">Test SweetAlert2</button>-->
+<div class="row">
+  <div class="col-3">
+    <% notifications = Event.get_all_notifications(session[:hidden_notifications]) %>
+    <% if notifications.size > 0 %>
+    <% p current_user.id %>
+      <button class="toggler btn btn-sm btn-outline-primary">Leggi le Notifiche</button>
 
-<% notifications = Event.get_all_notifications(session[:hidden_notifications]) %>
-<% if notifications.size > 0 %>
+      <div class="notif-block">
+        <h3>Notifiche</h3>
+        <div class="notif-section container-fluid overflow-auto">
 
-  <button class="toggler btn btn-sm btn-outline-primary">Leggi le Notifiche</button>
-
-  <div class="notif-block">
-    <h3>Notifiche</h3>
-    <div class="notif-section container-fluid overflow-auto">
-
-      <ul>
-        <% notifications.each do |event| %>
-          <% event_color = event.event_typology.et_color %>
-          <div class="notif" style="border: 3px solid <%=event_color %>;">
-            <li>
-              <div class="notif-head" style="color: <%= event_color %>">
-                <%= event.e_name %>
-                <% priority = event.event_typology.et_priority %>
+          <ul>
+            <% notifications.each do |event| %>
+              <% event_color = event.event_typology.et_color %>
+              <div class="notif" style="border: 3px solid <%=event_color %>;">
+                <li>
+                  <div class="notif-head" style="color: <%= event_color %>">
+                    <%= event.e_name %>
+                    <% priority = event.event_typology.et_priority %>
+                  </div>
+                  <div class="content">
+                    <%= event.e_description %>
+                  </div>
+                  <div class="control-buttons">
+                    <% case priority %>
+                    <% when 1 %>
+                      <button onclick="close_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-warning" method="POST">×</button>
+                    <% when 2 %>
+                      <button onclick="close_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-warning" method="POST">×</button>
+                      <button onclick="hide_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-info" method="POST">Nascondi</button>
+                    <% when 3 %>
+                      <button onclick="hide_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-info" method="POST">Nascondi</button>
+                    <% end %>
+                  </div>
+                </li>
               </div>
-              <div class="content">
-                <%= event.e_description %>
-              </div>
-              <div class="control-buttons">
-                <% case priority %>
-                <% when 1 %>
-                  <button onclick="close_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-warning" method="POST">×</button>
-                <% when 2 %>
-                  <button onclick="close_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-warning" method="POST">×</button>
-                  <button onclick="hide_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-info" method="POST">Nascondi</button>
-                <% when 3 %>
-                  <button onclick="hide_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-info" method="POST">Nascondi</button>
-                <% end %>
-              </div>
-            </li>
-          </div>
-        <% end %>
-      </ul>
-    </div>
+            <% end %>
+          </ul>
+        </div>
+      </div>
+    <% end %>
+
+    <% event = Event.get_all_notifications(session[:hidden_notifications], high_priority: true).first %>
+    <% if event %>
+      <script>
+          <%case event.event_typology.et_priority%>
+          <%when 4 %>
+          midHighNotif()
+          <%when 5 %>
+          highNotif()
+          <% end %>
+      </script>
+    <% end %>
   </div>
-<% end %>
+  <div class="col-9">
+    <div id="calendar"></div>
+  </div>
+</div>
 
-<% event = Event.get_all_notifications(session[:hidden_notifications], high_priority: true).first %>
-<% if event %>
-  <script>
-      <%case event.event_typology.et_priority%>
-      <%when 4 %>
-      midHighNotif()
-      <%when 5 %>
-      highNotif()
-      <% end %>
-  </script>
-<% end %>
-<div id="calendar"></div>
