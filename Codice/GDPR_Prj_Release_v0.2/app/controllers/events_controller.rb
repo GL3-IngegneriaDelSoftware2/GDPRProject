@@ -1,5 +1,6 @@
 class EventsController < ApplicationController
   before_action :set_event, only: [:show, :edit, :update, :destroy]
+  skip_before_action :verify_authenticity_token
 
   # GET /events
   # GET /events.json
@@ -28,11 +29,11 @@ class EventsController < ApplicationController
 
     respond_to do |format|
       if @event.save
-        format.html { redirect_to @event, notice: 'L\' evento è stato creato correttamente.' }
-        format.json { render :show, status: :created, location: @event }
+        format.html {redirect_to @event, notice: 'L\' evento è stato creato correttamente.'}
+        format.json {render :show, status: :created, location: @event}
       else
-        format.html { render :new }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        format.html {render :new}
+        format.json {render json: @event.errors, status: :unprocessable_entity}
       end
     end
   end
@@ -42,11 +43,11 @@ class EventsController < ApplicationController
   def update
     respond_to do |format|
       if @event.update(event_params)
-        format.html { redirect_to events_path, notice: 'L\' evento è stato modificato correttamente.' }
-        format.json { render :show, status: :ok, location: @event }
+        format.html {redirect_to events_path, notice: 'L\' evento è stato modificato correttamente.'}
+        format.json {render :show, status: :ok, location: @event}
       else
-        format.html { render :edit }
-        format.json { render json: @event.errors, status: :unprocessable_entity }
+        format.html {render :edit}
+        format.json {render json: @event.errors, status: :unprocessable_entity}
       end
     end
   end
@@ -56,19 +57,29 @@ class EventsController < ApplicationController
   def destroy
     @event.destroy
     respond_to do |format|
-      format.html { redirect_to events_url, notice: 'L\' evento è stato cancellato correttamente.' }
-      format.json { head :no_content }
+      format.html {redirect_to events_url, notice: 'L\' evento è stato cancellato correttamente.'}
+      format.json {head :no_content}
     end
   end
 
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_event
-      @event = Event.find(params[:id])
-    end
+  def search
+    @events = Event.all.map{|event| event if event.e_name.include?(params[:query]) || event.event_typology.et_name.include?(params[:query])}
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def event_params
-      params.require(:event).permit(:event_typology_id, :e_name, :e_description, :e_date_from, :e_date_to, :e_class, :e_state, :e_participants, :e_notes, :e_actual_start, :e_actual_end)
+    if @events.compact.size == 0
+      @events = nil
     end
+    render "index"
+  end
+
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_event
+    @event = Event.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def event_params
+    params.require(:event).permit(:event_typology_id, :e_name, :e_description, :e_date_from, :e_date_to, :e_class, :e_state, :e_participants, :e_notes, :e_actual_start, :e_actual_end, :query)
+  end
 end

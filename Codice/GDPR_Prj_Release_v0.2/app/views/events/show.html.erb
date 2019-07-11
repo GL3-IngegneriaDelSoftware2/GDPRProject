@@ -17,12 +17,12 @@
 
 <p>
   <strong>Inizio:</strong>
-  <%= @event.e_date_from %>
+  <%= @event.e_date_from.strftime("%d/%m/%Y %H:%M") %>
 </p>
 
 <p>
   <strong>Fine:</strong>
-  <%= @event.e_date_to %>
+  <%= @event.e_date_to.strftime("%d/%m/%Y %H:%M") %>
 </p>
 
 <p>
@@ -47,12 +47,12 @@
 
 <p>
   <strong>Inizio Effettivo:</strong>
-  <%= @event.e_actual_start %>
+  <%= @event.e_actual_start&.strftime("%d/%m/%Y %H:%M") %>
 </p>
 
 <p>
   <strong>Fine Effettiva:</strong>
-  <%= @event.e_actual_end %>
+  <%= @event.e_actual_end&.strftime("%d/%m/%Y %H:%M") %>
 </p>
 
 <%= link_to 'Modifica', edit_event_path(@event), :class => "btn btn-primary" %>
