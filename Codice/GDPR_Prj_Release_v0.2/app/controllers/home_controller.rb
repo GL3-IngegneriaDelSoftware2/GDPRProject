@@ -30,4 +30,10 @@ class HomeController < ApplicationController
       session[:hidden_notifications] = [params[:id]]
     end
   end
+
+  def close_important
+    @event = Event.find(params[:id])
+    @event.e_state = current_user.id
+    @event.save
+  end
 end
