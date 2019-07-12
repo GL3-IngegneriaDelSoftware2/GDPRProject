@@ -12,9 +12,16 @@
 </head>
 
 <body>
-<%= render 'layouts/header' %> <!-- navbar con i vari link -->
-<div class="container-fluid">
-  <%= yield %>
+<div id="wrap">
+  <div id="main">
+
+    <%= render 'layouts/header' %> <!-- navbar con i vari link -->
+
+    <div class="container-fluid">
+      <%= yield %>
+    </div>
+
+  </div>
 </div>
 
 <%= render 'layouts/footer' %>

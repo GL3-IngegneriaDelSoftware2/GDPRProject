@@ -19,10 +19,14 @@
         <% end %>
       </li>
       <li>
+        <% if user_signed_in? %>
         <a class="nav-link">Data Breach</a>
+          <% end %>
       </li>
       <li>
+        <% if user_signed_in? %>
         <a class="nav-link">Richiesta Esercizio Diritti</a>
+          <% end %>
       </li>
     </ul>
     <% if user_signed_in? %>
