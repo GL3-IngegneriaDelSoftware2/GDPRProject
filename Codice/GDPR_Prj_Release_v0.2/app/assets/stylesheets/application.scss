@@ -14,7 +14,7 @@
  */
 @import "bootstrap";
 
-.swal2-content{
+.swal2-content {
   p {
     margin-bottom: 0px;
   }
@@ -35,7 +35,7 @@
   .notif-section {
     //background-color: #0000FF;
     margin-left: 0px;
-    height: 500px;
+    height: 800px;
 
     ul {
       padding-left: 0px;
@@ -95,6 +95,7 @@
   //background-color: #f8f9fa;
   margin-top: 5px;
   border-top: 1px solid #ced4da;
+  color: rgba(255, 255, 255, 0.5);
 }
 
 html, body {
@@ -107,15 +108,18 @@ html, body {
 }
 
 #main {
-  overflow:auto;
-  padding-bottom:100px; /* this needs to be bigger than footer height*/
+  overflow: auto;
+  padding-bottom: 100px; /* this needs to be bigger than footer height*/
 }
 
-.footer {
-  position: relative;
-  margin-top: -100px; /* negative value of footer height */
-  height: 100px;
-  clear:both;
-  text-align: center;
-}
+//.footer {
+//  position: relative;
+//  margin-top: -100px; /* negative value of footer height */
+//  height: 100px;
+//  clear: both;
+//  text-align: center;
+//  .custom-footer {
+//
+//  }
+//}
 

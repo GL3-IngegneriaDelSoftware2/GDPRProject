@@ -2,13 +2,13 @@
 <!--<button onclick="sweetAlertTest()" class="btn btn-danger">Test SweetAlert2</button>-->
 <div class="row">
   <div class="col-3">
-    <% notifications = Event.get_all_notifications(session[:hidden_notifications]) %>
-    <% if notifications.size > 0 %>
-    <% p current_user.id %>
+    <div class="notif-block">
+      <h3>Notifiche</h3>
+      <div class="notif-section container-fluid overflow-auto">
 
-      <div class="notif-block">
-        <h3>Notifiche</h3>
-        <div class="notif-section container-fluid overflow-auto">
+        <% notifications = Event.get_all_notifications(session[:hidden_notifications]) %>
+        <% if notifications.size > 0 %>
+          <% p current_user.id %>
 
           <ul>
             <% notifications.each do |event| %>
@@ -37,9 +37,9 @@
               </div>
             <% end %>
           </ul>
-        </div>
+        <% end %>
       </div>
-    <% end %>
+    </div>
 
     <% event = Event.get_all_notifications(session[:hidden_notifications], high_priority: true).first %>
     <% if event %>
