@@ -1,7 +1,7 @@
 <div class="container" style="margin-top: 15px">
   <div class="row">
-    <div class="col-4"></div>
-    <div class="col-5">
+    <div class="col-3"></div>
+    <div class="col-6">
 
     <% if event_typology.persisted? %>
       <h1>Modifica Tipologia</h1>
@@ -39,7 +39,7 @@
 
       <div class="mb-3">
         <%= form.label :et_event_repeat, "Ripetizione" %>
-        <%= form.select :et_event_repeat, ['No Repeat','Daily', 'Weekly', 'Monthly', 'Yearly' ], :class => "form-control" %>
+        <%= form.select :et_event_repeat, ['Non ripetere','Giornaliero', 'Settimanale', 'Mensile', 'Annuale' ], {},:class => "form-control" %>
       </div>
 
       <div class="mb-3">

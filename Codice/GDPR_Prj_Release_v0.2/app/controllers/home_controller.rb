@@ -15,7 +15,6 @@ class HomeController < ApplicationController
       user_ids.delete(current_user.id.to_s)
       @event.e_state = user_ids.join(";")
       @event.save
-      ap @event.e_state
     end
 
   end
@@ -29,11 +28,5 @@ class HomeController < ApplicationController
     else
       session[:hidden_notifications] = [params[:id]]
     end
-  end
-
-  def close_important
-    @event = Event.find(params[:id])
-    @event.e_state = current_user.id
-    @event.save
   end
 end
