@@ -6,7 +6,8 @@
       <h3>Notifiche</h3>
       <div class="notif-section container-fluid overflow-auto">
 
-        <% notifications = Event.get_all_notifications(session[:hidden_notifications]) %>
+        <% session_hidden_notif = session[:hidden_notifications] || [] %>
+        <% notifications = Event.get_all_notifications(session_hidden_notif, current_user.id) %>
         <% if notifications.size > 0 %>
           <% p current_user.id %>
 
@@ -25,33 +26,42 @@
                   <div class="control-buttons">
                     <% case priority %>
                     <% when 1 %>
-                      <button onclick="close_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-warning" method="POST">×</button>
+                      <button onclick="close_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-warning">
+                        <span aria-hidden="true">&times;</span></button>
                     <% when 2 %>
-                      <button onclick="close_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-warning" method="POST">×</button>
-                      <button onclick="hide_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-info" method="POST">Nascondi</button>
+                      <button onclick="close_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-warning">
+                        <span aria-hidden="true">&times;</span></button>
+                      <button onclick="hide_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-info">Nascondi</button>
                     <% when 3 %>
-                      <button onclick="hide_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-info" method="POST">Nascondi</button>
+                      <button onclick="hide_notification(this, <%=event.id %>)" class="btn btn-sm btn-outline-info">Nascondi</button>
                     <% end %>
                   </div>
                 </li>
               </div>
             <% end %>
           </ul>
+        <% else %>
+          <p>Nessuna nuova notifica</p>
         <% end %>
       </div>
     </div>
 
-    <% event = Event.get_all_notifications(session[:hidden_notifications], high_priority: true).first %>
-    <% if event %>
-      <script>
-          <%case event.event_typology.et_priority%>
+    <% first_important_event = Event.get_all_notifications(session_hidden_notif, current_user.id, high_priority: true).first %>
+    <script>
+        <%notes = first_important_event&.e_notes%>
+        <%unless notes && notes.length > 0%>
+        <% notes = "Nessuna nota"%>
+        <%end %>
+
+        <%if first_important_event %>
+          <%case first_important_event.event_typology.et_priority%>
           <%when 4 %>
-          midHighNotif()
+          midHighNotif("<%=first_important_event.e_name %>", "<%=first_important_event.e_description%>", "<%= notes %>", "<%=first_important_event.event_typology.et_color %>", "<%=first_important_event.id %>");
           <%when 5 %>
-          highNotif()
+          highNotif("<%=first_important_event.e_name %>", "<%=first_important_event.e_description%>", "<%= notes %>", "<%=first_important_event.event_typology.et_color %>", "<%=first_important_event.id %>");
           <% end %>
-      </script>
-    <% end %>
+        <%end %>
+    </script>
   </div>
   <div class="col-9">
     <div id="calendar"></div>

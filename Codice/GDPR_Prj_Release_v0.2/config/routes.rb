@@ -33,6 +33,7 @@ Rails.application.routes.draw do
 
   post 'notif/hide/:id', to: "home#hide"
   post 'notif/close/:id', to: "home#close"
+  post 'notif/close_important/:id', to: "home#close_important"
   post 'events_search/', to: "events#search"
   get '/events_search', to: redirect('/events')
 

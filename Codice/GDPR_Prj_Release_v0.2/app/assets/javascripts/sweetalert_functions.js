@@ -3,30 +3,35 @@
 // Author: Baradel Luca
 
 // This function is a sample for a notification of priority 3.
-function midHighNotif() {
+function midHighNotif(name, description, notes, color, event_id) {
     Swal.fire({
-        titleText: 'Evento con priorità Medio-alta !',
-        text: "Questo evento ha priorità media. Va risolto al più presto!",
+        title: "<p style='color: " + color + "'>" + name + "</p>",
+        text: description,
         type: "info",
-        footer: "Uscire dall'evento lo riproporrà al prossimo accesso o visita",
+        footer: notes,
         confirmButtonText: "Risolvi evento",
-        showCancelButton: true,
-        cancelButtonText: 'Posponi notifica',
-        confirmButtonColor: '#1abc9c'
+        confirmButtonColor: color
+    }).then((result) => {
+      if(result.value){
+          $.ajax({url: "notif/close_important/" + event_id, type: "POST"});
+      }
     })
 }
 
 // This function is a sample for a notification of priority 4.
-function highNotif() {
+function highNotif(name, description, notes, color, event_id) {
     Swal.fire({
-        titleText: 'Evento Alta Priorità!',
-        text: "Evento ad alta priorità, va risolto istantaneamente!",
-        confirmButtonText: 'Solve Event Now',
-        allowOutsideClick: false,
+        title: "<p style='color: " + color + "'>" + name + "</p>",
+        text: description,
+        allowOutsideClick: true,
         type: "warning",
-        footer: "Uscire dalla pagina o ricaricare non fa evitare questa notifica.",
-        confirmButtonText: "Risolvi evento ora",
-        confirmButtonColor: '#1abc9c'
+        footer: notes,
+        confirmButtonText: "Risolvi evento",
+        confirmButtonColor: color
+    }).then((result) => {
+        if(result.value){
+            $.ajax({url: "notif/close_important/" + event_id, type: "POST"});
+        }
     })
 }
 

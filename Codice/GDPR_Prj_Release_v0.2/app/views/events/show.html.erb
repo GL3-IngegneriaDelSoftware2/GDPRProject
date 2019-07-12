@@ -31,17 +31,23 @@
 </p>
 
 <p>
-  <strong>Stato (elenco degli utenti che devono ancora risolvere l'evento):</strong>
-  <% state = @event.e_state&.split(";")
-  state&.each do |user_id| %>
-    <%= User.find(user_id).email %>
-  <% end %>
+  <% if @event.event_typology.et_priority >= 4 %>
+    <strong>Utente che ha risolto questo evento:</strong>
+  <% else %>
+    <strong>Stato (elenco degli utenti che devono ancora risolvere l'evento):</strong>
+    <%end %>
+    <% state = @event.e_state&.split(";")
+       state&.each do |user_id| %>
+      <br>
+      <%= "#{User.find(user_id).email}" %>
+    <% end %>
 </p>
 
 <p>
   <strong>Partecipanti:</strong>
   <% participants = @event.e_participants&.split(";")
      participants&.each do |user_id| %>
+    <br>
     <%= User.find(user_id).email %>
   <% end %>
 </p>
