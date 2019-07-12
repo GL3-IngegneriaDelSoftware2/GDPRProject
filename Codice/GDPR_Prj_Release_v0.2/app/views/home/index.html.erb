@@ -5,7 +5,6 @@
     <% notifications = Event.get_all_notifications(session[:hidden_notifications]) %>
     <% if notifications.size > 0 %>
     <% p current_user.id %>
-      <button class="toggler btn btn-sm btn-outline-primary">Leggi le Notifiche</button>
 
       <div class="notif-block">
         <h3>Notifiche</h3>

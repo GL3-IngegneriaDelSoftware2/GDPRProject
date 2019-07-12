@@ -25,13 +25,17 @@ class EventsController < ApplicationController
   # POST /events
   # POST /events.json
   def create
-    @event.e_participants = @event.e_participants.join(";")
+    # Converto l'array in una stringa separata da ;
+    params[:event]["e_participants"] = params[:event]["e_participants"].drop(1).join(";")
+    # Inizialmente lo stato e' l'elenco dei partecipanti
+    params[:event]["e_state"] = params[:event]["e_participants"]
+
+    @event = Event.create(event_params)
+
     # Stato = ai partecipanti quando creo un evento
     if @event.e_state.nil?
       @event.e_state = @event.e_participants
     end
-
-    @event = Event.create(event_params)
 
     respond_to do |format|
       if @event.save
@@ -47,7 +51,11 @@ class EventsController < ApplicationController
   # PATCH/PUT /events/1
   # PATCH/PUT /events/1.json
   def update
-    @event.e_participants = @event.e_participants.join(";")
+    # Converto l'array in una stringa separata da ;
+    params[:event]["e_participants"] = params[:event]["e_participants"].drop(1).join(";")
+    # Inizialmente lo stato e' l'elenco dei partecipanti
+    params[:event]["e_state"] = params[:event]["e_participants"]
+
     respond_to do |format|
       if @event.update(event_params)
         format.html {redirect_to events_path, notice: 'L\' evento è stato modificato correttamente.'}
@@ -87,6 +95,6 @@ class EventsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def event_params
-    params.require(:event).permit(:event_typology_id, :e_name, :e_description, :e_date_from, :e_date_to, :e_class, :e_notes, :e_actual_start, :e_actual_end, :query, e_state: [], e_participants: [])
+    params.require(:event).permit(:event_typology_id, :e_name, :e_description, :e_date_from, :e_date_to, :e_class, :e_notes, :e_actual_start, :e_actual_end, :query, :e_state, :e_participants)
   end
 end
