@@ -154,7 +154,7 @@ updated_at        :datetime         not null
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#get_all_notifications-class_method" title="get_all_notifications (class method)">.<strong>get_all_notifications</strong>(hidden_notifications, high_priority: false)  &#x21d2; Array&lt;Event&gt; </a>
+      <a href="#get_all_notifications-class_method" title="get_all_notifications (class method)">.<strong>get_all_notifications</strong>(hidden_notifications, current_user_id, high_priority: false)  &#x21d2; Array&lt;Event&gt; </a>
     
 
     
@@ -194,7 +194,7 @@ updated_at        :datetime         not null
       <div class="method_details first">
   <h3 class="signature first" id="get_all_notifications-class_method">
   
-    .<strong>get_all_notifications</strong>(hidden_notifications, high_priority: false)  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="" title="Event (class)">Event</a></span>&gt;</tt> 
+    .<strong>get_all_notifications</strong>(hidden_notifications, current_user_id, high_priority: false)  &#x21d2; <tt>Array&lt;<span class='object_link'><a href="" title="Event (class)">Event</a></span>&gt;</tt> 
   
 
   
@@ -203,7 +203,7 @@ updated_at        :datetime         not null
 </h3><div class="docstring">
   <div class="discussion">
     
-<p>Retrieves all the events that are active or will be active within a certain time specified in <span class='object_link'><a href="EventTypology.html" title="EventTypology (class)">EventTypology</a></span> field ()early notification). Events hidden (which id appears in <a href=":hidden_notifications">session</a>) will not be shown TODO Add the verification of participants using the current user in session</p>
+<p>Retrieves all the events that are active or will be active within a certain time specified in <span class='object_link'><a href="EventTypology.html" title="EventTypology (class)">EventTypology</a></span> field ()early notification). Events hidden (which id appears in <a href=":hidden_notifications">session</a>) will not be shown</p>
 
 
   </div>
@@ -271,6 +271,7 @@ updated_at        :datetime         not null
       <pre class="lines">
 
 
+35
 36
 37
 38
@@ -302,34 +303,35 @@ updated_at        :datetime         not null
 64</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'app/models/event.rb', line 36</span>
+      <pre class="code"><span class="info file"># File 'app/models/event.rb', line 35</span>
 
-<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_all_notifications'>get_all_notifications</span><span class='lparen'>(</span><span class='id identifier rubyid_hidden_notifications'>hidden_notifications</span><span class='comma'>,</span> <span class='label'>high_priority:</span> <span class='kw'>false</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_get_all_notifications'>get_all_notifications</span><span class='lparen'>(</span><span class='id identifier rubyid_hidden_notifications'>hidden_notifications</span><span class='comma'>,</span> <span class='id identifier rubyid_current_user_id'>current_user_id</span><span class='comma'>,</span> <span class='label'>high_priority:</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_events'>events</span> <span class='op'>=</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_all'>all</span>
   <span class='id identifier rubyid_events'>events</span><span class='period'>.</span><span class='id identifier rubyid_select'>select</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_event'>event</span><span class='op'>|</span>
 
-    <span class='comment'># is_imminent = event.e_date_from == DateTime.now + event.event_typology.et_early_notification
-</span>    <span class='id identifier rubyid_early_notif'>early_notif</span> <span class='op'>=</span> <span class='id identifier rubyid_event'>event</span><span class='period'>.</span><span class='id identifier rubyid_event_typology'>event_typology</span><span class='period'>.</span><span class='id identifier rubyid_et_early_notification'>et_early_notification</span>
+    <span class='id identifier rubyid_early_notif'>early_notif</span> <span class='op'>=</span> <span class='id identifier rubyid_event'>event</span><span class='period'>.</span><span class='id identifier rubyid_event_typology'>event_typology</span><span class='period'>.</span><span class='id identifier rubyid_et_early_notification'>et_early_notification</span>
     <span class='id identifier rubyid_notif_start_day'>notif_start_day</span> <span class='op'>=</span> <span class='id identifier rubyid_event'>event</span><span class='period'>.</span><span class='id identifier rubyid_e_date_from'>e_date_from</span> <span class='op'>-</span> <span class='lparen'>(</span><span class='id identifier rubyid_early_notif'>early_notif</span> <span class='op'>*</span> <span class='int'>86400</span><span class='rparen'>)</span>
 
     <span class='comment'># By default an early notification will start at 8AM the number of days specified in early_notification
 </span>    <span class='comment'># before the event e_date_from
 </span>    <span class='id identifier rubyid_notification_start'>notification_start</span> <span class='op'>=</span> <span class='const'>DateTime</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_notif_start_day'>notif_start_day</span><span class='period'>.</span><span class='id identifier rubyid_year'>year</span><span class='comma'>,</span> <span class='id identifier rubyid_notif_start_day'>notif_start_day</span><span class='period'>.</span><span class='id identifier rubyid_month'>month</span><span class='comma'>,</span> <span class='id identifier rubyid_notif_start_day'>notif_start_day</span><span class='period'>.</span><span class='id identifier rubyid_day'>day</span><span class='comma'>,</span> <span class='int'>8</span><span class='comma'>,</span> <span class='int'>0</span><span class='comma'>,</span> <span class='int'>0</span><span class='comma'>,</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>+0200</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span> <span class='comment'># WARNING: Maybe a problem with offset
-</span>    <span class='id identifier rubyid_is_not_hidden'>is_not_hidden</span> <span class='op'>=</span> <span class='id identifier rubyid_hidden_notifications'>hidden_notifications</span><span class='period'>.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_event'>event</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span> <span class='op'>?</span> <span class='kw'>false</span> <span class='op'>:</span> <span class='kw'>true</span> <span class='comment'># verifies if the event id is hidden
-</span>    <span class='id identifier rubyid_is_imminent'>is_imminent</span> <span class='op'>=</span> <span class='const'>DateTime</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span> <span class='op'>&gt;</span> <span class='id identifier rubyid_notification_start'>notification_start</span>
+</span>    <span class='id identifier rubyid_is_hidden'>is_hidden</span> <span class='op'>=</span> <span class='id identifier rubyid_hidden_notifications'>hidden_notifications</span><span class='op'>&amp;.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_event'>event</span><span class='period'>.</span><span class='id identifier rubyid_id'>id</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span>
+    <span class='id identifier rubyid_is_imminent'>is_imminent</span> <span class='op'>=</span> <span class='const'>DateTime</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span> <span class='op'>&gt;</span> <span class='id identifier rubyid_notification_start'>notification_start</span>
     <span class='id identifier rubyid_is_ongoing'>is_ongoing</span> <span class='op'>=</span> <span class='id identifier rubyid_event'>event</span><span class='period'>.</span><span class='id identifier rubyid_e_date_from'>e_date_from</span> <span class='op'>&lt;</span> <span class='const'>DateTime</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_event'>event</span><span class='period'>.</span><span class='id identifier rubyid_e_date_to'>e_date_to</span> <span class='op'>&gt;</span> <span class='const'>DateTime</span><span class='period'>.</span><span class='id identifier rubyid_now'>now</span>
     <span class='id identifier rubyid_is_important'>is_important</span> <span class='op'>=</span> <span class='id identifier rubyid_event'>event</span><span class='period'>.</span><span class='id identifier rubyid_event_typology'>event_typology</span><span class='period'>.</span><span class='id identifier rubyid_et_priority'>et_priority</span> <span class='op'>&gt;=</span> <span class='int'>4</span>
-    <span class='id identifier rubyid_is_current_user_included'>is_current_user_included</span> <span class='op'>=</span> <span class='kw'>true</span> <span class='comment'># TODO Fix with correct value from Devise
-</span>
-    <span class='id identifier rubyid_ap'>ap</span> <span class='id identifier rubyid_early_notif'>early_notif</span>
-    <span class='id identifier rubyid_ap'>ap</span> <span class='id identifier rubyid_notif_start_day'>notif_start_day</span>
-    <span class='id identifier rubyid_ap'>ap</span> <span class='id identifier rubyid_notification_start'>notification_start</span>
-    <span class='id identifier rubyid_ap'>ap</span> <span class='id identifier rubyid_is_imminent'>is_imminent</span>
+    <span class='id identifier rubyid_is_current_user_included'>is_current_user_included</span> <span class='op'>=</span> <span class='id identifier rubyid_event'>event</span><span class='period'>.</span><span class='id identifier rubyid_e_state'>e_state</span><span class='op'>&amp;.</span><span class='id identifier rubyid_split'>split</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>;</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span><span class='op'>&amp;.</span><span class='id identifier rubyid_include?'>include?</span> <span class='id identifier rubyid_current_user_id'>current_user_id</span><span class='period'>.</span><span class='id identifier rubyid_to_s'>to_s</span> <span class='op'>||</span> <span class='kw'>false</span>
 
+    <span class='comment'># ap event.e_name
+</span>    <span class='comment'># ap &quot;hidden: #{is_hidden}, cuz: #{hidden_notifications} and #{event.id}&quot;
+</span>    <span class='comment'># ap &quot;immin: #{is_imminent}&quot;
+</span>    <span class='comment'># ap &quot;ongoing: #{is_ongoing}&quot;
+</span>    <span class='comment'># ap &quot;important: #{is_important}&quot;
+</span>    <span class='comment'># ap &quot;current: #{is_current_user_included}&quot;
+</span>
     <span class='kw'>if</span> <span class='id identifier rubyid_high_priority'>high_priority</span>
-      <span class='id identifier rubyid_event'>event</span> <span class='kw'>if</span> <span class='id identifier rubyid_is_not_hidden'>is_not_hidden</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_is_current_user_included'>is_current_user_included</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_is_important'>is_important</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='id identifier rubyid_is_imminent'>is_imminent</span> <span class='op'>||</span> <span class='id identifier rubyid_is_ongoing'>is_ongoing</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_event'>event</span> <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_is_hidden'>is_hidden</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_is_current_user_included'>is_current_user_included</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_is_important'>is_important</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='id identifier rubyid_is_imminent'>is_imminent</span> <span class='op'>||</span> <span class='id identifier rubyid_is_ongoing'>is_ongoing</span><span class='rparen'>)</span>
     <span class='kw'>else</span>
-      <span class='id identifier rubyid_event'>event</span> <span class='kw'>if</span> <span class='id identifier rubyid_is_not_hidden'>is_not_hidden</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_is_current_user_included'>is_current_user_included</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_is_important'>is_important</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='id identifier rubyid_is_imminent'>is_imminent</span> <span class='op'>||</span> <span class='id identifier rubyid_is_ongoing'>is_ongoing</span><span class='rparen'>)</span>
+      <span class='id identifier rubyid_event'>event</span> <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_is_hidden'>is_hidden</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_is_current_user_included'>is_current_user_included</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_is_important'>is_important</span> <span class='op'>&amp;&amp;</span> <span class='lparen'>(</span><span class='id identifier rubyid_is_imminent'>is_imminent</span> <span class='op'>||</span> <span class='id identifier rubyid_is_ongoing'>is_ongoing</span><span class='rparen'>)</span>
     <span class='kw'>end</span>
   <span class='kw'>end</span>
 <span class='kw'>end</span></pre>
@@ -343,7 +345,7 @@ updated_at        :datetime         not null
 </div>
 
       <div id="footer">
-  Generated on Fri Jun 28 13:57:23 2019 by
+  Generated on Fri Jul 12 16:54:15 2019 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
   0.9.19 (ruby-2.6.0).
 </div>
