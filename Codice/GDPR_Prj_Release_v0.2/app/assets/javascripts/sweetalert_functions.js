@@ -24,7 +24,7 @@ function highNotif() {
         confirmButtonText: 'Solve Event Now',
         allowOutsideClick: false,
         type: "warning",
-        footer: "Uscire dalla pagina o ricaricare non fa eveitare questa notifica.",
+        footer: "Uscire dalla pagina o ricaricare non fa evitare questa notifica.",
         confirmButtonText: "Risolvi evento ora",
         confirmButtonColor: '#1abc9c'
     })
