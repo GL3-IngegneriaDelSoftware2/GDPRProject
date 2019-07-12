@@ -13,7 +13,7 @@ function midHighNotif(name, description, notes, color, event_id) {
         confirmButtonColor: color
     }).then((result) => {
       if(result.value){
-          $.ajax({url: "notif/close_important/" + event_id, type: "POST"});
+          $.ajax({url: "notif/close/" + event_id, type: "POST"});
       }
     })
 }
@@ -30,7 +30,7 @@ function highNotif(name, description, notes, color, event_id) {
         confirmButtonColor: color
     }).then((result) => {
         if(result.value){
-            $.ajax({url: "notif/close_important/" + event_id, type: "POST"});
+            $.ajax({url: "notif/close/" + event_id, type: "POST"});
         }
     })
 }

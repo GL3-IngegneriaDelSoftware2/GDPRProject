@@ -49,7 +49,11 @@ class Event < ApplicationRecord
       is_important = event.event_typology.et_priority >= 4
       # is_over = DateTime.now < notif_end_day
       is_current_user_included = event.e_state&.split(";")&.include? current_user_id.to_s || false
-      important_event_solved = event.e_state.length > 0 ? true : false # If in the state at least one user appears, it means the event has been solved by that user
+      if event.e_state&.length && event.e_participants&.length
+        important_event_solved = event.e_state&.length < event.e_participants&.length ? true : false # If the length of the state is lesser than the length of participants, it means someone resolved the event
+      else
+        important_event_solved = false
+      end
 
       ap event.e_name
       ap "hidden: #{is_hidden}, cuz: #{hidden_notifications} and #{event.id}"
@@ -57,6 +61,7 @@ class Event < ApplicationRecord
       ap "ongoing: #{is_ongoing}"
       ap "important: #{is_important}"
       ap "current: #{is_current_user_included}"
+      ap "solved : #{important_event_solved}"
 
       if high_priority
         event if !is_hidden && is_important && !important_event_solved && (is_imminent || is_ongoing)
