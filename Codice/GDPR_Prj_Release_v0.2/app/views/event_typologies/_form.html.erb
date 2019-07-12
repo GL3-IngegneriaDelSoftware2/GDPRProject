@@ -22,29 +22,29 @@
         </div>
       <% end %>
 
-      <div class="field">
+      <div class="mb-3">
         <%= form.label :et_name, "Nome Tipologia" %>
-        <%= form.text_field :et_name %>
+        <%= form.text_field :et_name, :required => true, :class => "form-control" %>
       </div>
 
-      <div class="field">
+      <div class="mb-3">
         <%= form.label :et_priority, "Priorità" %>
-        <%= form.number_field :et_priority %>
+        <%= form.number_field :et_priority, :min => 1, :max => 5, :class => "form-control" %>
       </div>
 
-      <div class="field">
+      <div class="mb-3">
         <%= form.label :et_early_notification, "Notifica Anticipata"%>
-        <%= form.number_field :et_early_notification %>
+        <%= form.number_field :et_early_notification, :min => 0, :max => 60, :class => "form-control" %>
       </div>
 
-      <div class="field">
+      <div class="mb-3">
         <%= form.label :et_event_repeat, "Ripetizione" %>
-        <%= form.text_field :et_event_repeat %>
+        <%= form.select :et_event_repeat, ['No Repeat','Daily', 'Weekly', 'Monthly', 'Yearly' ], :class => "form-control" %>
       </div>
 
-      <div class="field">
+      <div class="mb-3">
         <%= form.label :et_color, "Colore" %>
-        <%= form.text_field :et_color %>
+        <%= form.color_field :et_color, :class => "form-control" %>
       </div>
 
       <%= button_tag(type: 'submit', class: "btn btn-primary") do %>

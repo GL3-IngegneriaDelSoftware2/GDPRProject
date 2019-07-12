@@ -22,52 +22,52 @@
           </div>
         <% end %>
 
-        <div class="field">
+        <div class="mb-3">
           <%= form.label :event_typology_id, 'Tipologia' %>
-          <%= form.collection_select :event_typology_id, EventTypology.all, :id, :et_name %>
+          <%= form.collection_select :event_typology_id, EventTypology.all, :id, :et_name, :class => "form-control" %>
         </div>
 
-        <div class="field">
+        <div class="mb-3">
           <%= form.label :e_name, 'Nome' %>
-          <%= form.text_field :e_name %>
+          <%= form.text_field :e_name, :class => "form-control" %>
         </div>
 
-        <div class="field">
+        <div class="mb-3">
           <%= form.label :e_description, 'Descrizione' %>
-          <%= form.text_field :e_description %>
+          <%= form.text_field :e_description, :class => "form-control" %>
         </div>
 
-        <div class="field">
+        <div class="mb-3">
           <%= form.label :e_date_from, 'Data inizio' %>
-          <%= form.datetime_select :e_date_from %>
+          <%= form.datetime_select :e_date_from, :class => "form-control" %>
         </div>
 
-        <div class="field">
+        <div class="mb-3">
           <%= form.label :e_date_to, 'Data fine' %>
-          <%= form.datetime_select :e_date_to %>
+          <%= form.datetime_select :e_date_to, :class => "form-control" %>
         </div>
 
 
-        <div class="field">
+        <div class="mb-3">
           <%= form.label :e_participants, 'Partecipanti' %>
-          <%= form.collection_select :e_participants, User.all, :id, :email, {}, {:multiple => "multiple"} %>
+          <%= form.collection_select :e_participants, User.all, :id, :email, {}, {:multiple => "multiple", :class => "form-control"} %>
         </div>
 
         <%= form.hidden_field :e_class, :value => "Task" %>
 
-        <div class="field">
+        <div class="mb-3">
           <%= form.label :e_notes, 'Note' %>
-          <%= form.text_field :e_notes %>
+          <%= form.text_field :e_notes, :class => "form-control" %>
         </div>
 
-        <div class="field">
+        <div class="mb-3">
           <%= form.label :e_actual_start, 'Inizio effettivo' %>
-          <%= form.datetime_select :e_actual_start %>
+          <%= form.datetime_select :e_actual_start, :class => "form-control" %>
         </div>
 
-        <div class="field">
+        <div class="mb-3">
           <%= form.label :e_actual_end, 'Fine effettiva' %>
-          <%= form.datetime_select :e_actual_end %>
+          <%= form.datetime_select :e_actual_end, :class => "form-control" %>
         </div>
 
         <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
