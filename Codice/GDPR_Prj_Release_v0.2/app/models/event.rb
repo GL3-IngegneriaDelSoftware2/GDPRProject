@@ -25,7 +25,7 @@ class Event < ApplicationRecord
   belongs_to :event_typology
 
   # Validations
-  #validates :e_name, :e_description, :e_date_from, :e_date_to, :e_class, :e_state, presence: true
+  validates :e_name, :e_description, :e_date_from, :e_date_to, :e_class, presence: true
 
   # Retrieves all the events that are active or will be active within a certain time specified in {EventTypology} field ()early notification).
   # Events hidden (which id appears in session[:hidden_notifications]) will not be shown
