@@ -14,7 +14,7 @@
           <ul>
             <% notifications.each do |event| %>
               <% event_color = event.event_typology.et_color %>
-              <div class="notif" style="border: 3px solid <%=event_color %>;">
+              <div class="notif" style="border: 3px solid <%=event_color %>; ">
                 <li>
                   <div class="notif-head" style="color: <%= event_color %>">
                     <%= event.e_name %>

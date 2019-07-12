@@ -1,7 +1,7 @@
 <div class="container" style="margin-top: 15px">
   <div class="row">
-    <div class="col-4"></div>
-    <div class="col-5">
+    <div class="col-3"></div>
+    <div class="col-6">
 
       <% if event.persisted? %>
         <h1>Modifica Evento</h1>
@@ -24,7 +24,7 @@
 
         <div class="mb-3">
           <%= form.label :event_typology_id, 'Tipologia' %>
-          <%= form.collection_select :event_typology_id, EventTypology.all, :id, :et_name, :class => "form-control" %>
+          <%= form.collection_select :event_typology_id, EventTypology.all, :id, :et_name, {}, :class => "form-control" %>
         </div>
 
         <div class="mb-3">
@@ -34,17 +34,171 @@
 
         <div class="mb-3">
           <%= form.label :e_description, 'Descrizione' %>
-          <%= form.text_field :e_description, :class => "form-control" %>
+          <%= form.text_area :e_description, :class => "form-control" %>
         </div>
 
-        <div class="mb-3">
-          <%= form.label :e_date_from, 'Data inizio' %>
-          <%= form.datetime_select :e_date_from, :class => "form-control" %>
-        </div>
+        <!--        <div class="mb-3">-->
+        <%#= form.label :e_date_from, 'Data inizio' %>
+        <%#= form.datetime_select :e_date_from, :class => "form-control" %>
+        <!--        </div>-->
 
         <div class="mb-3">
-          <%= form.label :e_date_to, 'Data fine' %>
-          <%= form.datetime_select :e_date_to, :class => "form-control" %>
+          <label class="col-sm-12" for="event_e_date_from">Data inizio</label>
+
+          <select class="custom-select custom-select-sm col-sm-2" id="event_e_date_from_3i" name="event[e_date_from(3i)]">
+            <% current_day = DateTime.now.day %>
+            <% 31.times do |index| %>
+              <% if index + 1 == current_day %>
+                <option value="<%= index + 1 %>" selected="selected"><%= index + 1 %></option>
+              <% else %>
+                <option value="<%= index + 1 %>"><%= index + 1 %></option>
+              <% end %>
+            <% end %>
+          </select>
+
+          <select class="custom-select custom-select-sm col-sm-3" id="event_e_date_from_2i" name="event[e_date_from(2i)]">
+            <% current_month = DateTime.now.month - 1 %>
+            <% ita_months = %w(Gennaio Febbraio Marzo Aprile Maggio Giugno Luglio Agosto Settembre Ottobre Novembre Dicembre) %>
+            <% 12.times do |index| %>
+              <% if index == current_month %>
+                <option value="<%= index + 1 %>" selected="selected"><%= ita_months[index] %></option>
+              <% else %>
+                <option value="<%= index + 1 %>"><%= ita_months[index] %></option>
+              <% end %>
+            <% end %>
+          </select>
+
+          <select class="custom-select custom-select-sm col-sm-2" id="event_e_date_from_1i" name="event[e_date_from(1i)]">
+            <% current_year = DateTime.now.year %>
+            <% 10.times do |index| %>
+              <% if index == 0 %>
+                <option value="<%= current_year + index %>" selected="selected"><%= current_year + index %></option>
+              <% else %>
+                <option value="<%= current_year + index %>"><%= current_year + index %></option>
+              <% end %>
+            <% end %>
+          </select>
+          :
+          <select class="custom-select custom-select-sm col-sm-2" id="event_e_date_from_4i" name="event[e_date_from(4i)]">
+            <% current_hour = DateTime.now.hour %>
+            <% 24.times do |index| %>
+              <% if index == current_hour %>
+                <% if index < 10 %>
+                  <option value="<%= index %>" selected="selected">0<%= index %></option>
+                <% else %>
+                  <option value="<%= index %>" selected="selected"><%= index %></option>
+                <% end %>
+              <% else %>
+                <% if index < 10 %>
+                  <option value="<%= index %>">0<%= index %></option>
+                <% else %>
+                  <option value="<%= index %>"><%= index %></option>
+                <% end %>
+              <% end %>
+            <% end %>
+          </select>
+
+          <select class="custom-select custom-select-sm col-sm-2" id="event_e_date_from_5i" name="event[e_date_from(5i)]">
+            <% current_minute = DateTime.now.minute %>
+            <% 60.times do |index| %>
+              <% if index == current_minute %>
+                <% if index < 10 %>
+                  <option value="<%= index %>" selected="selected">0<%= index %></option>
+                <% else %>
+                  <option value="<%= index %>" selected="selected"><%= index %></option>
+                <% end %>
+              <% else %>
+                <% if index < 10 %>
+                  <option value="<%= index %>">0<%= index %></option>
+                <% else %>
+                  <option value="<%= index %>"><%= index %></option>
+                <% end %>
+              <% end %>
+            <% end %>
+          </select>
+
+        </div>
+
+        <!--        <div class="mb-4">-->
+        <%#= form.label :e_date_to, 'Data fine' %>
+        <%#= form.datetime_select :e_date_to, :class => "form-control" %>
+        <!--        </div>-->
+
+        <div class="mb-3">
+          <label class="col-sm-12" for="event_e_date_to">Data inizio</label>
+
+          <select class="custom-select custom-select-sm col-sm-2" id="event_e_date_to_3i" name="event[e_date_to(3i)]">
+            <% current_day = DateTime.now.day %>
+            <% 31.times do |index| %>
+              <% if index + 1 == current_day %>
+                <option value="<%= index + 1 %>" selected="selected"><%= index + 1 %></option>
+              <% else %>
+                <option value="<%= index + 1 %>"><%= index + 1 %></option>
+              <% end %>
+            <% end %>
+          </select>
+
+          <select class="custom-select custom-select-sm col-sm-3" id="event_e_date_to_2i" name="event[e_date_to(2i)]">
+            <% current_month = DateTime.now.month - 1 %>
+            <% ita_months = %w(Gennaio Febbraio Marzo Aprile Maggio Giugno Luglio Agosto Settembre Ottobre Novembre Dicembre) %>
+            <% 12.times do |index| %>
+              <% if index == current_month %>
+                <option value="<%= index + 1 %>" selected="selected"><%= ita_months[index] %></option>
+              <% else %>
+                <option value="<%= index + 1 %>"><%= ita_months[index] %></option>
+              <% end %>
+            <% end %>
+          </select>
+
+          <select class="custom-select custom-select-sm col-sm-2" id="event_e_date_to_1i" name="event[e_date_to(1i)]">
+            <% current_year = DateTime.now.year %>
+            <% 10.times do |index| %>
+              <% if index == 0 %>
+                <option value="<%= current_year + index %>" selected="selected"><%= current_year + index %></option>
+              <% else %>
+                <option value="<%= current_year + index %>"><%= current_year + index %></option>
+              <% end %>
+            <% end %>
+          </select>
+          :
+          <select class="custom-select custom-select-sm col-sm-2" id="event_e_date_to_3i" name="event[e_date_to(4i)]">
+            <% current_hour = DateTime.now.hour %>
+            <% 24.times do |index| %>
+              <% if index == current_hour %>
+                <% if index < 10 %>
+                  <option value="<%= index %>" selected="selected">0<%= index %></option>
+                <% else %>
+                  <option value="<%= index %>" selected="selected"><%= index %></option>
+                <% end %>
+              <% else %>
+                <% if index < 10 %>
+                  <option value="<%= index %>">0<%= index %></option>
+                <% else %>
+                  <option value="<%= index %>"><%= index %></option>
+                <% end %>
+              <% end %>
+            <% end %>
+          </select>
+
+          <select class="custom-select custom-select-sm col-sm-2" id="event_e_date_to_3i" name="event[e_date_to(5i)]">
+            <% current_minute = DateTime.now.minute %>
+            <% 60.times do |index| %>
+              <% if index == current_minute %>
+                <% if index < 10 %>
+                  <option value="<%= index %>" selected="selected">0<%= index %></option>
+                <% else %>
+                  <option value="<%= index %>" selected="selected"><%= index %></option>
+                <% end %>
+              <% else %>
+                <% if index < 10 %>
+                  <option value="<%= index %>">0<%= index %></option>
+                <% else %>
+                  <option value="<%= index %>"><%= index %></option>
+                <% end %>
+              <% end %>
+            <% end %>
+          </select>
+
         </div>
 
 
@@ -57,17 +211,171 @@
 
         <div class="mb-3">
           <%= form.label :e_notes, 'Note' %>
-          <%= form.text_field :e_notes, :class => "form-control" %>
+          <%= form.text_area :e_notes, :class => "form-control" %>
         </div>
 
-        <div class="mb-3">
-          <%= form.label :e_actual_start, 'Inizio effettivo' %>
-          <%= form.datetime_select :e_actual_start, :class => "form-control" %>
-        </div>
+<!--        <div class="mb-3">-->
+          <%#= form.label :e_actual_start, 'Inizio effettivo' %>
+          <%#= form.datetime_select :e_actual_start, :class => "form-control" %>
+<!--        </div>-->
 
         <div class="mb-3">
-          <%= form.label :e_actual_end, 'Fine effettiva' %>
-          <%= form.datetime_select :e_actual_end, :class => "form-control" %>
+          <label class="col-sm-12" for="event_e_actual_start">Inizio Effettivo</label>
+
+          <select class="custom-select custom-select-sm col-sm-2" id="event_e_actual_start_3i" name="event[e_actual_start(3i)]">
+            <% current_day = DateTime.now.day %>
+            <% 31.times do |index| %>
+              <% if index + 1 == current_day %>
+                <option value="<%= index + 1 %>" selected="selected"><%= index + 1 %></option>
+              <% else %>
+                <option value="<%= index + 1 %>"><%= index + 1 %></option>
+              <% end %>
+            <% end %>
+          </select>
+
+          <select class="custom-select custom-select-sm col-sm-3" id="event_e_actual_start_2i" name="event[e_actual_start(2i)]">
+            <% current_month = DateTime.now.month - 1 %>
+            <% ita_months = %w(Gennaio Febbraio Marzo Aprile Maggio Giugno Luglio Agosto Settembre Ottobre Novembre Dicembre) %>
+            <% 12.times do |index| %>
+              <% if index == current_month %>
+                <option value="<%= index + 1 %>" selected="selected"><%= ita_months[index] %></option>
+              <% else %>
+                <option value="<%= index + 1 %>"><%= ita_months[index] %></option>
+              <% end %>
+            <% end %>
+          </select>
+
+          <select class="custom-select custom-select-sm col-sm-2" id="event_e_actual_start_1i" name="event[e_actual_start(1i)]">
+            <% current_year = DateTime.now.year %>
+            <% 10.times do |index| %>
+              <% if index == 0 %>
+                <option value="<%= current_year + index %>" selected="selected"><%= current_year + index %></option>
+              <% else %>
+                <option value="<%= current_year + index %>"><%= current_year + index %></option>
+              <% end %>
+            <% end %>
+          </select>
+          :
+          <select class="custom-select custom-select-sm col-sm-2" id="event_e_actual_start_4i" name="event[e_actual_start(4i)]">
+            <% current_hour = DateTime.now.hour %>
+            <% 24.times do |index| %>
+              <% if index == current_hour %>
+                <% if index < 10 %>
+                  <option value="<%= index %>" selected="selected">0<%= index %></option>
+                <% else %>
+                  <option value="<%= index %>" selected="selected"><%= index %></option>
+                <% end %>
+              <% else %>
+                <% if index < 10 %>
+                  <option value="<%= index %>">0<%= index %></option>
+                <% else %>
+                  <option value="<%= index %>"><%= index %></option>
+                <% end %>
+              <% end %>
+            <% end %>
+          </select>
+
+          <select class="custom-select custom-select-sm col-sm-2" id="event_e_actual_start_5i" name="event[e_actual_start(5i)]">
+            <% current_minute = DateTime.now.minute %>
+            <% 60.times do |index| %>
+              <% if index == current_minute %>
+                <% if index < 10 %>
+                  <option value="<%= index %>" selected="selected">0<%= index %></option>
+                <% else %>
+                  <option value="<%= index %>" selected="selected"><%= index %></option>
+                <% end %>
+              <% else %>
+                <% if index < 10 %>
+                  <option value="<%= index %>">0<%= index %></option>
+                <% else %>
+                  <option value="<%= index %>"><%= index %></option>
+                <% end %>
+              <% end %>
+            <% end %>
+          </select>
+
+        </div>
+
+<!--        <div class="mb-3">-->
+          <%#= form.label :e_actual_end, 'Fine effettiva' %>
+          <%#= form.datetime_select :e_actual_end, :class => "form-control" %>
+<!--        </div>-->
+
+        <div class="mb-3">
+          <label class="col-sm-12" for="event_e_actual_start">Fine Effettiva</label>
+
+          <select class="custom-select custom-select-sm col-sm-2" id="event_e_actual_end_3i" name="event[e_actual_end(3i)]">
+            <% current_day = DateTime.now.day %>
+            <% 31.times do |index| %>
+              <% if index + 1 == current_day %>
+                <option value="<%= index + 1 %>" selected="selected"><%= index + 1 %></option>
+              <% else %>
+                <option value="<%= index + 1 %>"><%= index + 1 %></option>
+              <% end %>
+            <% end %>
+          </select>
+
+          <select class="custom-select custom-select-sm col-sm-3" id="event_e_actual_end_2i" name="event[e_actual_end(2i)]">
+            <% current_month = DateTime.now.month - 1 %>
+            <% ita_months = %w(Gennaio Febbraio Marzo Aprile Maggio Giugno Luglio Agosto Settembre Ottobre Novembre Dicembre) %>
+            <% 12.times do |index| %>
+              <% if index == current_month %>
+                <option value="<%= index + 1 %>" selected="selected"><%= ita_months[index] %></option>
+              <% else %>
+                <option value="<%= index + 1 %>"><%= ita_months[index] %></option>
+              <% end %>
+            <% end %>
+          </select>
+
+          <select class="custom-select custom-select-sm col-sm-2" id="event_e_actual_end_1i" name="event[e_actual_end(1i)]">
+            <% current_year = DateTime.now.year %>
+            <% 10.times do |index| %>
+              <% if index == 0 %>
+                <option value="<%= current_year + index %>" selected="selected"><%= current_year + index %></option>
+              <% else %>
+                <option value="<%= current_year + index %>"><%= current_year + index %></option>
+              <% end %>
+            <% end %>
+          </select>
+          :
+          <select class="custom-select custom-select-sm col-sm-2" id="event_e_actual_end_4i" name="event[e_actual_end(4i)]">
+            <% current_hour = DateTime.now.hour %>
+            <% 24.times do |index| %>
+              <% if index == current_hour %>
+                <% if index < 10 %>
+                  <option value="<%= index %>" selected="selected">0<%= index %></option>
+                <% else %>
+                  <option value="<%= index %>" selected="selected"><%= index %></option>
+                <% end %>
+              <% else %>
+                <% if index < 10 %>
+                  <option value="<%= index %>">0<%= index %></option>
+                <% else %>
+                  <option value="<%= index %>"><%= index %></option>
+                <% end %>
+              <% end %>
+            <% end %>
+          </select>
+
+          <select class="custom-select custom-select-sm col-sm-2" id="event_e_actual_end_5i" name="event[e_actual_end(5i)]">
+            <% current_minute = DateTime.now.minute %>
+            <% 60.times do |index| %>
+              <% if index == current_minute %>
+                <% if index < 10 %>
+                  <option value="<%= index %>" selected="selected">0<%= index %></option>
+                <% else %>
+                  <option value="<%= index %>" selected="selected"><%= index %></option>
+                <% end %>
+              <% else %>
+                <% if index < 10 %>
+                  <option value="<%= index %>">0<%= index %></option>
+                <% else %>
+                  <option value="<%= index %>"><%= index %></option>
+                <% end %>
+              <% end %>
+            <% end %>
+          </select>
+
         </div>
 
         <%= button_tag(type: 'submit', class: "btn btn-primary") do %>
