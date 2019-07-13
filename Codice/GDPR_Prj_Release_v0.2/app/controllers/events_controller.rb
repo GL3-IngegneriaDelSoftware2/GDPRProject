@@ -5,7 +5,20 @@ class EventsController < ApplicationController
   # GET /events
   # GET /events.json
   def index
-    @events = Event.all.sort_by &:e_date_from
+  if current_user.is_system_admin
+    @events = Event.all.sort_by &:e_date_from # admin => mostro tutti gli eventi
+  else
+    all_events = Event.all.sort_by &:e_date_from # prendo tutti gli eventi
+	@events = [] # array che conterra gli eventi
+	all_events.each do |event|
+	p event
+	  if !event.e_participants.nil? # se ci sono partecipanti
+	    if event.e_participants.split(";").include?(current_user.id.to_s) 
+	      @events << event # tengo gli eventi in cui l'utente e' fra i partecipanti
+	    end
+      end
+	end
+  end
   end
 
   # GET /events/1
