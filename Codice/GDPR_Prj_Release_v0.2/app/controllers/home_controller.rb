@@ -1,6 +1,7 @@
 class HomeController < ApplicationController
   before_action :authenticate_user!
   skip_before_action :verify_authenticity_token
+
   def index
 
   end
@@ -28,5 +29,45 @@ class HomeController < ApplicationController
     else
       session[:hidden_notifications] = [params[:id]]
     end
+  end
+
+  def fake_data_breach
+
+    @event_typology = EventTypology.all.detect {|et| et.et_priority == 5}
+    if @event_typology
+
+      @participants = User.all.map {|u| u.id}
+      @new_event = Event.create(e_name: "Databreach Fittizio per Test",
+                                e_description: "Databreach Finto per il test della gestione in caso di Databreach reale",
+                                e_date_from: DateTime.now,
+                                e_date_to: DateTime.now + 3,
+                                e_participants: @participants.join(";"),
+                                e_state: @participants.join(";"),
+                                e_class: "Evento",
+                                event_typology: @event_typology
+      )
+
+    end
+    redirect_to @new_event
+  end
+
+  def fake_request
+
+    @event_typology = EventTypology.all.detect {|et| et.et_priority == 4}
+    if @event_typology
+
+      @participants = User.all.map {|u| u.id}
+      @new_event = Event.create(e_name: "Richeista di Esercizio Diritti Fittizio per Test",
+                                e_description: "Richeista di Esercizio Diritti Finta per il test della gestione in caso di Richeista di Esercizio Diritti reale",
+                                e_date_from: DateTime.now,
+                                e_date_to: DateTime.now + 20,
+                                e_participants: @participants.join(";"),
+                                e_state: @participants.join(";"),
+                                e_class: "Evento",
+                                event_typology: @event_typology
+      )
+
+    end
+    redirect_to @new_event
   end
 end

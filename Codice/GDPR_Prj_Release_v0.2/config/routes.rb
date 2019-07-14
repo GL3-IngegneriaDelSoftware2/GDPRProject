@@ -35,6 +35,8 @@ Rails.application.routes.draw do
   post 'notif/close/:id', to: "home#close"
   post 'events_search/', to: "events#search"
   get '/events_search', to: redirect('/events')
+  get '/create_fake_data_breach', to: "home#fake_data_breach"
+  get '/create_fake_request', to: "home#fake_request"
 
   root to: 'home#index'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
