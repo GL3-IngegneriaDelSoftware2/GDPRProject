@@ -91,7 +91,10 @@ class EventsController < ApplicationController
   end
 
   def search
-    @events = Event.all.map{|event| event if event.e_name.include?(params[:query]) || event.event_typology.et_name.include?(params[:query])}
+
+    @valid_events = Event.all.select{|e| e.e_participants&.split(";")&.include? current_user.id.to_s}
+    
+    @events = @valid_events.map{|event| event if event.e_name.include?(params[:query]) || event.event_typology.et_name.include?(params[:query])}
 
     if @events.compact.size == 0
       @events = nil
