@@ -64,7 +64,7 @@ class Event < ApplicationRecord
       ap "solved : #{important_event_solved}"
 
       if high_priority
-        event if !is_hidden && is_important && !important_event_solved && (is_imminent || is_ongoing)
+        event if !is_hidden && is_current_user_included && is_important && !important_event_solved && (is_imminent || is_ongoing)
       else
         event if !is_hidden && is_current_user_included && !is_important && (is_imminent || is_ongoing)
       end
