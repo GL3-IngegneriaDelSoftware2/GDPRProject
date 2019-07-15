@@ -19,6 +19,7 @@
 //= require bootstrap-sprockets
 //= require moment
 //= require fullcalendar
+//= require fullcalendar/lang/it
 
 function eventCalendar() {
     return $('#calendar').fullCalendar({events: '/events.json'});

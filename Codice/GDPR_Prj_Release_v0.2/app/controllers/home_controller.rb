@@ -57,8 +57,8 @@ class HomeController < ApplicationController
     if @event_typology
 
       @participants = User.all.map {|u| u.id}
-      @new_event = Event.create(e_name: "Richeista di Esercizio Diritti Fittizio per Test",
-                                e_description: "Richeista di Esercizio Diritti Finta per il test della gestione in caso di Richeista di Esercizio Diritti reale",
+      @new_event = Event.create(e_name: "Richiesta di Esercizio Diritti Fittizio per Test",
+                                e_description: "Richiesta di Esercizio Diritti Finta per il test della gestione in caso di Richiesta di Esercizio Diritti reale",
                                 e_date_from: DateTime.now,
                                 e_date_to: DateTime.now + 20,
                                 e_participants: @participants.join(";"),
