@@ -52,3 +52,10 @@ $(document).ready(function () {
         $('.session').show();
     });
 });
+
+// Gestione durata flash messages dell'applicazione (all'interno del div con class="flashContainer")
+$('document').ready(function() {
+    setTimeout(function() {
+        $('#flashContainer').slideUp();
+    }, 5000); // 5 secondi e poi sparisce
+});
